@@ -239,7 +239,7 @@ stories and achievements.</string>
                                     <color key="baseBackgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="IZM-iZ-eQf" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="CVZ-gI-sZp"/>
+                                    <segue destination="IZM-iZ-eQf" kind="show" id="XRF-rm-1e2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share your journey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFt-cJ-enO">
@@ -279,7 +279,7 @@ stories and achievements.</string>
         <!--Tab Bar Controller-->
         <scene sceneID="hqD-bd-Ci2">
             <objects>
-                <tabBarController id="IZM-iZ-eQf" sceneMemberID="viewController">
+                <tabBarController id="IZM-iZ-eQf" customClass="TabBarController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="7zD-6h-t7r"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gNv-te-4Up">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

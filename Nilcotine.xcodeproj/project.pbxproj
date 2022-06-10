@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
 		4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B082A285201F80046910B /* OnboardingViewController.swift */; };
 		B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAB285047D600D14B6F /* AppDelegate.swift */; };
 		B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAD285047D600D14B6F /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4E7B082A285201F80046910B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B5D33FA8285047D600D14B6F /* Nilcotine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nilcotine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D33FAB285047D600D14B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				B5D33FB6285047D800D14B6F /* LaunchScreen.storyboard */,
 				B5D33FB9285047D800D14B6F /* Info.plist */,
 				4E7B082A285201F80046910B /* OnboardingViewController.swift */,
+				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
 			);
 			path = Nilcotine;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */,
 				B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */,
 				B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */,
+				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
