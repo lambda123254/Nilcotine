@@ -16,12 +16,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var count = 0
     var dataArr: [String] = []
+    
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "TestRecord")
     override func viewDidLoad() {
         super.viewDidLoad()
 //        record.setValue("test terakhir", forKey: "test_name")
 //        db.save(record) { record, error in
 //            print(error ?? "saved")
 //        }
+        ck.insert(value: "aaasdfafaaf", key: "test_name")
         
         let query = CKQuery(recordType: "TestRecord", predicate: NSPredicate(value: true))
 //        db.fetch(withQuery: query) { records in
