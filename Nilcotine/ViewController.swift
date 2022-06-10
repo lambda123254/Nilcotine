@@ -24,9 +24,8 @@ class ViewController: UIViewController {
 //        db.save(record) { record, error in
 //            print(error ?? "saved")
 //        }
-        ck.insert(value: "aaasdfafaaf", key: "test_name")
         
-        let query = CKQuery(recordType: "TestRecord", predicate: NSPredicate(value: true))
+//        let query = CKQuery(recordType: "TestRecord", predicate: NSPredicate(value: true))
 //        db.fetch(withQuery: query) { records in
 //            let recordsArrCount = records.map { $0.matchResults.count }
 ////            for i in 0 ..< recordsArrCount {
@@ -44,12 +43,12 @@ class ViewController: UIViewController {
 //
 //        }
         
-        db.perform(query, inZoneWith: nil) { records, err in
-            guard let records = records, err == nil else {
-                return
-            }
-            print(records.compactMap({$0.value(forKey: "test_name") as? String}))
-        }
+//        db.perform(query, inZoneWith: nil) { records, err in
+//            guard let records = records, err == nil else {
+//                return
+//            }
+//            print(records.compactMap({$0.value(forKey: "test_name") as? String}))
+//        }
         
         tableView.delegate = self
         tableView.dataSource = self

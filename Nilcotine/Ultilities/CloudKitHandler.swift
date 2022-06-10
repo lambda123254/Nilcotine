@@ -27,4 +27,14 @@ public class CloudKitHandler {
             print(error ?? "saved")
         }
     }
+    
+    public func get(key: String){
+        let query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
+        db.perform(query, inZoneWith: nil) { records, err in
+            guard let records = records, err == nil else {
+                return
+            }
+            print(records.compactMap({$0.value(forKey: key) as? String}))
+        }
+    }
 }
