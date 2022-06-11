@@ -28,13 +28,14 @@ public class CloudKitHandler {
         }
     }
     
-    public func get(key: String){
+    public func get() async throws -> [CKRecord]{
+        //Cara ambil data per key -->> records.compactMap({$0.value(forKey: "nama keynya") as? String})
         let query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
-        db.perform(query, inZoneWith: nil) { records, err in
-            guard let records = records, err == nil else {
-                return
-            }
-            print(records.compactMap({$0.value(forKey: key) as? String}))
+        var dataReturn: [CKRecord] = []
+        if let rec = try? await db.perform(query, inZoneWith: nil) {
+            dataReturn = rec
         }
+        return dataReturn
     }
 }
+
