@@ -26,7 +26,7 @@ class ViewController: UIViewController {
             dataArr = arr!
             tableView.reloadData()
         }
-
+//        ck.update(recordName: "8CF7E739-5ECE-41A0-AB66-260BE4A87B7D", key: "test_name", value: "gantiiiiii")
 
         tableView.delegate = self
         tableView.dataSource = self

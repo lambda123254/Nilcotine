@@ -37,5 +37,29 @@ public class CloudKitHandler {
         }
         return dataReturn
     }
+    
+    public func update(recordName: String, key: String, value: String) {
+        let recordID = CKRecord.ID(recordName: recordName)
+        
+        db.fetch(withRecordID: recordID) { record, error in
+            if error == nil {
+                record?.setValue(value, forKey: key)
+                
+                self.db.save(record!, completionHandler: { (newRecord, error) in
+                    if error == nil {
+                        print("Record Saved")
+                    } else {
+                        print(error!)
+                        print("Record Not Saved")
+                    }
+                })
+            }
+            else {
+                print(error!)
+                print("Could not fetch record")
+                
+            }
+        }
+    }
 }
 
