@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
 		4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B082A285201F80046910B /* OnboardingViewController.swift */; };
+		B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310D92852E8F7003E5294 /* CloudKitHandler.swift */; };
 		B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAB285047D600D14B6F /* AppDelegate.swift */; };
 		B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAD285047D600D14B6F /* SceneDelegate.swift */; };
 		B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAF285047D600D14B6F /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4E7B082A285201F80046910B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		B59310D92852E8F7003E5294 /* CloudKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHandler.swift; sourceTree = "<group>"; };
 		B5D33FA8285047D600D14B6F /* Nilcotine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nilcotine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D33FAB285047D600D14B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D33FAD285047D600D14B6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B59310D82852E88B003E5294 /* Ultilities */ = {
+			isa = PBXGroup;
+			children = (
+				B59310D92852E8F7003E5294 /* CloudKitHandler.swift */,
+			);
+			path = Ultilities;
+			sourceTree = "<group>";
+		};
 		B5D33F9F285047D600D14B6F = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 		B5D33FAA285047D600D14B6F /* Nilcotine */ = {
 			isa = PBXGroup;
 			children = (
+				B59310D82852E88B003E5294 /* Ultilities */,
 				B5D33FBF2850483500D14B6F /* Nilcotine.entitlements */,
 				B5D33FAB285047D600D14B6F /* AppDelegate.swift */,
 				B5D33FAD285047D600D14B6F /* SceneDelegate.swift */,
@@ -159,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */,
+				B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */,
 				B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */,
 				B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */,
 				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
