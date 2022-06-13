@@ -14,11 +14,35 @@ public class CloudKitHandler {
     var recordString: String
     
     lazy var db = CKContainer(identifier: dbString).publicCloudDatabase
+    lazy var container = CKContainer(identifier: dbString)
     lazy var record = CKRecord(recordType: recordString)
+
 
     init(dbString: String, recordString: String){
         self.dbString = dbString
         self.recordString = recordString
+    }
+    
+    public func getUserID() async throws -> CKRecord.ID {
+        var idName: CKRecord.ID?
+            if let id = try? await container.userRecordID() {
+                idName = id
+            }
+        return idName!
+        
+    }
+    
+    public func createProfile() async {
+        record.setValue("user112034", forKey: "username")
+        record.setValue(34, forKey: "age")
+        try? await record.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
+        
+        DispatchQueue.main.async {
+            self.db.save(self.record) { record, error in
+                print(error ?? "saved")
+            }
+        }
+        
     }
     
     public func insert(value: String, key: String){
@@ -26,8 +50,43 @@ public class CloudKitHandler {
         db.save(record) { record, error in
             print(error ?? "saved")
         }
+        
     }
     
+    public func insertMultiple(value: String, key: String){
+        let valArr = value.split(separator: ",").map{ String($0) }
+        let keyArr = key.split(separator: ",").map{ String($0) }
+        var sortedVal = [Any]()
+        for i in 0 ..< valArr.count {
+            if valArr[i].description.isNumeric {
+                if valArr[i].contains("."){
+                    if let changeVal = Double(valArr[i]) {
+                        sortedVal.append(changeVal)
+                    }
+                }
+                else {
+                    if let changeVal = Int(valArr[i]) {
+                        sortedVal.append(changeVal)
+                    }
+                }
+            }
+            else {
+                sortedVal.append(valArr[i])
+            }
+                    
+        }
+        for i in 0 ..< valArr.count {
+            record.setValue(sortedVal[i], forKey: keyArr[i])
+        }
+        db.save(record) { record, error in
+            print(error ?? "saved")
+        }
+
+
+        
+        
+    }
+        
     public func get() async throws -> [CKRecord]{
         //Cara ambil data per key -->> records.compactMap({$0.value(forKey: "nama keynya") as? String})
         let query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
@@ -63,3 +122,8 @@ public class CloudKitHandler {
     }
 }
 
+extension String {
+    var isNumeric : Bool {
+        return Double(self) != nil
+    }
+}
