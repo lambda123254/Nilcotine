@@ -100,7 +100,9 @@ reducing nicotine addiction. Are you ready ?</string>
                         <viewLayoutGuide key="safeArea" id="N5p-NU-ecn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fQi-Sw-GzI"/>
+                    <navigationItem key="navigationItem" id="fQi-Sw-GzI">
+                        <barButtonItem key="backBarButtonItem" title=" " id="cRM-00-FFB"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMn-xc-O08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -135,7 +137,7 @@ reducing nicotine addiction. Are you ready ?</string>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can track your progress, such as how many days you manage to not consume nicotine, times you relapsed, &amp; your best streak." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uph-Jr-N6S">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can track your progress, such as how many days you manage to not consume nicotine, times you relapsed and your best streak." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uph-Jr-N6S">
                                 <rect key="frame" x="28" y="547" width="335" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -156,7 +158,9 @@ reducing nicotine addiction. Are you ready ?</string>
                         <viewLayoutGuide key="safeArea" id="O44-Vk-sbp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DR2-EU-cVo"/>
+                    <navigationItem key="navigationItem" id="DR2-EU-cVo">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ABE-2z-gdF"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfp-EG-4w2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -214,7 +218,9 @@ stories and achievements.</string>
                         <viewLayoutGuide key="safeArea" id="ujT-Hk-mbt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="e7j-Pv-NQm"/>
+                    <navigationItem key="navigationItem" id="e7j-Pv-NQm">
+                        <barButtonItem key="backBarButtonItem" title=" " id="iqZ-ih-RJk"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OL-LJ-4gf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -270,7 +276,9 @@ stories and achievements.</string>
                         <viewLayoutGuide key="safeArea" id="d0Y-tI-mob"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vlA-z6-sK7"/>
+                    <navigationItem key="navigationItem" id="vlA-z6-sK7">
+                        <barButtonItem key="backBarButtonItem" title=" " id="35B-Ze-oOS"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOI-as-BiX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -286,11 +294,10 @@ stories and achievements.</string>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
-                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="value" red="0.57647061349999995" green="0.74117654560000001" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
@@ -302,13 +309,13 @@ stories and achievements.</string>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hf-Wn-OZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2582" y="1603"/>
+            <point key="canvasLocation" x="2582" y="1582"/>
         </scene>
         <!--Progress-->
         <scene sceneID="NOJ-jM-imA">
             <objects>
                 <navigationController id="pgM-Ty-lwc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Progress" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="VZr-zM-rcy"/>
+                    <tabBarItem key="tabBarItem" title="Progress" image="Progress_Not Selected" selectedImage="Progress_Selected" id="VZr-zM-rcy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gl4-Ae-dqj">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -328,7 +335,7 @@ stories and achievements.</string>
         <scene sceneID="iEF-hG-vuj">
             <objects>
                 <navigationController id="Nkd-WY-wBB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity" image="list.bullet.rectangle.portrait" catalog="system" selectedImage="list.bullet.rectangle.portrait.fill" id="CYn-bq-pry"/>
+                    <tabBarItem key="tabBarItem" title="Activity" image="Activity_Not Selected" selectedImage="Activity_Selected" id="CYn-bq-pry"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a2x-lm-zAC">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -348,7 +355,7 @@ stories and achievements.</string>
         <scene sceneID="Viy-u8-mEG">
             <objects>
                 <navigationController id="XaH-zd-HIw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="z2M-c6-U7F"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile_Not Selected" selectedImage="Profile_Selected" id="z2M-c6-U7F"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGo-h1-oo0">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -433,14 +440,14 @@ stories and achievements.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Activity_Not Selected" width="36.952381134033203" height="21"/>
+        <image name="Activity_Selected" width="37" height="21"/>
         <image name="Logo" width="344" height="300"/>
         <image name="OnBoardingPlaceholderImg" width="320" height="288"/>
-        <image name="chart.bar" catalog="system" width="128" height="90"/>
-        <image name="chart.bar.fill" catalog="system" width="128" height="92"/>
-        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
-        <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
-        <image name="person" catalog="system" width="128" height="117"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="Profile_Not Selected" width="17" height="21"/>
+        <image name="Profile_Selected" width="17" height="21"/>
+        <image name="Progress_Not Selected" width="22" height="19"/>
+        <image name="Progress_Selected" width="22" height="19"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
