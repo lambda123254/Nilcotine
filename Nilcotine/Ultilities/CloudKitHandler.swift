@@ -12,7 +12,8 @@ public class CloudKitHandler {
     
     var dbString: String
     var recordString: String
-    
+    var userId: CKRecord.ID?
+
     lazy var db = CKContainer(identifier: dbString).publicCloudDatabase
     lazy var container = CKContainer(identifier: dbString)
     lazy var record = CKRecord(recordType: recordString)
@@ -21,6 +22,11 @@ public class CloudKitHandler {
     init(dbString: String, recordString: String){
         self.dbString = dbString
         self.recordString = recordString
+        
+        Task {
+
+            self.userId = try await getUserID()
+        }
     }
     
     public func getUserID() async throws -> CKRecord.ID {
@@ -33,15 +39,35 @@ public class CloudKitHandler {
     }
     
     public func createProfile() async {
-        record.setValue("user112034", forKey: "username")
-        record.setValue(34, forKey: "age")
-        try? await record.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
-        
-        DispatchQueue.main.async {
-            self.db.save(self.record) { record, error in
-                print(error ?? "saved")
+        if let data = try? await get() {
+            var trueCount = 0
+            for i in 0 ..< data.count {
+                let id = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+
+                if userId?.recordName == id.recordID.recordName {
+                    trueCount += 1
+                }
+            }
+            
+            if trueCount == 0 {
+                let recordProfile = CKRecord(recordType: "Profiles")
+                recordProfile.setValue("user112034", forKey: "username")
+                recordProfile.setValue(34, forKey: "age")
+                try? await recordProfile.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
+
+                DispatchQueue.main.async {
+                    self.db.save(recordProfile) { record, error in
+                        print(error ?? "saved")
+                    }
+                }
+                
+            }
+            else {
+                print("user already exist")
             }
         }
+        
+        
         
     }
     
