@@ -24,7 +24,6 @@ public class CloudKitHandler {
         self.recordString = recordString
         
         Task {
-
             self.userId = try await getUserID()
         }
     }
@@ -36,6 +35,25 @@ public class CloudKitHandler {
             }
         return idName!
         
+    }
+    
+    public func checkIfProfileCreated() async throws -> Bool {
+        var result = false
+        if let data = try? await get() {
+            var trueCount = 0
+            for i in 0 ..< data.count {
+                let id = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+
+                if userId?.recordName == id.recordID.recordName {
+                    trueCount += 1
+                }
+            }
+            
+            if trueCount > 0 {
+                result = true
+            }
+        }
+        return result
     }
     
     public func createProfile() async {
@@ -51,8 +69,10 @@ public class CloudKitHandler {
             
             if trueCount == 0 {
                 let recordProfile = CKRecord(recordType: "Profiles")
-                recordProfile.setValue("user112034", forKey: "username")
-                recordProfile.setValue(34, forKey: "age")
+                let randomInt = Int.random(in: 10000..<99999)
+                let randomAge = Int.random(in: 20..<80)
+                recordProfile.setValue("user\(randomInt)", forKey: "username")
+                recordProfile.setValue(randomAge, forKey: "age")
                 try? await recordProfile.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
 
                 DispatchQueue.main.async {
