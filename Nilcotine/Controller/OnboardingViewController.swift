@@ -13,9 +13,16 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         Task {
-            try await  ck.createProfile()
+            if let check = try? await ck.checkIfProfileCreated() {
+                if check {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let nextView = storyBoard.instantiateViewController(withIdentifier: "TabBarView") as! TabBarController
+                    nextView.modalPresentationStyle = .fullScreen
+                    nextView.modalTransitionStyle = .crossDissolve
+                    self.present(nextView, animated: true)
+                }
+            }
         }
         // Do any additional setup after loading the view.
     }

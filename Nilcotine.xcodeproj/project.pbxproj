@@ -12,6 +12,8 @@
 		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
 		4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B082A285201F80046910B /* OnboardingViewController.swift */; };
 		B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310D92852E8F7003E5294 /* CloudKitHandler.swift */; };
+		B59310DF28585708003E5294 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310DE28585708003E5294 /* Activity.swift */; };
+		B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */; };
 		B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAB285047D600D14B6F /* AppDelegate.swift */; };
 		B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAD285047D600D14B6F /* SceneDelegate.swift */; };
 		B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D33FAF285047D600D14B6F /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4E7B082A285201F80046910B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B59310D92852E8F7003E5294 /* CloudKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHandler.swift; sourceTree = "<group>"; };
+		B59310DE28585708003E5294 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		B5D33FA8285047D600D14B6F /* Nilcotine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nilcotine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D33FAB285047D600D14B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D33FAD285047D600D14B6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 		B59310DB285828C4003E5294 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B59310DE28585708003E5294 /* Activity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -73,6 +78,7 @@
 				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
 				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
 				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
+				B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -199,12 +205,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */,
 				B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */,
 				B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */,
 				B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */,
 				B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */,
 				3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */,
 				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
+				B59310DF28585708003E5294 /* Activity.swift in Sources */,
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 			);

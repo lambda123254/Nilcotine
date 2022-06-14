@@ -11,40 +11,87 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableActivity: UITableView!
     
-    struct Activity {
-        let name: String
-        let age: String
-        let desc: String
-        let imageIcon: String
-    }
+    var activity: [Activity] = []
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
     
-    let data: [Activity] = [
-        Activity(name: "Samuel Dennis", age: "24 yo", desc: "Samuel Dennis relapsed after 12 days of trying", imageIcon: "ActivityIcon"),
-        Activity(name: "Bene Rajagukguk", age: "24 yo", desc: "Bene Rajagukguk earn trophy for completing 12 days of no smoking", imageIcon: "ActivityIcon"),
-        Activity(name: "Bene Rajagukguk", age: "24 yo", desc: "Bene Rajagukguk earn trophy for completing 12 days of no smoking", imageIcon: "ActivityIcon"),
-        Activity(name: "Samuel Dennis", age: "24 yo", desc: "Samuel Dennis relapsed after 12 days of trying", imageIcon: "ActivityIcon"),
-        Activity(name: "Samuel Dennis", age: "24 yo", desc: "Samuel Dennis relapsed after 12 days of trying", imageIcon: "ActivityIcon"),
-    
-    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableActivity.dataSource = self
         tableActivity.delegate = self
-        // Do any additional setup after loading the view.
+
+        Task {
+            let dataRecord = try? await ck.get(option: "all", format: "")
+            
+            for i in 0 ..< dataRecord!.count {
+                let activityType = dataRecord![i].value(forKey: "activityType") as! String
+                let username = dataRecord![i].value(forKey: "username") as! String
+                let imageName = dataRecord![i].value(forKey: "imageName") as! String
+                let age = dataRecord![i].value(forKey: "userAge") as! Int
+                let relapseStory = dataRecord![i].value(forKey: "relapseStory") as! String
+                let trophyStory = dataRecord![i].value(forKey: "trophyStory") as! String
+
+                
+                if dataRecord?[i].value(forKey: "startDate") == nil {
+                    let isoDate = "2016-04-14T10:44:00+0000"
+
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    let date = dateFormatter.date(from:isoDate)!
+                    activity.append(Activity(activityType: activityType, username: username, imageName: imageName, age: age, startDate: date, endDate: date, relapseStory: relapseStory, trophyStory: trophyStory))
+                }
+                else {
+                    let startDate = dataRecord?[i].value(forKey: "startDate") as! Date
+                    let endDate = dataRecord?[i].value(forKey: "endDate") as! Date
+                    activity.append(Activity(activityType: activityType, username: username, imageName: imageName, age: age, startDate: startDate, endDate: endDate, relapseStory: relapseStory, trophyStory: trophyStory))
+                }
+
+                
+
+            }
+            
+            self.tableActivity.reloadData()
+        }
+    }
+    
+    func intervalDays(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
+        
+        let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
+        return dayInterval.day!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return activity.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let activity = data[indexPath.row]
         let cell = tableActivity.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActivityTableViewCell
-        cell.labelName.text = activity.name
-        cell.labelDesc.text = activity.desc
-        cell.labelAge.text = activity.age
-        cell.activityIconImageView.image = UIImage(named: activity.imageIcon)
+        cell.labelName.text = activity[indexPath.row].username
+        cell.labelAge.text = "\(activity[indexPath.row].age) yo"
+        cell.activityIconImageView.image = UIImage(named: "ActivityIcon.png")
+        if activity[indexPath.row].activityType == "relapse" {
+            let df = DateFormatter()
+            df.dateFormat = "YY/MM/dd"
+            
+            let calendar = Calendar.current
+
+            let startDate = activity[indexPath.row].startDate
+            let endDate = activity[indexPath.row].endDate
+            let date1 = calendar.startOfDay(for: startDate)
+            let date2 = calendar.startOfDay(for: endDate)
+            
+            let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
+
+            cell.labelDesc.text = "\(activity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
+        }
+        else if activity[indexPath.row].activityType == "badge" {
+            cell.labelDesc.text = "\(activity[indexPath.row].username) earn a throphy!"
+        }
+
         return cell
     }
     
@@ -52,5 +99,48 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         return 94
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ActivityTableViewCell
+        
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetailViewController
+        
+        if activity[indexPath.row].activityType == "relapse" {
+            nextView.titleLabelString = "\(activity[indexPath.row].username) has relapsed"
+            nextView.daysLabelString = "\(intervalDays(startDate: activity[indexPath.row].startDate, endDate: activity[indexPath.row].endDate)) days of no smoking"
+            nextView.effortTextViewString = activity[indexPath.row].relapseStory
 
+            self.navigationController?.pushViewController(nextView, animated: true)
+        }
+        else {
+            nextView.titleLabelString = "\(activity[indexPath.row].username) earn a trophy!"
+            self.navigationController?.pushViewController(nextView, animated: true)
+            
+        }
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(rgb: 0x217F70)
+        
+        
+    }
+    
+
+}
+
+extension UIColor {
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgb: Int) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF
+       )
+   }
 }
