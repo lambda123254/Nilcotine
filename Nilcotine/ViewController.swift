@@ -20,13 +20,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
-            let arr = try? await ck.get().compactMap({$0.value(forKey: "test_name") as? String})
-            dataArr = arr!
-            await ck2.createProfile()
-            tableView.reloadData()
-
-        }
+//        Task {
+//            let arr = try? await ck.get().compactMap({$0.value(forKey: "test_name") as? String})
+//            dataArr = arr!
+//            await ck2.createProfile()
+//            tableView.reloadData()
+//
+//        }
 //        ck.update(recordName: "8CF7E739-5ECE-41A0-AB66-260BE4A87B7D", key: "test_name", value: "gantiiiiii")
 
         tableView.delegate = self
