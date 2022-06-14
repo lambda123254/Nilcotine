@@ -39,7 +39,7 @@ public class CloudKitHandler {
     
     public func checkIfProfileCreated() async throws -> Bool {
         var result = false
-        if let data = try? await get() {
+        if let data = try? await get(option: "all", format: "") {
             var trueCount = 0
             for i in 0 ..< data.count {
                 let id = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -57,7 +57,7 @@ public class CloudKitHandler {
     }
     
     public func createProfile() async {
-        if let data = try? await get() {
+        if let data = try? await get(option: "all", format: "") {
             var trueCount = 0
             for i in 0 ..< data.count {
                 let id = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -133,16 +133,28 @@ public class CloudKitHandler {
         
     }
         
-    public func get() async throws -> [CKRecord]{
+    public func get(option: String, format: String) async throws -> [CKRecord]{
         //Cara ambil data per key -->> records.compactMap({$0.value(forKey: "nama keynya") as? String})
-        let query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
+        let query: CKQuery?
         var dataReturn: [CKRecord] = []
-        if let rec = try? await db.perform(query, inZoneWith: nil) {
-            dataReturn = rec
+
+        if option == "all" {
+            query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
+            if let rec = try? await db.perform(query!, inZoneWith: nil) {
+                dataReturn = rec
+            }
         }
+        else if option == "format" {
+            query = CKQuery(recordType: recordString, predicate: NSPredicate(format: format))
+            if let rec = try? await db.perform(query!, inZoneWith: nil) {
+                dataReturn = rec
+            }
+        }
+        
+        
         return dataReturn
     }
-    
+
     public func update(recordName: String, key: String, value: String) {
         let recordID = CKRecord.ID(recordName: recordName)
         
