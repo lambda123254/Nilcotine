@@ -59,6 +59,31 @@
 			path = Ultilities;
 			sourceTree = "<group>";
 		};
+		B59310DB285828C4003E5294 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B59310DC285828CB003E5294 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E7B082A285201F80046910B /* OnboardingViewController.swift */,
+				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
+				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
+				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B59310DD285828D3003E5294 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B5D33F9F285047D600D14B6F = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +104,9 @@
 		B5D33FAA285047D600D14B6F /* Nilcotine */ = {
 			isa = PBXGroup;
 			children = (
+				B59310DD285828D3003E5294 /* View */,
+				B59310DC285828CB003E5294 /* Controller */,
+				B59310DB285828C4003E5294 /* Model */,
 				B59310D82852E88B003E5294 /* Ultilities */,
 				B5D33FBF2850483500D14B6F /* Nilcotine.entitlements */,
 				B5D33FAB285047D600D14B6F /* AppDelegate.swift */,
@@ -88,10 +116,6 @@
 				B5D33FB4285047D800D14B6F /* Assets.xcassets */,
 				B5D33FB6285047D800D14B6F /* LaunchScreen.storyboard */,
 				B5D33FB9285047D800D14B6F /* Info.plist */,
-				4E7B082A285201F80046910B /* OnboardingViewController.swift */,
-				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
-				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
-				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
 			);
 			path = Nilcotine;
 			sourceTree = "<group>";
