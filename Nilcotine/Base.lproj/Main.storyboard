@@ -67,7 +67,7 @@
                                     <color key="baseBackgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="MOW-JT-HgS" kind="show" id="XLG-ad-v1c"/>
+                                    <segue destination="MOW-JT-HgS" kind="show" id="Ol6-qR-WIb"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Nilcotine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwe-oj-5GI">
@@ -374,7 +374,7 @@ stories and achievements.</string>
         <!--Progress-->
         <scene sceneID="5HN-3w-B9f">
             <objects>
-                <viewController id="fGL-9N-du3" sceneMemberID="viewController">
+                <viewController id="fGL-9N-du3" customClass="ProgressViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N5j-DO-NgW">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,13 +388,6 @@ stories and achievements.</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.11372549830000001" green="0.109803915" blue="0.13333332540000001" alpha="0.75" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5q-Yj-E1Q">
-                                <rect key="frame" x="164" y="193" width="61" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
-                                <color key="textColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19E-SQ-6We">
@@ -446,7 +439,11 @@ stories and achievements.</string>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Relapse">
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="baseBackgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="RelapseButonPressed:" destination="fGL-9N-du3" eventType="touchUpInside" id="cc2-Y4-wCM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJa-K1-0CF">
                                 <rect key="frame" x="60" y="422" width="270" height="40"/>
@@ -457,6 +454,9 @@ stories and achievements.</string>
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
                                     <color key="baseBackgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="StartButtonPressed:" destination="fGL-9N-du3" eventType="touchUpInside" id="F8W-oL-HBa"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s40-aV-abe">
                                 <rect key="frame" x="39" y="664" width="325" height="62"/>
@@ -506,15 +506,98 @@ but the progress of your journey…</string>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5q-Yj-E1Q">
+                                <rect key="frame" x="165" y="192" width="61" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                                <color key="textColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4oK-jC-Dpg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Progress" id="qNu-Q4-bm3"/>
+                    <connections>
+                        <outlet property="LongestStreakNumber" destination="1mN-iB-seZ" id="Cwu-kl-s4g"/>
+                        <outlet property="RelapseButton" destination="ftQ-NE-eYr" id="pXJ-91-snb"/>
+                        <outlet property="RelapseNumber" destination="qnO-FP-m3f" id="y6D-wJ-dVh"/>
+                        <outlet property="StartButton" destination="PJa-K1-0CF" id="6Gl-os-6fH"/>
+                        <outlet property="TimerLabelDays" destination="l5q-Yj-E1Q" id="YI8-Nt-zf7"/>
+                        <outlet property="TimerLabelHours" destination="beZ-7d-Ucr" id="zfd-Uk-1Qb"/>
+                        <outlet property="TimerLabelMinutes" destination="19E-SQ-6We" id="f9X-gY-NWa"/>
+                        <segue destination="sKj-g0-cTY" kind="show" identifier="toRelapseForm" id="6dI-MC-hzl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmU-CX-YqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1644.6153846153845" y="3062.5592417061612"/>
+        </scene>
+        <!--Relapse Form View Controller-->
+        <scene sceneID="F06-6h-6JI">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="sKj-g0-cTY" customClass="RelapseFormViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A79-Hl-rha">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Let's try again!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB0-yx-5ez">
+                                <rect key="frame" x="122" y="137" width="148" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="relapsePicture" translatesAutoresizingMaskIntoConstraints="NO" id="pOR-f1-qgZ">
+                                <rect key="frame" x="138" y="181" width="114" height="154"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You relapsed after 12 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4M2-aq-mvX">
+                                <rect key="frame" x="95" y="360" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tell your story on how you can maintain  12 days streak!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVm-2R-fuS">
+                                <rect key="frame" x="28" y="443" width="330" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4LG-42-jcc">
+                                <rect key="frame" x="28" y="493" width="334" height="149"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izU-Co-jXe">
+                                <rect key="frame" x="59" y="693" width="270" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Submit">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="baseBackgroundColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="SubmitButtonPressed:" destination="sKj-g0-cTY" eventType="touchUpInside" id="zOq-bl-ybw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cJq-ow-7HV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qgJ-sP-q1D"/>
+                    <connections>
+                        <outlet property="RelapseTextView" destination="4LG-42-jcc" id="lHU-Iy-MKW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAX-vI-s9U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644.6153846153845" y="3799.7630331753553"/>
         </scene>
         <!--Activity-->
         <scene sceneID="4Lx-lq-wee">
@@ -645,7 +728,11 @@ but the progress of your journey…</string>
         <image name="Profile_Selected" width="17" height="21"/>
         <image name="Progress_Not Selected" width="22" height="19"/>
         <image name="Progress_Selected" width="22" height="19"/>
+        <image name="relapsePicture" width="114" height="154"/>
         <image name="roundedRec_progress" width="312" height="87"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
