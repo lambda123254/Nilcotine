@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D297628577FE60067BC8C /* ActivityViewController.swift */; };
 		3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */; };
+		4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E045DC42858516100B2FBBC /* ProgressViewController.swift */; };
 		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
 		4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B082A285201F80046910B /* OnboardingViewController.swift */; };
+		4EB836172858BD95002EC0B5 /* RelapseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */; };
 		B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310D92852E8F7003E5294 /* CloudKitHandler.swift */; };
 		B59310DF28585708003E5294 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310DE28585708003E5294 /* Activity.swift */; };
 		B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */; };
@@ -26,8 +28,10 @@
 /* Begin PBXFileReference section */
 		3F0D297628577FE60067BC8C /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		4E045DC42858516100B2FBBC /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4E7B082A285201F80046910B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelapseFormViewController.swift; sourceTree = "<group>"; };
 		B59310D92852E8F7003E5294 /* CloudKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHandler.swift; sourceTree = "<group>"; };
 		B59310DE28585708003E5294 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +82,12 @@
 				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
 				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
 				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
+ 
+				4E045DC42858516100B2FBBC /* ProgressViewController.swift */,
+				4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */,
+
 				B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */,
+ 
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -207,12 +216,17 @@
 			files = (
 				B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */,
 				B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */,
+				4EB836172858BD95002EC0B5 /* RelapseFormViewController.swift in Sources */,
 				B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */,
 				B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */,
 				B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */,
 				3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */,
 				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
+
+				4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */,
+
 				B59310DF28585708003E5294 /* Activity.swift in Sources */,
+
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 			);
