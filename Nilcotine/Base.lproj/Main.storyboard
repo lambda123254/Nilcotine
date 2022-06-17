@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gRJ-ye-TfL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pbg-qN-3NB">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -51,7 +51,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="6rl-nr-13o">
             <objects>
-                <viewController id="9Ym-df-TFp" customClass="OnboardingViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboardingView" id="9Ym-df-TFp" customClass="OnboardingViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yjf-yI-hXq">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -779,8 +779,30 @@ but the progress of your journey…</string>
             </objects>
             <point key="canvasLocation" x="-438.46153846153845" y="799.76303317535542"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="MKu-VG-MgU">
+            <objects>
+                <viewController id="Pbg-qN-3NB" customClass="SplashViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ugs-dF-2ZC">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="#6" translatesAutoresizingMaskIntoConstraints="NO" id="VSS-pw-Dl1">
+                                <rect key="frame" x="28" y="288" width="335" height="269"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TtS-9P-ZuE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mjf-h9-iJq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1412" y="800"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="#6" width="300" height="300"/>
         <image name="Activity_Not Selected" width="36.952381134033203" height="21"/>
         <image name="Activity_Selected" width="37" height="21"/>
         <image name="Circular growth" width="295" height="296"/>

@@ -13,23 +13,10 @@ struct Relapse {
 }
 
 class OnboardingViewController: UIViewController {
-    
-    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
-    
+        
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        Task {
-            try await print(ck.get(option: "format", format: "username == 'aaaaaa'"))
-            if let check = try? await ck.checkIfProfileCreated() {
-                if check {
-                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let nextView = storyBoard.instantiateViewController(withIdentifier: "TabBarView") as! TabBarController
-                    nextView.modalPresentationStyle = .fullScreen
-                    nextView.modalTransitionStyle = .crossDissolve
-                    self.present(nextView, animated: true)
-                }
-            }
-        }
         // Do any additional setup after loading the view.
     }
     
