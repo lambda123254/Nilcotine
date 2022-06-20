@@ -48,12 +48,27 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         // TODO : Save UITextView User Inputed , Relapse Data ( Time )
         
         let endTime = Date()
-        
-        
+    
+
         //ck.update(recordName: <#T##String#>, key: <#T##String#>, value: <#T##String#>)
         
         
         // if data = nil
+        
+        if RelapseTextView.text.contains("_") {
+            let alert = UIAlertController(title: "Alert", message: "Remove '_' character in your story", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: {(_) in
+                // dismiss
+                
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+
+        }
         
         Task {
             let data = try await ck.get(option: "all", format: "")
@@ -61,9 +76,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             for i in 0 ..< data.count {
                 let value = data[i].value(forKey: "effort") as! String
                 if value == "nil" {
-                    
                     RelapseTextView.text = "User does not input any story"
-                    
                 }
                 
        
@@ -71,8 +84,6 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             }
             
         
-        
-        self.navigationController?.popViewController(animated: true)
         }
     
     
