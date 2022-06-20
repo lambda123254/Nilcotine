@@ -16,9 +16,12 @@ class ActivityDetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var effortTextView: UITextView!
     
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    
     @IBOutlet weak var daysLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        effortTextView.isEditable = false
         titleLabel.text = titleLabelString
         daysLabel.text = daysLabelString
         effortTextView.text = effortTextViewString
@@ -26,6 +29,8 @@ class ActivityDetailViewController: UIViewController {
     }
     
     @IBAction func visitProfileBtnPressed(_ sender: Any) {
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "ProgressView") as! ProgressViewController
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     /*

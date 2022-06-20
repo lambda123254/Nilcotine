@@ -47,7 +47,7 @@ class ProgressViewController: UIViewController {
         super.viewDidLoad()
 
         Task {
-            
+        
             // TODO : Get data from relapse database for total relapse + best attempt
             
             // Change Total Relapse Label

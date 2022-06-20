@@ -374,7 +374,7 @@ stories and achievements.</string>
         <!--Progress-->
         <scene sceneID="5HN-3w-B9f">
             <objects>
-                <viewController id="fGL-9N-du3" customClass="ProgressViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgressView" id="fGL-9N-du3" customClass="ProgressViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N5j-DO-NgW">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
