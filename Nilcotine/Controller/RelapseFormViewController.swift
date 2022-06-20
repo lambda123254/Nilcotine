@@ -47,8 +47,11 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
         // TODO : Save UITextView User Inputed , Relapse Data ( Time )
         
-        ck.insert(value: "Tanggal Berhenti", key: "endDate")
-        ck.insertMultiple(value: "\(RelapseTextView.text ?? "nil" )", key: "effort")
+        let endTime = Date()
+        
+        
+        //ck.update(recordName: <#T##String#>, key: <#T##String#>, value: <#T##String#>)
+        
         
         // if data = nil
         
@@ -62,6 +65,9 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                     RelapseTextView.text = "User does not input any story"
                     
                 }
+                
+       
+                
             }
             
         
