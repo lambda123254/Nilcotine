@@ -55,6 +55,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
         // if data = nil
         
+        //Check if story contains "_"
         if RelapseTextView.text.contains("_") {
             let alert = UIAlertController(title: "Alert", message: "Remove '_' character in your story", preferredStyle: .alert)
             

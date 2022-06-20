@@ -47,7 +47,6 @@ class ProgressViewController: UIViewController {
         super.viewDidLoad()
 
         Task {
-        
             // TODO : Get data from relapse database for total relapse + best attempt
             
             // Change Total Relapse Label
@@ -133,9 +132,7 @@ class ProgressViewController: UIViewController {
 //        print(time)
         
         let startTime = Date()
-        print(startTime)
-        print(userIdForDb?.recordName)
-        
+        print(startTime)        
         
 //        let dateFormatter = DateFormatter()
 //        dateFormatter.dateFormat = "dd:HH:mm"
@@ -143,7 +140,7 @@ class ProgressViewController: UIViewController {
 //
 //        print(result)
         
-        ck.insertMultiple(value: "\(startTime),\(userIdForDb)" , key: "startDate,accountNumber")
+//        ck.insertMultiple(value: "\(startTime),\(String(describing: userIdForDb!.recordName))" , key: "startDate,accountNumber")
         
 
     }
