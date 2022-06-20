@@ -123,13 +123,22 @@ public class CloudKitHandler {
                     sortedVal.append(changeVal)
                 }
             }
+            else if valArr[i].contains("_"){
+                sortedVal.append(CKRecord.ID(recordName: valArr[i]))
+            }
             else {
                 sortedVal.append(valArr[i])
             }
                     
         }
         for i in 0 ..< valArr.count {
-            record.setValue(sortedVal[i], forKey: keyArr[i])
+            if valArr[i].contains("_") {
+                record.setValue(CKRecord.Reference(recordID: sortedVal[i] as! CKRecord.ID, action: CKRecord.ReferenceAction.none), forKey: keyArr[i])
+            }
+            else {
+                record.setValue(sortedVal[i], forKey: keyArr[i])
+            }
+
         }
         db.save(record) { record, error in
             print(error ?? "saved")
