@@ -10,6 +10,7 @@
 // Todo : Pass and save data to cloudkit
 
 import UIKit
+import CloudKit
 
 class ProgressViewController: UIViewController {
 
@@ -23,15 +24,96 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var StartButton: UIButton!
     @IBOutlet weak var RelapseButton: UIButton!
     
-    var timer:Timer = Timer()
-    var count:Int = 0
-    var timerCounting:Bool = false
+    var timer: Timer = Timer()
+    var count: Int = 0
+    var timerCounting: Bool = false
+    
+    var dateInterval : DateInterval?
+    var interval : Double?
+    var dayInterval : Int?
+    
+    var maxDayInterval : [Int] = []
+    
+    
+    
+    var relapse: [Relapse] = []
+    
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
+    
+    var userIdForDb: CKRecord.ID?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        Task {
         
-
-
+            // TODO : Get data from relapse database for total relapse + best attempt
+            
+            // Change Total Relapse Label
+            let data = try await ck.get(option: "all", format: "")
+            let userId = try await ck.getUserID()
+            userIdForDb = userId
+            var countRecordId = 0
+            for i in 0 ..< data.count {
+                let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+                    
+                // Change Total Relapse Label ( need to be fixed )
+                    
+                    // ask : kok relapse numbernya ga berubah ya
+                    countRecordId += 1
+                    RelapseNumber.text = "\(countRecordId)"
+                    
+                // (check if it is best attempt ) Change Best Attempt Label
+                    
+                    let startDate = data[i].value(forKey: "startDate") as! Date
+                    let endDate = data[i].value(forKey: "endDate") as! Date
+                    let effort = data[i].value(forKey: "effort") as! String
+                    
+                    relapse = [Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate)]
+                    
+                    for i in 0 ..< relapse.count {
+                        
+                        dateInterval = DateInterval(start: relapse[i].startDate, end: relapse[i].endDate)
+                        interval = dateInterval?.duration
+                        dayInterval = Int (interval!) / 86400
+                        print(dayInterval!)
+                        
+                        maxDayInterval.append(dayInterval!)
+                        
+                        
+                        
+                        
+                    }
+                    
+                    LongestStreakNumber.text = "\(maxDayInterval.max()!)"
+                    
+                    
+                    
+    
+                    
+                     
+//                     ( Buat dapet data tertinggi )
+//                     let bestAttempt = relapse.map {$0.attempt} . max()
+//
+//                     let longestStreak = makeBestAttempt ( attempt : bestAttempt )
+//
+//                     LongestStreakNumber.text = longestStreak
+                     
+                     
+                    
+                    // append data ke struct nanti dapet start date dan end date
+                    
+                    
+                }
+                
+            } // for
+            
+            print(relapse[0].startDate)
+            
+        } // Task
+  
         
     }
     
@@ -44,6 +126,24 @@ class ProgressViewController: UIViewController {
         // Timer start counting
         // Set time interval = 60
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        
+//        let timestamp = NSDate().timeIntervalSince1970
+//        let myTimeInterval = TimeInterval(timestamp)
+//        let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
+//        print(time)
+        
+        let startTime = Date()
+        print(startTime)
+        print(userIdForDb?.recordName)
+        
+        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd:HH:mm"
+//        let result = dateFormatter.string(from: date)
+//
+//        print(result)
+        
+        ck.insertMultiple(value: "\(startTime),\(userIdForDb)" , key: "startDate,accountNumber")
         
 
     }
@@ -65,7 +165,7 @@ class ProgressViewController: UIViewController {
     
     func daysToHoursToMinutes(seconds: Int) -> (Int, Int, Int)
     {
-        // Todo : Fix Timerr ( Days , Hours , Minutes )
+        
        return (((seconds / 1440 )  ), ((seconds % 3600) / 60 % 24 ), ((seconds % 3600) % 60 ))
       
     }
@@ -90,6 +190,8 @@ class ProgressViewController: UIViewController {
         timeStringMinutes += String(format: "%02d", minutes)
         return timeStringMinutes
     }
+    
+    
     
     @IBAction func RelapseButonPressed(_ sender: UIButton) {
         
@@ -123,7 +225,12 @@ class ProgressViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
         
+        
+        
     }
     
 
+    
+
 }
+

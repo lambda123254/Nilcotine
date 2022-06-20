@@ -109,7 +109,14 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         if activity[indexPath.row].activityType == "relapse" {
             nextView.titleLabelString = "\(activity[indexPath.row].username) has relapsed"
             nextView.daysLabelString = "\(intervalDays(startDate: activity[indexPath.row].startDate, endDate: activity[indexPath.row].endDate)) days of no smoking"
-            nextView.effortTextViewString = activity[indexPath.row].relapseStory
+            
+            if activity[indexPath.row].relapseStory == "nil"{
+                nextView.effortTextViewString = "This user didn't submit any story.."
+            }
+            else {
+                nextView.effortTextViewString = activity[indexPath.row].relapseStory
+
+            }
 
             self.navigationController?.pushViewController(nextView, animated: true)
         }

@@ -103,6 +103,8 @@ public class CloudKitHandler {
         let valArr = value.split(separator: ",").map{ String($0) }
         let keyArr = key.split(separator: ",").map{ String($0) }
         var sortedVal = [Any]()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         for i in 0 ..< valArr.count {
             if valArr[i].description.isNumeric {
                 if valArr[i].contains("."){
@@ -116,13 +118,27 @@ public class CloudKitHandler {
                     }
                 }
             }
+            else if (dateFormatter.date(from: valArr[i]) != nil){
+                if let changeVal = dateFormatter.date(from: valArr[i]) {
+                    sortedVal.append(changeVal)
+                }
+            }
+            else if valArr[i].contains("_"){
+                sortedVal.append(CKRecord.ID(recordName: valArr[i]))
+            }
             else {
                 sortedVal.append(valArr[i])
             }
                     
         }
         for i in 0 ..< valArr.count {
-            record.setValue(sortedVal[i], forKey: keyArr[i])
+            if valArr[i].contains("_") {
+                record.setValue(CKRecord.Reference(recordID: sortedVal[i] as! CKRecord.ID, action: CKRecord.ReferenceAction.none), forKey: keyArr[i])
+            }
+            else {
+                record.setValue(sortedVal[i], forKey: keyArr[i])
+            }
+
         }
         db.save(record) { record, error in
             print(error ?? "saved")
@@ -149,6 +165,7 @@ public class CloudKitHandler {
             if let rec = try? await db.perform(query!, inZoneWith: nil) {
                 dataReturn = rec
             }
+            
         }
         
         
