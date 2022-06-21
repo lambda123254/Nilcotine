@@ -47,7 +47,8 @@ class ProgressViewController: UIViewController {
         super.viewDidLoad()
 
         Task {
-            // TODO : Get data from relapse database for total relapse + best attempt
+            // Start Button hanya muncul kalo data relapse user 0
+            
             
             // Change Total Relapse Label
             let data = try await ck.get(option: "all", format: "")
@@ -60,10 +61,14 @@ class ProgressViewController: UIViewController {
             userIdForDb = userId
             var countRecordId = 0
             for i in 0 ..< data.count {
+                
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
                 if value.recordID.recordName == userId.recordName {
                     
-                
+                    if data[i].value(forKey: "startDate") != nil {
+                        StartButton.isHidden = true
+                    }
+
                     
                 // Change Total Relapse Label ( need to be fixed )
                     
@@ -216,6 +221,7 @@ class ProgressViewController: UIViewController {
         
     }
     
+    // TODO : User pencet start sekali seumur hidup , gimana caranya buka aplikasi ga usah start
 
     
 
