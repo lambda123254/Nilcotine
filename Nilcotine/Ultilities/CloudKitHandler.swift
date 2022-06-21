@@ -172,12 +172,45 @@ public class CloudKitHandler {
         return dataReturn
     }
 
-    public func update(recordName: String, key: String, value: String) {
-        let recordID = CKRecord.ID(recordName: recordName)
-        
+    public func update(id: String, value: String, key: String) {
+        let recordID = CKRecord.ID(recordName: id)
+        let valArr = value.split(separator: ",").map{ String($0) }
+        let keyArr = key.split(separator: ",").map{ String($0) }
+        var sortedVal = [Any]()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        for i in 0 ..< valArr.count {
+            if valArr[i].description.isNumeric {
+                if valArr[i].contains("."){
+                    if let changeVal = Double(valArr[i]) {
+                        sortedVal.append(changeVal)
+                    }
+                }
+                else {
+                    if let changeVal = Int(valArr[i]) {
+                        sortedVal.append(changeVal)
+                    }
+                }
+            }
+            else if (dateFormatter.date(from: valArr[i]) != nil){
+                if let changeVal = dateFormatter.date(from: valArr[i]) {
+                    sortedVal.append(changeVal)
+                }
+            }
+            else if valArr[i].contains("_"){
+                sortedVal.append(CKRecord.ID(recordName: valArr[i]))
+            }
+            else {
+                sortedVal.append(valArr[i])
+            }
+                    
+        }
         db.fetch(withRecordID: recordID) { record, error in
             if error == nil {
-                record?.setValue(value, forKey: key)
+                
+                for i in 0 ..< valArr.count {
+                    record?.setValue(sortedVal[i], forKey: keyArr[i])
+                }
                 
                 self.db.save(record!, completionHandler: { (newRecord, error) in
                     if error == nil {
