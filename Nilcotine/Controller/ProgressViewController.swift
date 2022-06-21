@@ -103,9 +103,6 @@ class ProgressViewController: UIViewController {
                 
             } // for
             
-            
-            
-            
         } // Task
   
         

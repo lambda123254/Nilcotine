@@ -12,6 +12,7 @@
 		3F4F07862860B8710018F2EE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F07852860B8710018F2EE /* ProfileViewController.swift */; };
 		3F4F07892860BC4E0018F2EE /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */; };
 		3F4F078A2860BC4E0018F2EE /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */; };
+		3FA35DF32861776400E8C577 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA35DF22861776400E8C577 /* EditProfileViewController.swift */; };
 		4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E045DC42858516100B2FBBC /* ProgressViewController.swift */; };
 		4E1B5DB6285B681D00B96B17 /* Relapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B5DB5285B681D00B96B17 /* Relapse.swift */; };
 		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
@@ -36,6 +37,7 @@
 		3F4F07852860B8710018F2EE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		3FA35DF22861776400E8C577 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		4E045DC42858516100B2FBBC /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		4E1B5DB5285B681D00B96B17 /* Relapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relapse.swift; sourceTree = "<group>"; };
 		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -96,13 +98,11 @@
 				4E045DC42858516100B2FBBC /* ProgressViewController.swift */,
 				4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */,
 				B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */,
-
 				3F4F07852860B8710018F2EE /* ProfileViewController.swift */,
 				3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */,
 				3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */,
-
 				B59310E2285CB2F5003E5294 /* SplashViewController.swift */,
-
+				3FA35DF22861776400E8C577 /* EditProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -240,12 +240,11 @@
 				B59310E3285CB2F5003E5294 /* SplashViewController.swift in Sources */,
 				3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */,
 				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
+				3FA35DF32861776400E8C577 /* EditProfileViewController.swift in Sources */,
 				4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */,
 				B59310DF28585708003E5294 /* Activity.swift in Sources */,
-
 				3F4F07892860BC4E0018F2EE /* ProfileCollectionViewCell.swift in Sources */,
 				3F4F07862860B8710018F2EE /* ProfileViewController.swift in Sources */,
-
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 			);
@@ -395,7 +394,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nilcotine/Nilcotine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZMT5Z4822;
+				DEVELOPMENT_TEAM = 757ZMHMM6D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nilcotine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -424,7 +423,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nilcotine/Nilcotine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZMT5Z4822;
+				DEVELOPMENT_TEAM = 757ZMHMM6D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nilcotine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
