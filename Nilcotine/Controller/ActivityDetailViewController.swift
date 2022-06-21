@@ -21,6 +21,7 @@ class ActivityDetailViewController: UIViewController {
     @IBOutlet weak var daysLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         effortTextView.isEditable = false
         titleLabel.text = titleLabelString
         daysLabel.text = daysLabelString

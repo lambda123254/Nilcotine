@@ -48,7 +48,7 @@ class ProgressViewController: UIViewController {
 
         Task {
             // TODO : Get data from relapse database for total relapse + best attempt
-            
+
             // Change Total Relapse Label
             let data = try await ck.get(option: "all", format: "")
             let userId = try await ck.getUserID()
@@ -56,6 +56,7 @@ class ProgressViewController: UIViewController {
             var countRecordId = 0
             for i in 0 ..< data.count {
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                print(data[i].recordID.recordName)
                 if value.recordID.recordName == userId.recordName {
                     
                 // Change Total Relapse Label ( need to be fixed )
