@@ -18,8 +18,11 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var textViewStory: UITextView!
     var data: [String] = []
     
+    var countTextViewStory = 0
+    var countTextViewMotivation = 0
+    var maxMotivationBool = false
+    var maxStoryBool = false
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +41,6 @@ class EditProfileViewController: UIViewController {
     
 
 }
-
 extension EditProfileViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -58,27 +60,22 @@ extension EditProfileViewController: UIPickerViewDelegate {
 }
 
 extension EditProfileViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        let currentText = textView.text ?? ""
-        
-//        let currentText2 = textViewStory.text ?? ""
-        
-        guard let stringRange = Range(range, in: currentText) else {
-            return false
-        }
-        
-//        guard let stringRange2 = Range(range, in: currentText2) else {
-//            return false
-//        }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView === textViewMotivation {
+            if textViewMotivation.text.count > 150 {
+                textViewMotivation.text = String(textViewMotivation.text.dropLast())
+            }
+            labelCountCharMotivation.text = String(textViewMotivation.text.count)
 
-        let updateText = currentText.replacingCharacters(in: stringRange, with: text)
-//        let updateText2 = currentText2.replacingCharacters(in: stringRange2, with: text)
-        
-        labelCountCharMotivation.text = "\(updateText.count)"
-//        labelCountCharStory.text = "\(updateText2.count)"
-        
-        return updateText.count < 150
-//        return updateText2.count < 250
+        }
+        else if textView === textViewStory {
+            if textViewStory.text.count > 250 {
+                textViewStory.text = String(textViewStory.text.dropLast())
+            }
+            labelCountCharStory.text = String(textViewStory.text.count)
+        }
     }
 }
+
+
