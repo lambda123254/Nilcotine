@@ -47,16 +47,30 @@ class ProgressViewController: UIViewController {
         super.viewDidLoad()
 
         Task {
-            // TODO : Get data from relapse database for total relapse + best attempt
+            // Start Button hanya muncul kalo data relapse user 0
+            
             
             // Change Total Relapse Label
             let data = try await ck.get(option: "all", format: "")
+            
+            
+            
+            // Sort Data
+            let sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
+            
+                                         
             let userId = try await ck.getUserID()
             userIdForDb = userId
             var countRecordId = 0
             for i in 0 ..< data.count {
+                
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
                 if value.recordID.recordName == userId.recordName {
+                    
+                    if data[i].value(forKey: "startDate") != nil {
+                        StartButton.isHidden = true
+                    }
+                    
                     
                 // Change Total Relapse Label ( need to be fixed )
                     
@@ -72,6 +86,7 @@ class ProgressViewController: UIViewController {
                     
                     relapse = [Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate)]
                     
+                    
                     for i in 0 ..< relapse.count {
                         
                         dateInterval = DateInterval(start: relapse[i].startDate, end: relapse[i].endDate)
@@ -81,35 +96,17 @@ class ProgressViewController: UIViewController {
                         
                         maxDayInterval.append(dayInterval!)
                         
-                        
-                        
-                        
                     }
                     
                     LongestStreakNumber.text = "\(maxDayInterval.max()!)"
-                    
-                    
-                    
-    
-                    
-                     
-//                     ( Buat dapet data tertinggi )
-//                     let bestAttempt = relapse.map {$0.attempt} . max()
-//
-//                     let longestStreak = makeBestAttempt ( attempt : bestAttempt )
-//
-//                     LongestStreakNumber.text = longestStreak
-                     
-                     
-                    
-                    // append data ke struct nanti dapet start date dan end date
                     
                     
                 }
                 
             } // for
             
-            print(relapse[0].startDate)
+            
+            
             
         } // Task
   
@@ -126,22 +123,22 @@ class ProgressViewController: UIViewController {
         // Set time interval = 60
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
         
-//        let timestamp = NSDate().timeIntervalSince1970
-//        let myTimeInterval = TimeInterval(timestamp)
-//        let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
-//        print(time)
-        
         let startTime = Date()
-        print(startTime)        
+        let endTime = Date()
+
+                
         
 //        let dateFormatter = DateFormatter()
 //        dateFormatter.dateFormat = "dd:HH:mm"
 //        let result = dateFormatter.string(from: date)
 //
 //        print(result)
+    
+
         
-//        ck.insertMultiple(value: "\(startTime),\(String(describing: userIdForDb!.recordName))" , key: "startDate,accountNumber")
         
+        ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+
 
     }
     
@@ -226,6 +223,7 @@ class ProgressViewController: UIViewController {
         
     }
     
+    // TODO : User pencet start sekali seumur hidup , gimana caranya buka aplikasi ga usah start
 
     
 
