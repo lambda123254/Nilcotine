@@ -965,7 +965,7 @@ but the progress of your journey…</string>
                                 <rect key="frame" x="288" y="0.0" width="86" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="edit_profile_btn"/>
+                                <buttonConfiguration key="configuration" style="plain" image="edit_profile_btn" title=""/>
                             </button>
                         </barButtonItem>
                     </navigationItem>

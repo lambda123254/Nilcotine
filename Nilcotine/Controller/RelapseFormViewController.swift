@@ -14,6 +14,8 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
     
+    var lastDataForDb: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +27,22 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
         
         RelapseTextView.delegate = self
+        
+        Task{
+            let data = try await ck.get(option: "all", format: "")
+            let userId = try await ck.getUserID()
+            
+            for i in 0 ..< data.count {
+                let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+                    
+                    let lastData = data.last?.recordID.recordName
+                    lastDataForDb = lastData
+                    
+                }
+            }
+            
+        }
         
     }
     
@@ -47,10 +65,11 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
         // TODO : Save UITextView User Inputed , Relapse Data ( Time )
         
+        
         let endTime = Date()
     
 
-        //ck.update(recordName: <#T##String#>, key: <#T##String#>, value: <#T##String#>)
+        ck.update(id: "\(lastDataForDb!)", value: "\(RelapseTextView.text),\(endTime)", key: "effort,endDate")
         
         
         // if data = nil
