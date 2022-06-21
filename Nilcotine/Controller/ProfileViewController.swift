@@ -11,6 +11,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet var collectionViewProfile: UICollectionView!
 
+    @IBOutlet weak var textViewMotivation: UITextView!
+    @IBOutlet weak var textViewStory: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +26,9 @@ class ProfileViewController: UIViewController {
         
         collectionViewProfile.delegate = self
         collectionViewProfile.dataSource = self
+        
+        textViewMotivation.isEditable = false
+        textViewStory.isEditable = false
 
         // Do any additional setup after loading the view.
     }
