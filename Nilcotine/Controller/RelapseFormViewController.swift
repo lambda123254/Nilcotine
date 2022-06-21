@@ -14,6 +14,9 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
     
+    var firstDataForDb: String?
+    var userIdForDb: CKRecord.ID?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +28,27 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
         
         RelapseTextView.delegate = self
+        
+        Task{
+            let data = try await ck.get(option: "all", format: "")
+            let userId = try await ck.getUserID()
+            userIdForDb = userId
+            
+            
+            
+            for i in 0 ..< data.count {
+                let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+                    
+                    let sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
+                    
+                    let firstData = sortedData.first?.recordID.recordName
+                    firstDataForDb = firstData
+                    
+                }
+            }
+            
+        }
         
     }
     
@@ -45,12 +69,20 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func SubmitButtonPressed(_ sender: UIButton) {
         
-        // TODO : Save UITextView User Inputed , Relapse Data ( Time )
-        
+        let startTime = Date()
         let endTime = Date()
     
+        
+        // Update the data
 
-        //ck.update(recordName: <#T##String#>, key: <#T##String#>, value: <#T##String#>)
+        ck.update(id: "\(firstDataForDb!)", value: "\(RelapseTextView.text!),\(endTime)", key: "effort,endDate")
+        
+        
+        
+        
+        //TODO Insert new data cell for new relapse
+        
+        ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
         
         
         // if data = nil
@@ -71,20 +103,6 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
         }
         
-        Task {
-            let data = try await ck.get(option: "all", format: "")
-            
-            for i in 0 ..< data.count {
-                let value = data[i].value(forKey: "effort") as! String
-                if value == "nil" {
-                    RelapseTextView.text = "User does not input any story"
-                }
-                
-       
-                
-            }
-            
-        
         }
     
     
@@ -94,7 +112,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     
     }
     
-}
+
     
 
 

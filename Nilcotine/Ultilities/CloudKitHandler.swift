@@ -158,6 +158,8 @@ public class CloudKitHandler {
             query = CKQuery(recordType: recordString, predicate: NSPredicate(value: true))
             if let rec = try? await db.perform(query!, inZoneWith: nil) {
                 dataReturn = rec
+                
+                
             }
         }
         else if option == "format" {
