@@ -1,4 +1,4 @@
-//
+
 //  ProgressViewController.swift
 //  Nilcotine
 //
@@ -53,8 +53,6 @@ class ProgressViewController: UIViewController {
             // Change Total Relapse Label
             let data = try await ck.get(option: "all", format: "")
             
-            
-            
             // Sort Data
             let sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
             
@@ -70,7 +68,7 @@ class ProgressViewController: UIViewController {
                     if data[i].value(forKey: "startDate") != nil {
                         StartButton.isHidden = true
                     }
-                    
+
                     
                 // Change Total Relapse Label ( need to be fixed )
                     
@@ -228,4 +226,3 @@ class ProgressViewController: UIViewController {
     
 
 }
-

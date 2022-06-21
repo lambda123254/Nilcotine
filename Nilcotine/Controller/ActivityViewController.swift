@@ -54,6 +54,11 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+    
     func intervalDays(startDate: Date, endDate: Date) -> Int {
         let calendar = Calendar.current
 
