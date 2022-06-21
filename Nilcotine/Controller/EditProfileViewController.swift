@@ -11,9 +11,10 @@ class EditProfileViewController: UIViewController {
 
     @IBOutlet weak var pickerAge: UIPickerView!
     
-    @IBOutlet weak var labelCountChar: UILabel!
+    @IBOutlet weak var labelCountCharMotivation: UILabel!
     @IBOutlet weak var textViewMotivation: UITextView!
     
+    @IBOutlet weak var labelCountCharStory: UILabel!
     @IBOutlet weak var textViewStory: UITextView!
     var data: [String] = []
     
@@ -30,6 +31,8 @@ class EditProfileViewController: UIViewController {
         pickerAge.delegate = self
         
         textViewMotivation.delegate = self
+        textViewStory.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     
@@ -58,14 +61,24 @@ extension EditProfileViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         let currentText = textView.text ?? ""
+        
+//        let currentText2 = textViewStory.text ?? ""
+        
         guard let stringRange = Range(range, in: currentText) else {
             return false
         }
         
+//        guard let stringRange2 = Range(range, in: currentText2) else {
+//            return false
+//        }
+
         let updateText = currentText.replacingCharacters(in: stringRange, with: text)
+//        let updateText2 = currentText2.replacingCharacters(in: stringRange2, with: text)
         
-        labelCountChar.text = "\(updateText.count)"
+        labelCountCharMotivation.text = "\(updateText.count)"
+//        labelCountCharStory.text = "\(updateText2.count)"
         
         return updateText.count < 150
+//        return updateText2.count < 250
     }
 }
