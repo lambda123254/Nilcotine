@@ -110,7 +110,7 @@ class ProgressViewController: UIViewController {
                 
             } // for
             
-            print(relapse[0].startDate)
+//            print(relapse[0].startDate)
             
         } // Task
   
