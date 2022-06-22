@@ -44,6 +44,9 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
     
     let df = DateFormatter()
     
+    var isRelapseClicked = false
+    var isLogin = false
+    
     var time: (Int,Int,Int)?
     var timeStringDays: String?
     var timeStringHours: String?
@@ -75,7 +78,7 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
                     
                     if data[i].value(forKey: "startDate") != nil {
                         StartButton.isHidden = true
-                        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+                        isLogin = true
                     }
 
                     
@@ -102,13 +105,14 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
                         maxDayInterval.append(dayInterval!)
                         
                     }
-                    
                     LongestStreakNumber.text = "\(maxDayInterval.max()!)"
                     
                 }
             } // for
             
-            
+            if isLogin {
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+            }
 
         } // Task
         
@@ -116,18 +120,10 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
     }
     
     func refreshTimer() {
-        Task {
-            let data = try? await ck.get(option: "all", format: "")
-            let sortedData = data?.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
-            let startDate = sortedData?.first!.value(forKey: "startDate") as! Date
-            let endDate = sortedData?.first!.value(forKey: "endDate") as! Date
-            let effort = sortedData?.first!.value(forKey: "effort") as! String
-            sortedRelapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate))
-            
-            RelapseNumber.text = String(sortedRelapse.count)
-            startInterval = sortedRelapse.last!.startDate
-                     
-        }
+        isRelapseClicked = true
+        timer.invalidate()
+        count = 0
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -159,13 +155,22 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
     // Change label to timer
     @objc func timerCounter() -> Void
     {
-        dateString = df.string(from: Date())
-        timeInterval = DateInterval(start: startInterval!, end: df.date(from: dateString!)!)
-        duration = timeInterval?.duration
-        dayInSecond = Int (duration!)
+        
+        
+        if isRelapseClicked == false {
+            dateString = df.string(from: Date())
+            timeInterval = DateInterval(start: startInterval!, end: df.date(from: dateString!)!)
+            duration = timeInterval?.duration
+            dayInSecond = Int (duration!)
+            time = daysToHoursToMinutes(seconds: dayInSecond!)
 
-        count = count+1
-        time = daysToHoursToMinutes(seconds: dayInSecond!)
+        }
+        else {
+            count += 1
+            time = daysToHoursToMinutes(seconds: count)
+        }
+        
+
         timeStringDays = makeTimeStringDays(days: time!.0)
         timeStringHours = makeTimeStringHours(hours: time!.1)
         timeStringMinutes = makeTimeStringMinutes(minutes: time!.2)

@@ -13,9 +13,12 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var textViewMotivation: UITextView!
     @IBOutlet weak var textViewStory: UITextView!
-    
+    let appearance = UITabBarAppearance()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 33, green: 127, blue: 112)
         
 //        let layout = UICollectionViewFlowLayout()
 //        layout.itemSize = CGSize(width: 108, height: 152)

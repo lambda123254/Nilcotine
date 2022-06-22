@@ -12,7 +12,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet var achievementImageView: UIImageView!
     
     static let identifier = "ProfileCollectionViewCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
