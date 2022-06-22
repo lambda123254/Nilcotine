@@ -6,21 +6,58 @@
 //
 
 import UIKit
+import CloudKit
 
 class ProfileViewController: UIViewController {
     
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
+    
+    @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var labelAge: UILabel!
     @IBOutlet var collectionViewProfile: UICollectionView!
-
+    
     @IBOutlet weak var textViewMotivation: UITextView!
     @IBOutlet weak var textViewStory: UITextView!
+    
+    var profile: Profile?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: 108, height: 152)
-//        
-//        collectionViewProfile.collectionViewLayout = layout
+        Task {
+            let data = try await ck.get(option: "all", format: "")
+
+            let userId = try await ck.getUserID()
+
+            for i in 0 ..< data.count {
+                let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+
+//                    var achievement = data[i].value(forKey: "achievement") as! String
+                    var age = data[i].value(forKey: "age") as! Int
+//                    var motivation = data[i].value(forKey: "motivation") as! String
+//                    var story = data[i].value(forKey: "story") as! String
+                    var username = data[i].value(forKey: "username") as! String
+                    
+                    labelUsername.text = username
+                    labelAge.text = String(age)
+//                    textViewMotivation.text = motivation
+//                    textViewStory.text = story
+                    
+//                    profile = Profile(achievement: "nil", age: age, motivation: motivation, story: story, username: username)
+                    
+                    print(data[i].value(forKey: "username") as! String)
+                }
+            }
+
+
+        }
+        
+        
+        //        let layout = UICollectionViewFlowLayout()
+        //        layout.itemSize = CGSize(width: 108, height: 152)
+        //
+        //        collectionViewProfile.collectionViewLayout = layout
         
         collectionViewProfile.register(ProfileCollectionViewCell.nib(), forCellWithReuseIdentifier: ProfileCollectionViewCell.identifier)
         
@@ -29,11 +66,11 @@ class ProfileViewController: UIViewController {
         
         textViewMotivation.isEditable = false
         textViewStory.isEditable = false
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    
 }
 
 extension ProfileViewController: UICollectionViewDelegate {
