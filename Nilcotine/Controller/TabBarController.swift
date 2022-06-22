@@ -13,6 +13,8 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = true
+        
+        self.tabBar.isTranslucent = false
     }
     
 
