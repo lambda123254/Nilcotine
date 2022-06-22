@@ -56,7 +56,8 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
     var dateString: String?
     var timeInterval: DateInterval?
     var duration: Double?
-    
+    var countRecordId = 0
+
     var startInterval: Date?
     
     override func viewDidLoad() {
@@ -70,7 +71,6 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
             
             let userId = try await ck.getUserID()
             userIdForDb = userId
-            var countRecordId = 0
             for i in 0 ..< data.count {
                 
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -124,6 +124,10 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
         timer.invalidate()
         count = 0
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        
+        countRecordId += 1
+        RelapseNumber.text = "\(countRecordId)"
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
