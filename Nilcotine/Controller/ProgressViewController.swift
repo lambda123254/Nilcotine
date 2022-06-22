@@ -86,7 +86,7 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
                     
                     // ask : kok relapse numbernya ga berubah ya
                     countRecordId += 1
-                    RelapseNumber.text = "\(countRecordId)"
+                    RelapseNumber.text = "\(countRecordId - 1)"
                     
                 // (check if it is best attempt ) Change Best Attempt Label
                     
@@ -144,6 +144,7 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
         
         // Timer start counting
         // Set time interval = 60
+        isRelapseClicked = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
         
         let startTime = df.string(from: Date())
