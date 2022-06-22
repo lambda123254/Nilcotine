@@ -73,6 +73,10 @@ public class CloudKitHandler {
                 let randomAge = Int.random(in: 20..<80)
                 recordProfile.setValue("user\(randomInt)", forKey: "username")
                 recordProfile.setValue(randomAge, forKey: "age")
+                recordProfile.setValue("nil", forKey: "achievement")
+                recordProfile.setValue("nil", forKey: "motivation")
+                recordProfile.setValue("nil", forKey: "story")
+
                 try? await recordProfile.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
 
                 DispatchQueue.main.async {
