@@ -8,14 +8,20 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func startedButtonPressed(_ sender: Any) {
+        Task {
+            try? await ck.createProfile()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

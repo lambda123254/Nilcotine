@@ -57,39 +57,28 @@ public class CloudKitHandler {
     }
     
     public func createProfile() async {
-        if let data = try? await get(option: "all", format: "") {
-            var trueCount = 0
-            for i in 0 ..< data.count {
-                let id = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
-
-                if userId?.recordName == id.recordID.recordName {
-                    trueCount += 1
-                }
-            }
+        
             
-            if trueCount == 0 {
-                let recordProfile = CKRecord(recordType: "Profiles")
-                let randomInt = Int.random(in: 10000..<99999)
-                let randomAge = Int.random(in: 20..<80)
-                recordProfile.setValue("user\(randomInt)", forKey: "username")
-                recordProfile.setValue(randomAge, forKey: "age")
-                recordProfile.setValue("nil", forKey: "achievement")
-                recordProfile.setValue("nil", forKey: "motivation")
-                recordProfile.setValue("nil", forKey: "story")
+        let recordProfile = CKRecord(recordType: "Profiles")
+        let randomInt = Int.random(in: 10000..<99999)
+        let randomAge = Int.random(in: 20..<80)
+        recordProfile.setValue("user\(randomInt)", forKey: "username")
+        recordProfile.setValue(randomAge, forKey: "age")
+        recordProfile.setValue("nil", forKey: "achievement")
+        recordProfile.setValue("nil", forKey: "motivation")
+        recordProfile.setValue("nil", forKey: "story")
 
-                try? await recordProfile.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
+        try? await recordProfile.setValue(CKRecord.Reference(recordID: getUserID(), action: CKRecord.ReferenceAction.none), forKey: "accountNumber")
 
-                DispatchQueue.main.async {
-                    self.db.save(recordProfile) { record, error in
-                        print(error ?? "saved")
-                    }
-                }
-                
-            }
-            else {
-                print("user already exist")
+        DispatchQueue.main.async {
+            self.db.save(recordProfile) { record, error in
+                print(error ?? "saved")
             }
         }
+                
+            
+
+        
         
         
         
