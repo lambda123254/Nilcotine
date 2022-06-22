@@ -12,7 +12,7 @@
 import UIKit
 import CloudKit
 
-class ProgressViewController: UIViewController {
+class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
 
     @IBOutlet weak var TimerLabelDays: UILabel!
     @IBOutlet weak var TimerLabelHours: UILabel!
@@ -34,7 +34,7 @@ class ProgressViewController: UIViewController {
     
     var maxDayInterval : [Int] = []
     
-    
+    var sortedRelapse: [Relapse] = []
     
     var relapse: [Relapse] = []
     
@@ -42,21 +42,29 @@ class ProgressViewController: UIViewController {
     
     var userIdForDb: CKRecord.ID?
     
+    let df = DateFormatter()
+    
+    var time: (Int,Int,Int)?
+    var timeStringDays: String?
+    var timeStringHours: String?
+    var timeStringMinutes: String?
+    
+    var dayInSecond: Int?
+    var dateString: String?
+    var timeInterval: DateInterval?
+    var duration: Double?
+    
+    var startInterval: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        df.timeZone = TimeZone.current
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         Task {
-            // Start Button hanya muncul kalo data relapse user 0
-            
             
             // Change Total Relapse Label
             let data = try await ck.get(option: "all", format: "")
             
-            // Sort Data
-            let sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
-            
-                                         
             let userId = try await ck.getUserID()
             userIdForDb = userId
             var countRecordId = 0
@@ -67,6 +75,7 @@ class ProgressViewController: UIViewController {
                     
                     if data[i].value(forKey: "startDate") != nil {
                         StartButton.isHidden = true
+                        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
                     }
 
                     
@@ -81,16 +90,14 @@ class ProgressViewController: UIViewController {
                     let startDate = data[i].value(forKey: "startDate") as! Date
                     let endDate = data[i].value(forKey: "endDate") as! Date
                     let effort = data[i].value(forKey: "effort") as! String
-                    
-                    relapse = [Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate)]
-                    
-                    
+
+                    relapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate))
+                    sortedRelapse = relapse.sorted(by: {$0.startDate > $1.startDate})
+                    startInterval = sortedRelapse.first?.startDate
                     for i in 0 ..< relapse.count {
-                        
                         dateInterval = DateInterval(start: relapse[i].startDate, end: relapse[i].endDate)
                         interval = dateInterval?.duration
                         dayInterval = Int (interval!) / 86400
-                        print(dayInterval!)
                         
                         maxDayInterval.append(dayInterval!)
                         
@@ -98,15 +105,36 @@ class ProgressViewController: UIViewController {
                     
                     LongestStreakNumber.text = "\(maxDayInterval.max()!)"
                     
-                    
                 }
-                
             } // for
             
+            
+
         } // Task
-  
+        
         
     }
+    
+    func refreshTimer() {
+        Task {
+            let data = try? await ck.get(option: "all", format: "")
+            let sortedData = data?.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
+            let startDate = sortedData?.first!.value(forKey: "startDate") as! Date
+            let endDate = sortedData?.first!.value(forKey: "endDate") as! Date
+            let effort = sortedData?.first!.value(forKey: "effort") as! String
+            sortedRelapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate))
+            
+            RelapseNumber.text = String(sortedRelapse.count)
+            startInterval = sortedRelapse.last!.startDate
+                     
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let secondVC: RelapseFormViewController = segue.destination as! RelapseFormViewController
+        secondVC.delegate = self
+    }
+    
     
     @IBAction func StartButtonPressed(_ sender: UIButton) {
         
@@ -116,23 +144,14 @@ class ProgressViewController: UIViewController {
         
         // Timer start counting
         // Set time interval = 60
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
         
-        let startTime = Date()
-        let endTime = Date()
+        let startTime = df.string(from: Date())
+        let endTime = df.string(from: Date())
 
-                
-        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd:HH:mm"
-//        let result = dateFormatter.string(from: date)
-//
-//        print(result)
-    
-
-        
         
         ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+        
 
 
     }
@@ -140,12 +159,17 @@ class ProgressViewController: UIViewController {
     // Change label to timer
     @objc func timerCounter() -> Void
     {
+        dateString = df.string(from: Date())
+        timeInterval = DateInterval(start: startInterval!, end: df.date(from: dateString!)!)
+        duration = timeInterval?.duration
+        dayInSecond = Int (duration!)
+
         count = count+1
-        let time = daysToHoursToMinutes(seconds: count)
-        let timeStringDays = makeTimeStringDays(days: time.0)
-        let timeStringHours = makeTimeStringHours(hours: time.1)
-        let timeStringMinutes = makeTimeStringMinutes(minutes: time.2)
-        
+        time = daysToHoursToMinutes(seconds: dayInSecond!)
+        timeStringDays = makeTimeStringDays(days: time!.0)
+        timeStringHours = makeTimeStringHours(hours: time!.1)
+        timeStringMinutes = makeTimeStringMinutes(minutes: time!.2)
+
         TimerLabelDays.text = timeStringDays
         TimerLabelHours.text = timeStringHours
         TimerLabelMinutes.text = timeStringMinutes
@@ -154,8 +178,8 @@ class ProgressViewController: UIViewController {
     
     func daysToHoursToMinutes(seconds: Int) -> (Int, Int, Int)
     {
-        
-       return (((seconds / 1440 )  ), ((seconds % 3600) / 60 % 24 ), ((seconds % 3600) % 60 ))
+
+        return (((seconds / 86400 )  ), ((seconds % 86400) / 3600 ), ((seconds % 3600) / 60 ))
       
     }
     

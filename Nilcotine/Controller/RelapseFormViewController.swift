@@ -8,18 +8,26 @@
 import UIKit
 import CloudKit
 
+protocol RelapseFormDelegateProtocol {
+    func refreshTimer()
+}
+
 class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
+    var delegate: RelapseFormDelegateProtocol? = nil
     @IBOutlet weak var RelapseTextView: UITextView!
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
     
     var firstDataForDb: String?
     var userIdForDb: CKRecord.ID?
+    let df = DateFormatter()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        df.timeZone = TimeZone.current
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.hidesBottomBarWhenPushed = true
         
@@ -69,19 +77,13 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func SubmitButtonPressed(_ sender: UIButton) {
         
-        let startTime = Date()
-        let endTime = Date()
+        let startTime = df.string(from: Date())
+        let endTime = df.string(from: Date())
     
-        
         // Update the data
 
         ck.update(id: "\(firstDataForDb!)", value: "\(RelapseTextView.text!),\(endTime)", key: "effort,endDate")
-        
-        
-        
-        
-        //TODO Insert new data cell for new relapse
-        
+
         ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
         
         
@@ -99,8 +101,9 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             self.present(alert, animated: true, completion: nil)
         }
         else {
+            self.delegate?.refreshTimer()
             self.navigationController?.popViewController(animated: true)
-
+            
         }
         
         }
