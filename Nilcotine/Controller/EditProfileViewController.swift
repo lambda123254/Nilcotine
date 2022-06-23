@@ -26,6 +26,14 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textViewMotivation.layer.borderColor = UIColor.lightGray.cgColor
+        textViewMotivation.layer.borderWidth = 1
+        textViewMotivation.layer.cornerRadius = 10
+        
+        textViewStory.layer.borderColor = UIColor.lightGray.cgColor
+        textViewStory.layer.borderWidth = 1
+        textViewStory.layer.cornerRadius = 10
+        
         for i in 1 ... 99 {
             data.append(String(i))
         }
