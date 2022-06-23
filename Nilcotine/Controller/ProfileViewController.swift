@@ -49,9 +49,13 @@ class ProfileViewController: UIViewController {
                     print(data[i].value(forKey: "username") as! String)
                 }
             }
+            
+            
 
 
         }
+        
+        
         
         
         //        let layout = UICollectionViewFlowLayout()
@@ -68,8 +72,14 @@ class ProfileViewController: UIViewController {
         textViewStory.isEditable = false
         
         // Do any additional setup after loading the view.
+        
+        
     }
     
+    @IBAction func seeAllPressed(_ sender: UIButton) {
+        
+        self.performSegue(withIdentifier: "toAchievementAll", sender: self)
+    }
     
 }
 
