@@ -32,6 +32,7 @@
 		B5D33FB5285047D800D14B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D33FB4285047D800D14B6F /* Assets.xcassets */; };
 		B5D33FB8285047D800D14B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D33FB6285047D800D14B6F /* LaunchScreen.storyboard */; };
 		B5D33FC22850483C00D14B6F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D33FC12850483C00D14B6F /* CloudKit.framework */; };
+		B5E3D80228642EFA00D9D316 /* AchievementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3D80128642EFA00D9D316 /* AchievementData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		B5D33FB9285047D800D14B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5D33FBF2850483500D14B6F /* Nilcotine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nilcotine.entitlements; sourceTree = "<group>"; };
 		B5D33FC12850483C00D14B6F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B5E3D80128642EFA00D9D316 /* AchievementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				B59310DE28585708003E5294 /* Activity.swift */,
 				4E1B5DB5285B681D00B96B17 /* Relapse.swift */,
 				3FFA43022862C654003B78CD /* Profile.swift */,
+				B5E3D80128642EFA00D9D316 /* AchievementData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				4E7940672864289D002E82C4 /* AllAchievementViewController.swift in Sources */,
 				3F4F07892860BC4E0018F2EE /* ProfileCollectionViewCell.swift in Sources */,
 				3F4F07862860B8710018F2EE /* ProfileViewController.swift in Sources */,
+				B5E3D80228642EFA00D9D316 /* AchievementData.swift in Sources */,
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 				4E794065286426E3002E82C4 /* Achievement.swift in Sources */,

@@ -9,10 +9,10 @@ import UIKit
 
 class AllAchievementViewController: UIViewController {
 
+    let achievement = AchievementData()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO :
         
     }
     

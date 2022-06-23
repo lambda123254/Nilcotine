@@ -11,5 +11,4 @@ struct Achievement {
     let achievementId: String
     let achievementName: String
     let achievementImage: String
-    
 }
