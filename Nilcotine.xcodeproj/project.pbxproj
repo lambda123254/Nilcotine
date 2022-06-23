@@ -13,6 +13,7 @@
 		3F4F07892860BC4E0018F2EE /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */; };
 		3F4F078A2860BC4E0018F2EE /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */; };
 		3FA35DF32861776400E8C577 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA35DF22861776400E8C577 /* EditProfileViewController.swift */; };
+		3FF9667F2864325900CED774 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9667E2864325900CED774 /* ProfileTableViewCell.swift */; };
 		3FFA43032862C654003B78CD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFA43022862C654003B78CD /* Profile.swift */; };
 		4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E045DC42858516100B2FBBC /* ProgressViewController.swift */; };
 		4E1B5DB6285B681D00B96B17 /* Relapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B5DB5285B681D00B96B17 /* Relapse.swift */; };
@@ -42,6 +43,7 @@
 		3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		3FA35DF22861776400E8C577 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		3FF9667E2864325900CED774 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		3FFA43022862C654003B78CD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4E045DC42858516100B2FBBC /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		4E1B5DB5285B681D00B96B17 /* Relapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relapse.swift; sourceTree = "<group>"; };
@@ -114,16 +116,10 @@
 				3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */,
 				B59310E2285CB2F5003E5294 /* SplashViewController.swift */,
 				3FA35DF22861776400E8C577 /* EditProfileViewController.swift */,
+				3FF9667E2864325900CED774 /* ProfileTableViewCell.swift */,
 				4E7940662864289D002E82C4 /* AllAchievementViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B59310DD285828D3003E5294 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B5D33F9F285047D600D14B6F = {
@@ -146,7 +142,6 @@
 		B5D33FAA285047D600D14B6F /* Nilcotine */ = {
 			isa = PBXGroup;
 			children = (
-				B59310DD285828D3003E5294 /* View */,
 				B59310DC285828CB003E5294 /* Controller */,
 				B59310DB285828C4003E5294 /* Model */,
 				B59310D82852E88B003E5294 /* Ultilities */,
@@ -249,6 +244,7 @@
 				B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */,
 				B5D33FAC285047D600D14B6F /* AppDelegate.swift in Sources */,
 				B5D33FAE285047D600D14B6F /* SceneDelegate.swift in Sources */,
+				3FF9667F2864325900CED774 /* ProfileTableViewCell.swift in Sources */,
 				3FFA43032862C654003B78CD /* Profile.swift in Sources */,
 				B59310E3285CB2F5003E5294 /* SplashViewController.swift in Sources */,
 				3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */,
