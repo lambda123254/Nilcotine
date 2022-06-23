@@ -8,7 +8,7 @@
 import Foundation
 
 struct Achievement {
-    let achievementId: String
+    let achievementId: Int
     let achievementName: String
     let achievementImage: String
 }
