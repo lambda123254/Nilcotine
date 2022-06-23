@@ -79,10 +79,18 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
         let startTime = df.string(from: Date())
         let endTime = df.string(from: Date())
-    
+        var effort = ""
+        
+        if RelapseTextView.text == "" || RelapseTextView.text == "Share your story here..."{
+            effort = "nil"
+        }
+        else {
+            effort = RelapseTextView.text
+        }
+
         // Update the data
 
-        ck.update(id: "\(firstDataForDb!)", value: "\(RelapseTextView.text!),\(endTime)", key: "effort,endDate")
+        ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(endTime)", key: "effort,endDate")
 
         ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
         
