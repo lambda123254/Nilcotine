@@ -19,10 +19,29 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var textViewMotivation: UITextView!
     @IBOutlet weak var textViewStory: UITextView!
     
+    @IBOutlet weak var tableRelapse: UITableView!
+    
+    struct Relapse {
+        let relapseTime: String
+        let relapseDate: String
+    }
+    
+    let dummyData: [Relapse] = [
+        Relapse(relapseTime: "14 days 7 hours 52 minutes", relapseDate: "07/06/2022"),
+        Relapse(relapseTime: "8 days 10 hours 30 minutes", relapseDate: "18/05/2022"),
+        Relapse(relapseTime: "5 days 8 hours 7 minutes", relapseDate: "25/03/2022"),
+        Relapse(relapseTime: "5 days 8 hours 7 minutes", relapseDate: "25/03/2022"),
+        Relapse(relapseTime: "5 days 8 hours 7 minutes", relapseDate: "25/03/2022"),
+        Relapse(relapseTime: "5 days 8 hours 7 minutes", relapseDate: "25/03/2022"),
+    ]
+    
     var profile: Profile?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableRelapse.dataSource = self
+        tableRelapse.delegate = self
         
         Task {
             let data = try await ck.get(option: "all", format: "")
@@ -67,6 +86,8 @@ class ProfileViewController: UIViewController {
         textViewMotivation.isEditable = false
         textViewStory.isEditable = false
         
+        collectionViewProfile.isScrollEnabled = false
+        
         // Do any additional setup after loading the view.
     }
     
@@ -102,3 +123,31 @@ extension ProfileViewController: UICollectionViewDataSource {
 //        CGSize(width: 108, height: 152)
 //    }
 //}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dummyData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let relapse = dummyData[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileTableViewCell
+        
+        cell.labelRelapseTime.text = relapse.relapseTime
+        cell.labelRelapseDate.text = relapse.relapseDate
+
+        return cell
+    }
+    
+    
+}
