@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
                     self.present(nextView, animated: true)
                 }
                 else {
-                    let nextView = storyBoard.instantiateViewController(withIdentifier: "onboardingView") as! OnboardingViewController
+                    let nextView = storyBoard.instantiateViewController(withIdentifier: "NavigationControllerView")
                     nextView.modalPresentationStyle = .fullScreen
                     nextView.modalTransitionStyle = .crossDissolve
                     self.present(nextView, animated: true)

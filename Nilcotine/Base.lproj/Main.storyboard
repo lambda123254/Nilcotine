@@ -1129,7 +1129,7 @@ but the progress of your journey…</string>
         <!--Navigation Controller-->
         <scene sceneID="PpB-RI-LgB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gRJ-ye-TfL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerView" automaticallyAdjustsScrollViewInsets="NO" id="gRJ-ye-TfL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hwx-cE-6ur">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
