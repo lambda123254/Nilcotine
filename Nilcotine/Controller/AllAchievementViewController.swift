@@ -18,6 +18,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
     var iconNameUse : [String] = []
+    var iconNameUseSorted: [String] = []
 
     var isFetchingFinish = false
     var timer: Timer = Timer()
@@ -28,8 +29,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let groupTask = DispatchGroup()
-
         Task {
             let data = try await ck.get(option: "all", format: "")
             let userId = try await ck.getUserID()
@@ -48,9 +47,10 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
             }// for
             
             for i in 0 ..< achievement.data.count - iconNameUse.count {
-                iconNameUse.append("")
+                iconNameUse.append("nil")
             }
-            
+            iconNameUseSorted = iconNameUse.sorted()
+            print(iconNameUseSorted)
             isFetchingFinish = true
 
         }
@@ -106,13 +106,9 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         
         achievementBadgeShow = achievement.data[indexPath.row].achievementImage
         achievementLabelShow = achievement.data[indexPath.row].achievementName
-
-        
-        
-
         
         if isFetchingFinish {
-            if iconNameUse[indexPath.row] == achievementBadgeShow {
+            if iconNameUseSorted[indexPath.row] == achievementBadgeShow {
                 cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
                 cell.AchievementLabel.text = "\(achievementLabelShow!)"
             }
