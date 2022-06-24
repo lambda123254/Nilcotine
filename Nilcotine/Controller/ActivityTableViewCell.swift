@@ -13,4 +13,5 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDesc: UILabel!
     @IBOutlet weak var labelAge: UILabel!
+    @IBOutlet weak var userIdLabel: UILabel!
 }

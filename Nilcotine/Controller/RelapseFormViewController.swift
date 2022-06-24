@@ -18,12 +18,16 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var RelapseTextView: UITextView!
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
+    var ck2 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
+    var ck3 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
+
     
     var firstDataForDb: String?
     var userIdForDb: CKRecord.ID?
     let df = DateFormatter()
+    var userName = ""
+    var sortedData: [CKRecord] = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         df.timeZone = TimeZone.current
@@ -39,6 +43,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
         Task{
             let data = try await ck.get(option: "all", format: "")
+            let dataProfile = try await ck3.get(option: "all", format: "")
             let userId = try await ck.getUserID()
             userIdForDb = userId
             
@@ -48,10 +53,19 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
                 if value.recordID.recordName == userId.recordName {
                     
-                    let sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
+                    sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
                     
                     let firstData = sortedData.first?.recordID.recordName
                     firstDataForDb = firstData
+                    
+                }
+            }
+            
+            for i in 0 ..< dataProfile.count {
+                let value = dataProfile[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+                    
+                    userName = dataProfile[i].value(forKey: "username") as! String
                     
                 }
             }
@@ -91,8 +105,15 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         // Update the data
 
         ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(endTime)", key: "effort,endDate")
-
-        ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+        for i in 1 ... 2 {
+            if i == 1 {
+                ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+            }
+            else {
+                ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(endTime),relapse.png,\(effort), \(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+            }
+        }
+        
         
         
         // if data = nil

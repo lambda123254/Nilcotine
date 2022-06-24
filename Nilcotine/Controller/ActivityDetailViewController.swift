@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import CloudKit
 
 class ActivityDetailViewController: UIViewController {
 
     var titleLabelString = ""
     var daysLabelString = ""
     var effortTextViewString = ""
+    var userId = ""
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var effortTextView: UITextView!
@@ -33,7 +35,9 @@ class ActivityDetailViewController: UIViewController {
     }
     
     @IBAction func visitProfileBtnPressed(_ sender: Any) {
-        let nextView = storyBoard.instantiateViewController(withIdentifier: "ProgressView") as! ProgressViewController
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "ProfileView") as! ProfileViewController
+        nextView.visitedUserId = CKRecord.ID(recordName: userId)
+        nextView.visited = true
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     

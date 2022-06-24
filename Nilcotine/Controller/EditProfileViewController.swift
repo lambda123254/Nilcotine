@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class EditProfileViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var textViewMotivation: UITextView!
     
     @IBOutlet weak var labelCountCharStory: UILabel!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var textViewStory: UITextView!
     var data: [String] = []
     
@@ -22,9 +24,16 @@ class EditProfileViewController: UIViewController {
     var countTextViewMotivation = 0
     var maxMotivationBool = false
     var maxStoryBool = false
-
+    
+    var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
+    var recordId: String?
+    var age = 0
+    var usernameString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+
         
         textViewMotivation.layer.borderColor = UIColor.lightGray.cgColor
         textViewMotivation.layer.borderWidth = 1
@@ -45,10 +54,34 @@ class EditProfileViewController: UIViewController {
         textViewMotivation.delegate = self
         textViewStory.delegate = self
         
-        // Do any additional setup after loading the view.
+        Task {
+            let data = try? await ck.get(option: "all", format: "")
+            let userId = try? await ck.getUserID()
+            for i in 0 ..< data!.count {
+                let value = data![i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId!.recordName {
+                    recordId = data![i].recordID.recordName
+                    usernameString = data![i].value(forKey: "username") as! String
+                }
+            }
+        }
     }
     
-
+    @objc func saveButtonPressed() {
+        if textViewMotivation.text == "" {
+            textViewMotivation.text = "nil"
+        }
+        if textViewStory.text == "" {
+            textViewStory.text = "nil"
+        }
+        if usernameTextField.text == "" {
+            usernameTextField.text = usernameString
+        }
+        ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!)", key: "achievement,age,motivation,story,username")
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 extension EditProfileViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -65,6 +98,9 @@ extension EditProfileViewController: UIPickerViewDataSource {
 extension EditProfileViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        age = pickerView.selectedRow(inComponent: component) + 1
     }
 }
 

@@ -15,6 +15,8 @@ class ProfileViewController: UIViewController {
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
     var ckR = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
     
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelAge: UILabel!
@@ -35,37 +37,69 @@ class ProfileViewController: UIViewController {
     var dateString: String?
     var duration: Double?
     var time: (Int,Int,Int)?
-    
+    var visited = false
+    var visitedUserId: CKRecord.ID?
     var intervalArr: [String] = []
-    
+    var userId: CKRecord.ID?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if visited {self.navigationItem.rightBarButtonItem = nil}
         tableRelapse.dataSource = self
         tableRelapse.delegate = self
         
+        if visited == false {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit Profile", style: .plain, target: self, action: #selector(editProfileButtonPressed))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 33, green: 127, blue: 112)
+        }
+        
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 33, green: 127, blue: 112)
+
         Task {
-            let data = try? await ck.get(option: "all", format: "")            
-            let userId = try await ck.getUserID()
+            let data = try? await ck.get(option: "all", format: "")
+            
+            if visited == false {
+                userId = try? await ck.getUserID()
+            }
+            else {
+                userId = visitedUserId
+            }
+            
+            
 
             for i in 0 ..< data!.count {
                 let value = data![i].value(forKey: "accountNumber") as! CKRecord.Reference
-                if value.recordID.recordName == userId.recordName {
+                if value.recordID.recordName == userId!.recordName {
 
 //                    var achievement = data[i].value(forKey: "achievement") as! String
                     let age = data![i].value(forKey: "age") as! Int
-//                    var motivation = data[i].value(forKey: "motivation") as! String
-//                    var story = data[i].value(forKey: "story") as! String
+                    var motivation = data![i].value(forKey: "motivation") as! String
+                    var story = data![i].value(forKey: "story") as! String
                     let username = data![i].value(forKey: "username") as! String
+                    
+                    if motivation == "nil" {
+                        motivation = "You haven't filled your motivation to quit yet"
+                    }
+                    else {
+                        textViewStory.textColor = .black
+                    }
+                    
+                    if story == "nil" {
+                        story = "You haven't filled your story yet"
+                        
+                    }
+                    else {
+                        textViewMotivation.textColor = .black
+                    }
                     
                     labelUsername.text = username
                     labelAge.text = String(age)
-//                    textViewMotivation.text = motivation
-//                    textViewStory.text = story
+                    textViewMotivation.text = motivation
+                    textViewStory.text = story
+
                     
 //                    profile = Profile(achievement: "nil", age: age, motivation: motivation, story: story, username: username)
                     
-                    print(data![i].value(forKey: "username") as! String)
                 }
             }
 
@@ -77,12 +111,18 @@ class ProfileViewController: UIViewController {
         
         Task {
             let dataRecord = try? await ckR.get(option: "all", format: "")
-            let userId = try await ckR.getUserID()
-            userIdForDb = userId
+            
+            if visited == false {
+                userId = try? await ck.getUserID()
+            }
+            else {
+                userId = visitedUserId
+            }
+            
             
             for i in 0 ..< dataRecord!.count {
                 let value = dataRecord![i].value(forKey: "accountNumber") as! CKRecord.Reference
-                if value.recordID.recordName == userId.recordName {
+                if value.recordID.recordName == userId!.recordName {
                     let effort = dataRecord![i].value(forKey: "effort") as! String
                     let startDate = dataRecord![i].value(forKey: "startDate") as! Date
                     let endDate = dataRecord![i].value(forKey: "endDate") as! Date
@@ -121,6 +161,12 @@ class ProfileViewController: UIViewController {
         
     }
     
+    @objc func editProfileButtonPressed() {
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "EditProfileView") as! EditProfileViewController
+        self.navigationController?.pushViewController(nextView, animated: true)
+
+    }
+    
     func daysToHoursToMinutes(seconds: Int) -> (Int, Int, Int)
     {
 
@@ -142,8 +188,9 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func seeAllPressed(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "toAchievementAll", sender: self)
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "AllAchievementView") as! AllAchievementViewController
+        nextView.userId = userId
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
 }
@@ -200,3 +247,4 @@ extension ProfileViewController: UITableViewDataSource {
     
     
 }
+

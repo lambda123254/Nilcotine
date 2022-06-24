@@ -13,31 +13,27 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     var achievement = AchievementData()
     var achievementBadgeShow: String?
     var achievementLabelShow: String?
-    
-    var userIdForDb: CKRecord.ID?
-    
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
     var iconNameUse : [String] = []
     var iconNameUseSorted: [String] = []
 
     var isFetchingFinish = false
     var timer: Timer = Timer()
+    var userId: CKRecord.ID?
+    var userIdString = ""
     
     @IBOutlet weak var AchievementCollection: UICollectionView!
     
     //let achievement = AchievementData()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(userIdString)
         Task {
             let data = try await ck.get(option: "all", format: "")
-            let userId = try await ck.getUserID()
-            userIdForDb = userId
-            
             for i in 0 ..< data.count {
 
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
-                if value.recordID.recordName == userId.recordName {
+                if value.recordID.recordName == userId!.recordName {
                     
                     let iconName = data[i].value(forKey: "iconName") as! String
                     

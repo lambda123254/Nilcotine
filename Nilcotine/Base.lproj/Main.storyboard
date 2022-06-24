@@ -336,11 +336,11 @@ stories and achievements.</string>
             </objects>
             <point key="canvasLocation" x="1646" y="2340"/>
         </scene>
-        <!--Activity-->
+        <!--People-->
         <scene sceneID="iEF-hG-vuj">
             <objects>
                 <navigationController id="Nkd-WY-wBB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity" image="Activity_Not Selected" selectedImage="Activity_Selected" id="CYn-bq-pry"/>
+                    <tabBarItem key="tabBarItem" title="People" image="Activity_Not Selected" selectedImage="Activity_Selected" id="CYn-bq-pry"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a2x-lm-zAC">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -604,7 +604,7 @@ but the progress of your journey…</string>
             </objects>
             <point key="canvasLocation" x="1644.6153846153845" y="3799.7630331753553"/>
         </scene>
-        <!--Activity-->
+        <!--People-->
         <scene sceneID="4Lx-lq-wee">
             <objects>
                 <viewController id="kDA-5d-Zej" customClass="ActivityViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
@@ -652,6 +652,13 @@ but the progress of your journey…</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMi-ZB-Wca">
+                                                    <rect key="frame" x="98" y="28" width="182" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Wg2-PJ-rVf" firstAttribute="leading" secondItem="K0f-mZ-pCg" secondAttribute="leading" constant="36" id="S8q-i4-Zhj"/>
@@ -664,6 +671,7 @@ but the progress of your journey…</string>
                                             <outlet property="labelAge" destination="JCq-ad-Cxr" id="GFr-Yw-xxS"/>
                                             <outlet property="labelDesc" destination="gWZ-Ot-pXS" id="XCv-Ee-Zy6"/>
                                             <outlet property="labelName" destination="yLE-4z-EbR" id="Fzz-lS-srs"/>
+                                            <outlet property="userIdLabel" destination="lMi-ZB-Wca" id="tDS-NG-Ooj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -678,7 +686,7 @@ but the progress of your journey…</string>
                             <constraint firstItem="EnE-xj-Npd" firstAttribute="top" secondItem="OyJ-bp-n1e" secondAttribute="top" id="wyK-Wu-WP1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Activity" id="aW3-wG-uTf"/>
+                    <navigationItem key="navigationItem" title="People" id="aW3-wG-uTf"/>
                     <connections>
                         <outlet property="tableActivity" destination="EnE-xj-Npd" id="9Aq-6B-20Y"/>
                     </connections>
@@ -752,7 +760,7 @@ but the progress of your journey…</string>
         <!--Profile-->
         <scene sceneID="KUp-sz-HVx">
             <objects>
-                <viewController id="I7w-Nd-VBk" customClass="ProfileViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" id="I7w-Nd-VBk" customClass="ProfileViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hTa-Uv-pwN">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="1100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -836,8 +844,8 @@ but the progress of your journey…</string>
                                                         <rect key="frame" x="27" y="447" width="334" height="149"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Story" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojf-eJ-5Oh">
-                                                        <rect key="frame" x="43" y="452" width="44" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojf-eJ-5Oh">
+                                                        <rect key="frame" x="43" y="452" width="77" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.49803921569999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1046,7 +1054,7 @@ but the progress of your journey…</string>
         <!--Edit Profile-->
         <scene sceneID="jf6-qk-zaJ">
             <objects>
-                <viewController id="SXG-zq-MUS" customClass="EditProfileViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileView" id="SXG-zq-MUS" customClass="EditProfileViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6lW-cV-pHS">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1167,6 +1175,7 @@ but the progress of your journey…</string>
                         <outlet property="pickerAge" destination="zJM-zn-Kdp" id="m82-aS-1yX"/>
                         <outlet property="textViewMotivation" destination="MV3-Jh-M0n" id="hgt-Yx-7bf"/>
                         <outlet property="textViewStory" destination="gop-ex-U2q" id="NQN-nb-5zE"/>
+                        <outlet property="usernameTextField" destination="PQ9-tg-YXi" id="i7a-Ub-ygM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN5-pE-aXM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1176,7 +1185,7 @@ but the progress of your journey…</string>
         <!--All Achievement View Controller-->
         <scene sceneID="Q7i-6m-nrq">
             <objects>
-                <viewController id="0VC-GK-BeN" customClass="AllAchievementViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllAchievementView" id="0VC-GK-BeN" customClass="AllAchievementViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Qn-hM-Y4P">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

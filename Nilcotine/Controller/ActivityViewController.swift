@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class ActivityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -13,6 +14,7 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var activity: [Activity] = []
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
+    var userIdArr: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +28,11 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
                 let activityType = dataRecord![i].value(forKey: "activityType") as! String
                 let username = dataRecord![i].value(forKey: "username") as! String
                 let imageName = dataRecord![i].value(forKey: "imageName") as! String
-                let age = dataRecord![i].value(forKey: "userAge") as! Int
+                let age = 12
                 let relapseStory = dataRecord![i].value(forKey: "relapseStory") as! String
                 let trophyStory = dataRecord![i].value(forKey: "trophyStory") as! String
-
+                let userId = dataRecord![i].value(forKey: "accountNumber") as! CKRecord.Reference
+                userIdArr.append(userId.recordID.recordName)
                 
                 if dataRecord?[i].value(forKey: "startDate") == nil {
                     let isoDate = "2016-04-14T10:44:00+0000"
@@ -78,6 +81,7 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.labelName.text = activity[indexPath.row].username
         cell.labelAge.text = "\(activity[indexPath.row].age) yo"
         cell.activityIconImageView.image = UIImage(named: "ActivityIcon.png")
+        cell.userIdLabel.text = userIdArr[indexPath.row]
         if activity[indexPath.row].activityType == "relapse" {
             let df = DateFormatter()
             df.dateFormat = "YY/MM/dd"
@@ -110,7 +114,7 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextView = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetailViewController
-        
+        nextView.userId = userIdArr[indexPath.row]
         if activity[indexPath.row].activityType == "relapse" {
             nextView.titleLabelString = "\(activity[indexPath.row].username) has relapsed"
             nextView.daysLabelString = "\(intervalDays(startDate: activity[indexPath.row].startDate, endDate: activity[indexPath.row].endDate)) days of no smoking"
