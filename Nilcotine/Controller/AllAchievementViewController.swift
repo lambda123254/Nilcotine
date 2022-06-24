@@ -19,36 +19,43 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
     var iconNameUse : [String] = []
 
+    var isFetchingFinish = false
+    var timer: Timer = Timer()
     
     @IBOutlet weak var AchievementCollection: UICollectionView!
     
     //let achievement = AchievementData()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
+        let groupTask = DispatchGroup()
+
         Task {
-            
             let data = try await ck.get(option: "all", format: "")
             let userId = try await ck.getUserID()
             userIdForDb = userId
             
             for i in 0 ..< data.count {
-                
+
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
                 if value.recordID.recordName == userId.recordName {
                     
                     let iconName = data[i].value(forKey: "iconName") as! String
                     
                     iconNameUse.append(iconName)
-                    
+
                 } // if
             }// for
+            
+            for i in 0 ..< achievement.data.count - iconNameUse.count {
+                iconNameUse.append("")
+            }
+            
+            isFetchingFinish = true
+
         }
         
-        
-        
-        
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(afterAsync), userInfo: nil, repeats: true)
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 108, height: 160)
@@ -62,6 +69,16 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         
     }
     
+    @objc func afterAsync() {
+        if isFetchingFinish {
+            print("Done Async")
+            print(iconNameUse)
+            AchievementCollection.reloadData()
+            timer.invalidate()
+            
+        }
+        
+    }
     
     // Collection View Function
     
@@ -87,23 +104,25 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         // Tampung data tampungan buat gambar2 badge biar bisa bandingin
         
         
-        
-        
         achievementBadgeShow = achievement.data[indexPath.row].achievementImage
         achievementLabelShow = achievement.data[indexPath.row].achievementName
-            
 
-            
-        cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
-        cell.AchievementLabel.text = "\(achievementLabelShow!)"
-            
-//
-//        if iconNameUse[] == achievementBadgeShow {
-//            print("test")
-//        }
         
-        // cari2
-            
+        
+
+        
+        if isFetchingFinish {
+            if iconNameUse[indexPath.row] == achievementBadgeShow {
+                cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
+                cell.AchievementLabel.text = "\(achievementLabelShow!)"
+            }
+            else {
+                cell.AchievementImage.image = UIImage(named: "Achievement_Locked.png")
+                cell.AchievementLabel.text = "\(achievementLabelShow!)"
+            }
+        }
+        
+                    
             
         
         return cell
