@@ -22,6 +22,8 @@
 		4E7940672864289D002E82C4 /* AllAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7940662864289D002E82C4 /* AllAchievementViewController.swift */; };
 		4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B082A285201F80046910B /* OnboardingViewController.swift */; };
 		4EB836172858BD95002EC0B5 /* RelapseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */; };
+		4EC06E492864899B00ADAD3F /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC06E472864899B00ADAD3F /* AchievementCollectionViewCell.swift */; };
+		4EC06E4A2864899B00ADAD3F /* AchievementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EC06E482864899B00ADAD3F /* AchievementCollectionViewCell.xib */; };
 		B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310D92852E8F7003E5294 /* CloudKitHandler.swift */; };
 		B59310DF28585708003E5294 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310DE28585708003E5294 /* Activity.swift */; };
 		B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */; };
@@ -52,6 +54,8 @@
 		4E7940662864289D002E82C4 /* AllAchievementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAchievementViewController.swift; sourceTree = "<group>"; };
 		4E7B082A285201F80046910B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelapseFormViewController.swift; sourceTree = "<group>"; };
+		4EC06E472864899B00ADAD3F /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EC06E482864899B00ADAD3F /* AchievementCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementCollectionViewCell.xib; sourceTree = "<group>"; };
 		B59310D92852E8F7003E5294 /* CloudKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHandler.swift; sourceTree = "<group>"; };
 		B59310DE28585708003E5294 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
@@ -104,20 +108,22 @@
 		B59310DC285828CB003E5294 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4E7B082A285201F80046910B /* OnboardingViewController.swift */,
-				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
-				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
-				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
-				4E045DC42858516100B2FBBC /* ProgressViewController.swift */,
-				4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */,
 				B59310E028589D9E003E5294 /* ActivityDetailViewController.swift */,
-				3F4F07852860B8710018F2EE /* ProfileViewController.swift */,
+				3F0D2978285818870067BC8C /* ActivityTableViewCell.swift */,
+				3F0D297628577FE60067BC8C /* ActivityViewController.swift */,
+				3FA35DF22861776400E8C577 /* EditProfileViewController.swift */,
+				4E7B082A285201F80046910B /* OnboardingViewController.swift */,
 				3F4F07872860BC4E0018F2EE /* ProfileCollectionViewCell.swift */,
 				3F4F07882860BC4E0018F2EE /* ProfileCollectionViewCell.xib */,
-				B59310E2285CB2F5003E5294 /* SplashViewController.swift */,
-				3FA35DF22861776400E8C577 /* EditProfileViewController.swift */,
 				3FF9667E2864325900CED774 /* ProfileTableViewCell.swift */,
+				3F4F07852860B8710018F2EE /* ProfileViewController.swift */,
+				4E045DC42858516100B2FBBC /* ProgressViewController.swift */,
+				4EB836162858BD95002EC0B5 /* RelapseFormViewController.swift */,
+				B59310E2285CB2F5003E5294 /* SplashViewController.swift */,
+				4E38FA492852EB87006F8C9F /* TabBarController.swift */,
 				4E7940662864289D002E82C4 /* AllAchievementViewController.swift */,
+				4EC06E472864899B00ADAD3F /* AchievementCollectionViewCell.swift */,
+				4EC06E482864899B00ADAD3F /* AchievementCollectionViewCell.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 			files = (
 				B5D33FB8285047D800D14B6F /* LaunchScreen.storyboard in Resources */,
 				B5D33FB5285047D800D14B6F /* Assets.xcassets in Resources */,
+				4EC06E4A2864899B00ADAD3F /* AchievementCollectionViewCell.xib in Resources */,
 				3F4F078A2860BC4E0018F2EE /* ProfileCollectionViewCell.xib in Resources */,
 				B5D33FB3285047D600D14B6F /* Main.storyboard in Resources */,
 			);
@@ -257,6 +264,7 @@
 				3F4F07862860B8710018F2EE /* ProfileViewController.swift in Sources */,
 				B5E3D80228642EFA00D9D316 /* AchievementData.swift in Sources */,
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
+				4EC06E492864899B00ADAD3F /* AchievementCollectionViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,
 				4E794065286426E3002E82C4 /* Achievement.swift in Sources */,
 			);

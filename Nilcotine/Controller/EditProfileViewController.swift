@@ -30,6 +30,7 @@ class EditProfileViewController: UIViewController {
         textViewMotivation.layer.borderWidth = 1
         textViewMotivation.layer.cornerRadius = 10
         
+        
         textViewStory.layer.borderColor = UIColor.lightGray.cgColor
         textViewStory.layer.borderWidth = 1
         textViewStory.layer.cornerRadius = 10

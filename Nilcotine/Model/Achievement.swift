@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 struct Achievement {
     let achievementId: Int
     let achievementName: String
     let achievementImage: String
+    
 }
+
+
+
+
