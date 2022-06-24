@@ -17,6 +17,9 @@
 		3FFA43032862C654003B78CD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFA43022862C654003B78CD /* Profile.swift */; };
 		4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E045DC42858516100B2FBBC /* ProgressViewController.swift */; };
 		4E1B5DB6285B681D00B96B17 /* Relapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B5DB5285B681D00B96B17 /* Relapse.swift */; };
+		4E2C42112865A9AC000499B5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2C42102865A9AC000499B5 /* UIView+Extension.swift */; };
+		4E2C42132865AABE000499B5 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2C42122865AABE000499B5 /* OnboardingSlide.swift */; };
+		4E2C42152865AE94000499B5 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2C42142865AE94000499B5 /* OnboardingCollectionViewCell.swift */; };
 		4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E38FA492852EB87006F8C9F /* TabBarController.swift */; };
 		4E794065286426E3002E82C4 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E794064286426E3002E82C4 /* Achievement.swift */; };
 		4E7940672864289D002E82C4 /* AllAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7940662864289D002E82C4 /* AllAchievementViewController.swift */; };
@@ -49,6 +52,9 @@
 		3FFA43022862C654003B78CD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4E045DC42858516100B2FBBC /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		4E1B5DB5285B681D00B96B17 /* Relapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relapse.swift; sourceTree = "<group>"; };
+		4E2C42102865A9AC000499B5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		4E2C42122865AABE000499B5 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		4E2C42142865AE94000499B5 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E38FA492852EB87006F8C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4E794064286426E3002E82C4 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		4E7940662864289D002E82C4 /* AllAchievementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAchievementViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E2C420F2865A992000499B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E2C42102865A9AC000499B5 /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B59310D82852E88B003E5294 /* Ultilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +115,7 @@
 				4E1B5DB5285B681D00B96B17 /* Relapse.swift */,
 				3FFA43022862C654003B78CD /* Profile.swift */,
 				B5E3D80128642EFA00D9D316 /* AchievementData.swift */,
+				4E2C42122865AABE000499B5 /* OnboardingSlide.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +139,7 @@
 				4E7940662864289D002E82C4 /* AllAchievementViewController.swift */,
 				4EC06E472864899B00ADAD3F /* AchievementCollectionViewCell.swift */,
 				4EC06E482864899B00ADAD3F /* AchievementCollectionViewCell.xib */,
+				4E2C42142865AE94000499B5 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -148,6 +164,7 @@
 		B5D33FAA285047D600D14B6F /* Nilcotine */ = {
 			isa = PBXGroup;
 			children = (
+				4E2C420F2865A992000499B5 /* Extensions */,
 				B59310DC285828CB003E5294 /* Controller */,
 				B59310DB285828C4003E5294 /* Model */,
 				B59310D82852E88B003E5294 /* Ultilities */,
@@ -257,12 +274,15 @@
 				3F0D297728577FE60067BC8C /* ActivityViewController.swift in Sources */,
 				4E38FA4A2852EB87006F8C9F /* TabBarController.swift in Sources */,
 				3FA35DF32861776400E8C577 /* EditProfileViewController.swift in Sources */,
+				4E2C42152865AE94000499B5 /* OnboardingCollectionViewCell.swift in Sources */,
 				4E045DC52858516100B2FBBC /* ProgressViewController.swift in Sources */,
 				B59310DF28585708003E5294 /* Activity.swift in Sources */,
 				4E7940672864289D002E82C4 /* AllAchievementViewController.swift in Sources */,
 				3F4F07892860BC4E0018F2EE /* ProfileCollectionViewCell.swift in Sources */,
 				3F4F07862860B8710018F2EE /* ProfileViewController.swift in Sources */,
+				4E2C42112865A9AC000499B5 /* UIView+Extension.swift in Sources */,
 				B5E3D80228642EFA00D9D316 /* AchievementData.swift in Sources */,
+				4E2C42132865AABE000499B5 /* OnboardingSlide.swift in Sources */,
 				3F0D2979285818870067BC8C /* ActivityTableViewCell.swift in Sources */,
 				4EC06E492864899B00ADAD3F /* AchievementCollectionViewCell.swift in Sources */,
 				4E7B082B285201F80046910B /* OnboardingViewController.swift in Sources */,

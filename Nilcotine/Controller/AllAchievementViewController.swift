@@ -18,6 +18,8 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
     var iconNameUse : [String] = []
+    
+    var indexAchievement: Int?
 
     
     @IBOutlet weak var AchievementCollection: UICollectionView!
@@ -39,15 +41,20 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                 if value.recordID.recordName == userId.recordName {
                     
                     let iconName = data[i].value(forKey: "iconName") as! String
-                    
                     iconNameUse.append(iconName)
+                    
+                    
+
                     
                 } // if
             }// for
-        }
-        
-        
-        
+            
+            for i in 0 ..< indexAchievement! - iconNameUse.count {
+                iconNameUse.append("")
+            } // for
+           
+            print(iconNameUse)
+        } // Task
         
         
         let layout = UICollectionViewFlowLayout()
@@ -86,6 +93,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         // TODO logic achievement unlock sama lock
         // Tampung data tampungan buat gambar2 badge biar bisa bandingin
         
+        indexAchievement = achievement.data.count
         
         
         
@@ -97,8 +105,8 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
         cell.AchievementLabel.text = "\(achievementLabelShow!)"
             
-//
-//        if iconNameUse[] == achievementBadgeShow {
+
+//        if iconNameUse[indexPath.row] == achievementBadgeShow {
 //            print("test")
 //        }
         

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "relapsePicture.png",
+      "filename" : "Achievement.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "relapsePicture@2x.png",
+      "filename" : "Achievement@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "relapsePicture@3x.png",
+      "filename" : "Achievement@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
