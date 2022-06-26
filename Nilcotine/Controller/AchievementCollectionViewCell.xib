@@ -27,6 +27,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuV-HF-kW1">
+                        <rect key="frame" x="0.0" y="0.0" width="108" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Claim">
+                            <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
+                            <color key="baseBackgroundColor" red="0.12941176469999999" green="0.49803921569999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="claimButtonPressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="uYm-sG-CaQ"/>
+                        </connections>
+                    </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBW-ZU-2IA">
+                        <rect key="frame" x="33" y="33" width="48" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -34,6 +53,8 @@
             <connections>
                 <outlet property="AchievementImage" destination="beJ-GK-zdS" id="UKF-YU-VjA"/>
                 <outlet property="AchievementLabel" destination="Rgk-HB-ZE8" id="Klg-R2-dcX"/>
+                <outlet property="claimButton" destination="VuV-HF-kW1" id="6gg-iJ-xAh"/>
+                <outlet property="userIdLabel" destination="EBW-ZU-2IA" id="VZB-cK-HWK"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="84.375"/>
         </collectionViewCell>

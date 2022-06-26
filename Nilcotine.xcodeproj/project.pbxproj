@@ -36,6 +36,7 @@
 		B5D33FB8285047D800D14B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D33FB6285047D800D14B6F /* LaunchScreen.storyboard */; };
 		B5D33FC22850483C00D14B6F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D33FC12850483C00D14B6F /* CloudKit.framework */; };
 		B5E3D80228642EFA00D9D316 /* AchievementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3D80128642EFA00D9D316 /* AchievementData.swift */; };
+		B5E3D80428681B7D00D9D316 /* AchievementFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3D80328681B7D00D9D316 /* AchievementFormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		B5D33FBF2850483500D14B6F /* Nilcotine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nilcotine.entitlements; sourceTree = "<group>"; };
 		B5D33FC12850483C00D14B6F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B5E3D80128642EFA00D9D316 /* AchievementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementData.swift; sourceTree = "<group>"; };
+		B5E3D80328681B7D00D9D316 /* AchievementFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementFormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				4E7940662864289D002E82C4 /* AllAchievementViewController.swift */,
 				4EC06E472864899B00ADAD3F /* AchievementCollectionViewCell.swift */,
 				4EC06E482864899B00ADAD3F /* AchievementCollectionViewCell.xib */,
+				B5E3D80328681B7D00D9D316 /* AchievementFormViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			files = (
 				B59310E128589D9E003E5294 /* ActivityDetailViewController.swift in Sources */,
 				4E1B5DB6285B681D00B96B17 /* Relapse.swift in Sources */,
+				B5E3D80428681B7D00D9D316 /* AchievementFormViewController.swift in Sources */,
 				B5D33FB0285047D600D14B6F /* ViewController.swift in Sources */,
 				4EB836172858BD95002EC0B5 /* RelapseFormViewController.swift in Sources */,
 				B59310DA2852E8F7003E5294 /* CloudKitHandler.swift in Sources */,
@@ -414,7 +418,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nilcotine/Nilcotine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 757ZMHMM6D;
+				DEVELOPMENT_TEAM = 2ZMT5Z4822;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nilcotine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -443,7 +447,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nilcotine/Nilcotine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 757ZMHMM6D;
+				DEVELOPMENT_TEAM = 2ZMT5Z4822;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nilcotine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

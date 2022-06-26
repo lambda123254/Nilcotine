@@ -190,6 +190,7 @@ class ProfileViewController: UIViewController {
     @IBAction func seeAllPressed(_ sender: UIButton) {
         let nextView = storyBoard.instantiateViewController(withIdentifier: "AllAchievementView") as! AllAchievementViewController
         nextView.userId = userId
+        nextView.visited = visited
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     

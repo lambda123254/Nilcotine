@@ -8,21 +8,26 @@
 import UIKit
 
 class AchievementCollectionViewCell: UICollectionViewCell {
-    
+    var ClaimButtonTapped: (() -> ())?
+
     var achievement: [Achievement] = []
     
     @IBOutlet var AchievementImage: UIImageView!
     @IBOutlet var AchievementLabel: UILabel!
     
+    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var claimButton: UIButton!
     static let identifier = "AchievementCollectionViewCell"
     
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
+        claimButton.isHidden = true
         // Initialization code
     }
     
+    @IBAction func claimButtonPressed(_ sender: Any) {
+        ClaimButtonTapped?()
+    }
     public func configure(with image: UIImage){
         
         for i in 0 ..< achievement.count {

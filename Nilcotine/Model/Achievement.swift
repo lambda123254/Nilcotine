@@ -12,7 +12,7 @@ struct Achievement {
     let achievementId: Int
     let achievementName: String
     let achievementImage: String
-    
+    let isClaimableDays: Int
 }
 
 
