@@ -39,10 +39,14 @@ class EditProfileViewController: UIViewController {
         textViewMotivation.layer.borderWidth = 1
         textViewMotivation.layer.cornerRadius = 10
         
-        
         textViewStory.layer.borderColor = UIColor.lightGray.cgColor
         textViewStory.layer.borderWidth = 1
         textViewStory.layer.cornerRadius = 10
+        
+        textViewMotivation.text = "Type your motivation to stop nicotine consumption."
+        textViewMotivation.textColor = UIColor.lightGray
+        textViewStory.text = "Tell the story of your nicotine consumption and journey so far."
+        textViewStory.textColor = UIColor.lightGray
         
         for i in 1 ... 99 {
             data.append(String(i))
@@ -119,6 +123,27 @@ extension EditProfileViewController: UITextViewDelegate {
                 textViewStory.text = String(textViewStory.text.dropLast())
             }
             labelCountCharStory.text = String(textViewStory.text.count)
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            if textView === textViewMotivation {
+                textView.text = "Type your motivation to stop nicotine consumption."
+                textView.textColor = UIColor.lightGray
+            }
+            
+            else if textView === textViewStory {
+                textView.text = "Tell the story of your nicotine consumption and journey so far."
+                textView.textColor = UIColor.lightGray
+            }
         }
     }
 }
