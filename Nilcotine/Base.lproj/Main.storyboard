@@ -553,7 +553,7 @@ but the progress of your journey…</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="relapsePicture" translatesAutoresizingMaskIntoConstraints="NO" id="pOR-f1-qgZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Relapse" translatesAutoresizingMaskIntoConstraints="NO" id="pOR-f1-qgZ">
                                 <rect key="frame" x="138" y="181" width="114" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -598,6 +598,8 @@ but the progress of your journey…</string>
                     <navigationItem key="navigationItem" id="qgJ-sP-q1D"/>
                     <connections>
                         <outlet property="RelapseTextView" destination="4LG-42-jcc" id="lHU-Iy-MKW"/>
+                        <outlet property="TellStoryLabel" destination="eVm-2R-fuS" id="GmG-aG-Yeg"/>
+                        <outlet property="YouRelapsedLabel" destination="4M2-aq-mvX" id="wGu-Fo-w2C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAX-vI-s9U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -710,7 +712,7 @@ but the progress of your journey…</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="OnBoardingPlaceholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="Ubb-Vg-k5H">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Relapse" translatesAutoresizingMaskIntoConstraints="NO" id="Ubb-Vg-k5H">
                                 <rect key="frame" x="75" y="170" width="240" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -723,8 +725,15 @@ but the progress of your journey…</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zws-Ue-jIe">
+                                <rect key="frame" x="22" y="393" width="347" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7x-7L-M0L">
-                                <rect key="frame" x="60" y="672" width="270" height="40"/>
+                                <rect key="frame" x="59" y="693" width="270" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.1294117719" green="0.49803921579999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
@@ -736,13 +745,6 @@ but the progress of your journey…</string>
                                     <action selector="visitProfileBtnPressed:" destination="7uF-sW-MNv" eventType="touchUpInside" id="hOp-Fc-xsz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zws-Ue-jIe">
-                                <rect key="frame" x="22" y="393" width="347" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LXC-R2-9hh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1202,13 +1204,13 @@ but the progress of your journey…</string>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="V0j-ip-GZb">
-                                        <rect key="frame" x="0.0" y="0.0" width="108" height="172"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="172"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZCr-Ge-cWp">
-                                            <rect key="frame" x="0.0" y="0.0" width="108" height="172"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="172"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="108" height="172"/>
+                                        <size key="customSize" width="140" height="172"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1280,7 +1282,7 @@ but the progress of your journey…</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="relapsePicture" translatesAutoresizingMaskIntoConstraints="NO" id="YOS-Zr-dXQ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Achievement" translatesAutoresizingMaskIntoConstraints="NO" id="YOS-Zr-dXQ">
                                 <rect key="frame" x="138" y="181" width="114" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1334,12 +1336,12 @@ but the progress of your journey…</string>
     </scenes>
     <resources>
         <image name="#6" width="300" height="300"/>
+        <image name="Achievement" width="677" height="687"/>
         <image name="Activity_Not Selected" width="36.952381134033203" height="21"/>
         <image name="Activity_Selected" width="37" height="21"/>
         <image name="Circular growth" width="295" height="296"/>
         <image name="Divider" width="2" height="42"/>
         <image name="Motivation_Box" width="333" height="122"/>
-        <image name="OnBoardingPlaceholderImg" width="320" height="288"/>
         <image name="Onboarding 1" width="983" height="810"/>
         <image name="Onboarding 2" width="983" height="810"/>
         <image name="Onboarding 3" width="983" height="811"/>
@@ -1348,10 +1350,10 @@ but the progress of your journey…</string>
         <image name="Profile_Selected" width="17" height="21"/>
         <image name="Progress_Not Selected" width="22" height="19"/>
         <image name="Progress_Selected" width="22" height="19"/>
+        <image name="Relapse" width="677" height="687"/>
         <image name="Story_Box" width="334" height="149"/>
         <image name="User_PP" width="75" height="75"/>
         <image name="edit_profile_btn" width="44" height="44"/>
-        <image name="relapsePicture" width="114" height="154"/>
         <image name="roundedRec_progress" width="312" height="87"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

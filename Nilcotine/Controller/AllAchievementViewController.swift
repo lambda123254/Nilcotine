@@ -89,7 +89,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(afterAsync), userInfo: nil, repeats: true)
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 108, height: 160)
+        layout.itemSize = CGSize(width: 108, height: 172)
         AchievementCollection.collectionViewLayout = layout
         
         AchievementCollection.register(AchievementCollectionViewCell.nib(), forCellWithReuseIdentifier: AchievementCollectionViewCell.identifier)
@@ -129,6 +129,9 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AchievementCollectionViewCell.identifier, for: indexPath) as! AchievementCollectionViewCell
         
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 10
         // TODO logic achievement unlock sama lock
         // Tampung data tampungan buat gambar2 badge biar bisa bandingin
         
@@ -167,7 +170,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                                 }
                             }
                             else {
-                                cell.AchievementImage.image = UIImage(named: "Achievement_Locked.png")
+                                cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
                                 cell.AchievementLabel.text = "\(achievementLabelShow!)"
                             }
                         }
@@ -192,7 +195,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                                 }
                             }
                             else {
-                                cell.AchievementImage.image = UIImage(named: "Achievement_Locked.png")
+                                cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
                                 cell.AchievementLabel.text = "\(achievementLabelShow!)"
                             }
                         }
@@ -201,7 +204,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
 
             }
             else {
-                cell.AchievementImage.image = UIImage(named: "Achievement_Locked.png")
+                cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
                 cell.AchievementLabel.text = "\(achievementLabelShow!)"
                 for i in 0 ..< iconNameUseSorted.count {
                     if iconNameUseSorted[i] == achievementBadgeShow! {
@@ -225,8 +228,9 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
 extension ViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 108, height: 160)
+        return CGSize(width: 108, height: 172)
     }
+
 }
 
 /*

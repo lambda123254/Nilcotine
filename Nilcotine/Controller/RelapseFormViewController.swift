@@ -17,6 +17,9 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     var delegate: RelapseFormDelegateProtocol? = nil
     @IBOutlet weak var RelapseTextView: UITextView!
     
+    @IBOutlet weak var YouRelapsedLabel: UILabel!
+    @IBOutlet weak var TellStoryLabel: UILabel!
+    
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Relapses")
     var ck2 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
     var ck3 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
@@ -68,9 +71,9 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                     userName = dataProfile[i].value(forKey: "username") as! String
                     
                 }
-            }
+            } // For
             
-        }
+        } // Task
         
     }
     

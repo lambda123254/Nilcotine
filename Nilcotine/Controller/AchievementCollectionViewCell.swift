@@ -23,6 +23,7 @@ class AchievementCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         claimButton.isHidden = true
         // Initialization code
+        
     }
     
     @IBAction func claimButtonPressed(_ sender: Any) {

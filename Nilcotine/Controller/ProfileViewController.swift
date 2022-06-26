@@ -139,7 +139,7 @@ class ProfileViewController: UIViewController {
                 }
                 
             }
-            print(makeTimeString(days: time!.0, hours: time!.1, minutes: time!.2))
+          //  print(makeTimeString(days: time!.0, hours: time!.1, minutes: time!.2))
             
             self.tableRelapse.reloadData()
         }
@@ -212,7 +212,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as! ProfileCollectionViewCell
         
-        cell.configure(with: UIImage(named: "Achievement_Locked")!)
+        cell.configure(with: UIImage(named: "Achievement Locked")!)
         
         return cell
     }
