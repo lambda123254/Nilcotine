@@ -12,4 +12,5 @@ struct Relapse {
     let relapseEffort: String
     let startDate: Date
     let endDate : Date
+    let intervalTime: String
 }
