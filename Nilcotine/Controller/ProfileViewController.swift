@@ -57,6 +57,12 @@ class ProfileViewController: UIViewController {
     var visitedUserId: CKRecord.ID?
     var intervalArr: [String] = []
     var intervalSortedArr: [String] = []
+    
+    var dateInterval : DateInterval?
+    var interval : Double?
+    var dayInterval : Int?
+    var maxDayInterval : [Int] = []
+    
     var userId: CKRecord.ID?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,8 +144,19 @@ class ProfileViewController: UIViewController {
                         textViewMotivation.textColor = .black
                     }
                     
+                    for i in 0 ..< sortedRelapse.count {
+                        dateInterval = DateInterval(start: sortedRelapse[i].startDate, end: sortedRelapse[i].endDate)
+                        interval = dateInterval?.duration
+                        dayInterval = Int (interval!) / 86400
+                        
+                        maxDayInterval.append(dayInterval!)
+                        
+                    }
+                    
                     labelUsername.text = username
                     labelAge.text = String(age)
+                    labelTotalRelapse.text = "\(sortedRelapse.count - 1)"
+                    labelLongestStreak.text = "\(maxDayInterval.max()!)"
                     textViewMotivation.text = motivation
                     textViewStory.text = story
 
@@ -152,7 +169,7 @@ class ProfileViewController: UIViewController {
         }
         
 //        df.timeZone = TimeZone.current
-        df.dateFormat = "dd/MM/YY"
+        df.dateFormat = "dd/MM/YYYY"
 
         dfComplete.dateFormat = "MM-dd-yyyy HH:mm"
         
@@ -409,6 +426,8 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableRelapse.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileTableViewCell
+        
+        cell.selectionStyle = .none
         
         cell.labelRelapseTime.text = sortedRelapse[indexPath.row].intervalTime
         cell.labelRelapseDate.text = df.string(from: sortedRelapse[indexPath.row].endDate)
