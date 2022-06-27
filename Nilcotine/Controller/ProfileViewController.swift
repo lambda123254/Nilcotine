@@ -11,6 +11,7 @@ import CloudKit
 class ProfileViewController: UIViewController {
     
     var relapse: [Relapse] = []
+    var sortedRelapse: [Relapse] = []
     var profile: Profile?
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
@@ -30,7 +31,8 @@ class ProfileViewController: UIViewController {
     var userIdForDb: CKRecord.ID?
     
     let df = DateFormatter()
-    
+    let dfComplete = DateFormatter()
+
     var timeString: String?
     var dayInSecond: Int?
     var timeInterval: DateInterval?
@@ -40,6 +42,7 @@ class ProfileViewController: UIViewController {
     var visited = false
     var visitedUserId: CKRecord.ID?
     var intervalArr: [String] = []
+    var intervalSortedArr: [String] = []
     var userId: CKRecord.ID?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,9 +108,10 @@ class ProfileViewController: UIViewController {
 
         }
         
-        df.timeZone = TimeZone.current
+//        df.timeZone = TimeZone.current
         df.dateFormat = "dd/MM/YY"
 
+        dfComplete.dateFormat = "MM-dd-yyyy HH:mm"
         
         Task {
             let dataRecord = try? await ckR.get(option: "all", format: "")
@@ -127,20 +131,20 @@ class ProfileViewController: UIViewController {
                     let startDate = dataRecord![i].value(forKey: "startDate") as! Date
                     let endDate = dataRecord![i].value(forKey: "endDate") as! Date
                     
-                    relapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate))
-                    
                     dateString = df.string(from: Date())
                     timeInterval = DateInterval(start: startDate, end: endDate)
                     duration = timeInterval?.duration
                     dayInSecond = Int (duration!)
                     time = daysToHoursToMinutes(seconds: dayInSecond!)
                     
-                    intervalArr.append(makeTimeString(days: time!.0, hours: time!.1, minutes: time!.2))
+                    relapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate, intervalTime: makeTimeString(days: time!.0, hours: time!.1, minutes: time!.2)))
+                    
+                    sortedRelapse = relapse.sorted(by: {$0.endDate > $1.endDate})
+                    
                 }
                 
             }
-          //  print(makeTimeString(days: time!.0, hours: time!.1, minutes: time!.2))
-            
+    
             self.tableRelapse.reloadData()
         }
         
@@ -159,6 +163,10 @@ class ProfileViewController: UIViewController {
         
         collectionViewProfile.isScrollEnabled = false
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @objc func editProfileButtonPressed() {
@@ -184,6 +192,16 @@ class ProfileViewController: UIViewController {
         timeString += " minutes "
         
         return timeString
+    }
+    
+    func intervalDays(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
+        
+        let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
+        return dayInterval.day!
     }
     
     
@@ -230,6 +248,18 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ProfileTableViewCell
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetailViewController
+        nextView.titleLabelString = "You relapsed"
+        nextView.daysLabelString = "After \(intervalArr[indexPath.row])"
+        nextView.effortTextViewString = relapse[indexPath.row].relapseEffort
+        
+        self.navigationController?.pushViewController(nextView, animated: true)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -240,8 +270,8 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableRelapse.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileTableViewCell
         
-        cell.labelRelapseTime.text = intervalArr[indexPath.row]
-        cell.labelRelapseDate.text = df.string(from: relapse[indexPath.row].endDate)
+        cell.labelRelapseTime.text = sortedRelapse[indexPath.row].intervalTime
+        cell.labelRelapseDate.text = df.string(from: sortedRelapse[indexPath.row].endDate)
 
         return cell
     }

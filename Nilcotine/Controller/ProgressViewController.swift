@@ -94,7 +94,7 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
                     let endDate = data[i].value(forKey: "endDate") as! Date
                     let effort = data[i].value(forKey: "effort") as! String
 
-                    relapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate))
+                    relapse.append(Relapse(relapseEffort: effort, startDate: startDate, endDate: endDate, intervalTime: "nil"))
                     sortedRelapse = relapse.sorted(by: {$0.startDate > $1.startDate})
                     startInterval = sortedRelapse.first?.startDate
                     for i in 0 ..< relapse.count {
