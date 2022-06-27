@@ -8,18 +8,22 @@
 import UIKit
 
 class ProfileCollectionViewCell: UICollectionViewCell {
+    var ClaimButtonTapped: (() -> ())?
 
-    @IBOutlet var achievementImageView: UIImageView!
+    @IBOutlet var AchievementImage: UIImageView!
+    @IBOutlet var AchievementLabel: UILabel!
     
+    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var claimButton: UIButton!
     static let identifier = "ProfileCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        claimButton.isHidden = true
         // Initialization code
     }
-    
-    public func configure(with image: UIImage) {
-        achievementImageView.image = image
+
+    @IBAction func claimButtonPressed(_ sender: Any) {
     }
     
     static func nib() -> UINib {
