@@ -214,6 +214,7 @@ class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+    }
 
     @objc func afterAsync() {
         if isFetchingFinish {
@@ -374,12 +375,6 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     
 }
-//  customize size collectionView
-//extension ViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        CGSize(width: 108, height: 152)
-//    }
-//}
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

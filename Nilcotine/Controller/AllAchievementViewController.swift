@@ -65,7 +65,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                     
                     let timeInterval = DateInterval(start: startDate, end: endDate)
                     let duration = Int(timeInterval.duration)
-                    relapse.append(Relapse(relapseEffort: "nil", startDate: startDate, endDate: endDate))
+                    relapse.append(Relapse(relapseEffort: "nil", startDate: startDate, endDate: endDate, intervalTime: "nil"))
                     
                     relapseDayIntervalArr.append(duration / 86400)
                     
