@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelAge: UILabel!
+    @IBOutlet weak var labelTotalRelapse: UILabel!
+    @IBOutlet weak var labelLongestStreak: UILabel!
     @IBOutlet var collectionViewProfile: UICollectionView!
     
     @IBOutlet weak var textViewMotivation: UITextView!
@@ -194,10 +196,10 @@ class ProfileViewController: UIViewController {
         }
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(afterAsync), userInfo: nil, repeats: true)
         
-        //        let layout = UICollectionViewFlowLayout()
-        //        layout.itemSize = CGSize(width: 108, height: 152)
-        //
-        //        collectionViewProfile.collectionViewLayout = layout
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 108, height: 172)
+        
+        collectionViewProfile.collectionViewLayout = layout
         
         collectionViewProfile.register(ProfileCollectionViewCell.nib(), forCellWithReuseIdentifier: ProfileCollectionViewCell.identifier)
         
@@ -285,6 +287,10 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as! ProfileCollectionViewCell
+        
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 10
         
         achievementBadgeShow = achievement.data[indexPath.row].achievementImage
         achievementLabelShow = achievement.data[indexPath.row].achievementName
@@ -387,8 +393,10 @@ extension ProfileViewController: UITableViewDelegate {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextView = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetailViewController
         nextView.titleLabelString = "You relapsed"
-        nextView.daysLabelString = "After \(intervalArr[indexPath.row])"
-        nextView.effortTextViewString = relapse[indexPath.row].relapseEffort
+        nextView.daysLabelString = "After \(sortedRelapse[indexPath.row].intervalTime)"
+        nextView.effortTextViewString = sortedRelapse[indexPath.row].relapseEffort
+        nextView.effortTextColor = UIColor.black
+        nextView.activityDetailImage = UIImage(named: "Relapse.png")!
         
         self.navigationController?.pushViewController(nextView, animated: true)
     }
@@ -396,7 +404,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        relapse.count
+        sortedRelapse.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
