@@ -12,6 +12,10 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityIconImageView: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDesc: UILabel!
-    @IBOutlet weak var labelAge: UILabel!
-    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
+    
+    @IBOutlet weak var ActivityTypeBackground: UIImageView!
+    @IBOutlet weak var ActivityTypeLabel: UILabel!
+    @IBOutlet weak var ActivityCard: UIImageView!
+    
 }

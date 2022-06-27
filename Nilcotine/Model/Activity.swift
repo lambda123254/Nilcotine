@@ -8,6 +8,7 @@
 import Foundation
 
 struct Activity {
+    let userId: String
     let activityType: String
     let username: String
     let imageName: String

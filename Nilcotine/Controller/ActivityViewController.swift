@@ -15,11 +15,19 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
     var activity: [Activity] = []
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
     var userIdArr: [String] = []
+    var sortedActivity: [Activity] = []
+    let df = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableActivity.dataSource = self
         tableActivity.delegate = self
+        
+    
+        
+        df.timeZone = TimeZone.current
+        df.dateFormat = "MMM dd"
+        
 
         Task {
             let dataRecord = try? await ck.get(option: "all", format: "")
@@ -41,20 +49,21 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
                     dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                     let date = dateFormatter.date(from:isoDate)!
-                    activity.append(Activity(activityType: activityType, username: username, imageName: imageName, age: age, startDate: date, endDate: date, relapseStory: relapseStory, trophyStory: trophyStory))
+                    activity.append(Activity( userId: userId.recordID.recordName, activityType: activityType, username: username, imageName: imageName, age: age, startDate: date, endDate: date, relapseStory: relapseStory, trophyStory: trophyStory))
                 }
                 else {
                     let startDate = dataRecord?[i].value(forKey: "startDate") as! Date
                     let endDate = dataRecord?[i].value(forKey: "endDate") as! Date
-                    activity.append(Activity(activityType: activityType, username: username, imageName: imageName, age: age, startDate: startDate, endDate: endDate, relapseStory: relapseStory, trophyStory: trophyStory))
+                    activity.append(Activity( userId: userId.recordID.recordName,activityType: activityType, username: username, imageName: imageName, age: age, startDate: startDate, endDate: endDate, relapseStory: relapseStory, trophyStory: trophyStory))
                 }
 
-                
+                sortedActivity = activity.sorted(by: {$0.endDate > $1.endDate})
 
             }
             
             self.tableActivity.reloadData()
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,74 +82,120 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activity.count
+        
+        return sortedActivity.count
     }
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableActivity.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActivityTableViewCell
-        cell.labelName.text = activity[indexPath.row].username
-        cell.labelAge.text = "\(activity[indexPath.row].age) yo"
-        cell.activityIconImageView.image = UIImage(named: "ActivityIcon.png")
-        cell.userIdLabel.text = userIdArr[indexPath.row]
-        if activity[indexPath.row].activityType == "relapse" {
+
+        cell.selectionStyle = .none
+        cell.labelName.text = sortedActivity[indexPath.row].username
+        cell.labelDate.text = df.string(from: sortedActivity[indexPath.row].endDate)
+        
+        if sortedActivity[indexPath.row].activityType == "relapse" {
+            cell.activityIconImageView.image = UIImage(named: "Icon Relapse.png")
+            cell.ActivityTypeLabel.text = "Relapse"
+            cell.ActivityTypeLabel.textColor = UIColor.black
+            cell.ActivityTypeBackground.image = UIImage(named: "Rectangle-relapse.png")
+            cell.ActivityCard.image = UIImage(named: "Card Relapse.png")
+        } else {
+            cell.activityIconImageView.image = UIImage (named: "Icon Achievement.png")
+            cell.ActivityTypeLabel.text = "Achievement"
+            cell.ActivityTypeLabel.textColor = UIColor.systemGreen
+            cell.ActivityTypeBackground.image = UIImage(named: "Rectangle-achievement.png")
+            cell.ActivityCard.image = UIImage(named: "Card Achievement.png")
+            
+        }
+        
+        
+        
+        
+        //cell.userIdLabel.text = userIdArr[indexPath.row]
+        if sortedActivity[indexPath.row].activityType == "relapse" {
             let df = DateFormatter()
             df.dateFormat = "YY/MM/dd"
             
             let calendar = Calendar.current
 
-            let startDate = activity[indexPath.row].startDate
-            let endDate = activity[indexPath.row].endDate
+            let startDate = sortedActivity[indexPath.row].startDate
+            let endDate = sortedActivity[indexPath.row].endDate
             let date1 = calendar.startOfDay(for: startDate)
             let date2 = calendar.startOfDay(for: endDate)
             
             let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
-
-            cell.labelDesc.text = "\(activity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
+            
+            cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
         }
-        else if activity[indexPath.row].activityType == "badge" {
-            cell.labelDesc.text = "\(activity[indexPath.row].username) earn a throphy!"
+        else if sortedActivity[indexPath.row].activityType == "achievement" {
+            cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) earn a throphy!"
         }
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 94
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
         let cell = tableView.cellForRow(at: indexPath) as! ActivityTableViewCell
+        
+        
         
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextView = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetailViewController
-        nextView.userId = userIdArr[indexPath.row]
-        if activity[indexPath.row].activityType == "relapse" {
-            nextView.titleLabelString = "\(activity[indexPath.row].username) has relapsed"
-            nextView.daysLabelString = "\(intervalDays(startDate: activity[indexPath.row].startDate, endDate: activity[indexPath.row].endDate)) days of no smoking"
+        nextView.userId = sortedActivity[indexPath.row].userId
+        if sortedActivity[indexPath.row].activityType == "relapse" {
+            nextView.titleLabelString = "\(sortedActivity[indexPath.row].username) has relapsed"
+            nextView.daysLabelString = "\(intervalDays(startDate: sortedActivity[indexPath.row].startDate, endDate: sortedActivity[indexPath.row].endDate)) days of no smoking"
+            nextView.activityDetailImage = UIImage(named: "Relapse.png")!
             
-            if activity[indexPath.row].relapseStory == "nil"{
-                nextView.effortTextViewString = "This user didn't submit any story.."
+            if sortedActivity[indexPath.row].relapseStory == "nil"{
+                nextView.effortTextViewString = "This user did not submit any story.."
+                nextView.effortTextColor = UIColor.lightGray
             }
             else {
-                nextView.effortTextViewString = activity[indexPath.row].relapseStory
+                nextView.effortTextViewString = sortedActivity[indexPath.row].relapseStory
+                nextView.effortTextColor = UIColor.black
 
             }
 
             self.navigationController?.pushViewController(nextView, animated: true)
         }
         else {
-            nextView.titleLabelString = "\(activity[indexPath.row].username) earn a trophy!"
+            nextView.titleLabelString = "\(sortedActivity[indexPath.row].username) earn a trophy!"
+            nextView.activityDetailImage = UIImage(named: "Achievement")!
+            
+            if sortedActivity[indexPath.row].trophyStory == "nil"{
+                nextView.effortTextViewString = "This user did not submit any story.."
+                nextView.effortTextColor = UIColor.lightGray
+            }
+            else {
+                nextView.effortTextViewString = sortedActivity[indexPath.row].trophyStory
+                nextView.effortTextColor = UIColor.black
+
+            }
+            
+            
+            
             self.navigationController?.pushViewController(nextView, animated: true)
             
         }
         
         self.navigationController?.navigationBar.tintColor = UIColor(rgb: 0x217F70)
-        
+        tableView.reloadData()
         
     }
     
 
+    
 }
 
 extension UIColor {

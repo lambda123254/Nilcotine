@@ -14,10 +14,13 @@ class ActivityDetailViewController: UIViewController {
     var daysLabelString = ""
     var effortTextViewString = ""
     var userId = ""
+    var activityDetailImage = UIImage()
+    var effortTextColor = UIColor()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var effortTextView: UITextView!
     
+    @IBOutlet weak var ActivityDetailImage: UIImageView!
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     
     @IBOutlet weak var daysLabel: UILabel!
@@ -31,6 +34,10 @@ class ActivityDetailViewController: UIViewController {
         titleLabel.text = titleLabelString
         daysLabel.text = daysLabelString
         effortTextView.text = effortTextViewString
+        effortTextView.textColor = effortTextColor
+        ActivityDetailImage.image = activityDetailImage
+        
+        
         // Do any additional setup after loading the view.
     }
     
