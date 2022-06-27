@@ -114,6 +114,7 @@ class ProfileViewController: UIViewController {
                 for i in 0 ..< 3 - iconNameUse.count {
                     iconNameUse.append("nil")
                 }
+                iconNameUseSorted = iconNameUse.sorted()
             }
             else if iconNameUse.count == 3 {
                 iconNameUseSorted = iconNameUse.sorted()
@@ -314,7 +315,7 @@ extension ProfileViewController: UICollectionViewDataSource {
         
         if isFetchingFinish {
             cell.userIdLabel.text = userId?.recordName
-            print("\(iconNameUseSorted[indexPath.row]) == \(achievementBadgeShow!) \(visited)")
+//            print("\(iconNameUseSorted[indexPath.row]) == \(achievementBadgeShow!) \(visited)")
             if !visited {
                 if iconNameUseSorted[indexPath.row] == achievementBadgeShow {
                     cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
