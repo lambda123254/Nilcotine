@@ -13,6 +13,7 @@ struct Achievement {
     let achievementName: String
     let achievementImage: String
     let isClaimableDays: Int
+    let achievementStory: String
 }
 
 

@@ -18,6 +18,13 @@ class AchievementFormViewController: UIViewController {
     var achievementName = ""
     var achievementImageString = ""
     var userIdString = ""
+    
+    var titleLabelString = ""
+    var daysLabelString = ""
+    var effortTextViewString = ""
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var effortTextView: UITextView!
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
@@ -26,6 +33,11 @@ class AchievementFormViewController: UIViewController {
         super.viewDidLoad()
         print(achievementName)
         // Do any additional setup after loading the view.
+        
+        effortTextView.isEditable = false
+        titleLabel.text = titleLabelString
+        daysLabel.text = daysLabelString
+        effortTextView.text = effortTextViewString
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {

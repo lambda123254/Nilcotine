@@ -20,6 +20,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     var iconNameUseSorted: [String] = []
     var sortedRelapse: [Relapse] = []
     var relapse: [Relapse] = []
+    var achievementStoryArr: [String] = []
 
 
     var isFetchingFinish = false
@@ -49,8 +50,10 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                 if value.recordID.recordName == userId!.recordName {
                     
                     let iconName = data[i].value(forKey: "iconName") as! String
+                    let achievementEffort = data[i].value(forKey: "story") as! String
                     
                     iconNameUse.append(iconName)
+                    achievementStoryArr.append(achievementEffort)
 
                 } // if
             }// for
@@ -115,7 +118,18 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        print("Tapped")
+        let cell = collectionView.cellForItem(at: indexPath) as! AchievementCollectionViewCell
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextView = storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
+        nextView.titleLabelString = "Yes, you did it!"
+//        let stringDaysFromAchievement = "\(achievement.data[indexPath.row].achievementName)"
+//        let index = stringDaysFromAchievement.firstIndex(of: " ") ?? stringDaysFromAchievement.endIndex
+//        let achievementDaysLabel = stringDaysFromAchievement[..<index]
+//        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
+        nextView.daysLabelString = "You earn trophy for completing \(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+        nextView.effortTextViewString = "\(achievementStoryArr[indexPath.row])"
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     
@@ -135,7 +149,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         // TODO logic achievement unlock sama lock
         // Tampung data tampungan buat gambar2 badge biar bisa bandingin
         
-        
+        // user click, ngecheck ambil gambarnya apakah ke lock atau bukan. kalo lock, gaterjadi apa", tapi kalo ga ke lock, bs di navigate
         achievementBadgeShow = achievement.data[indexPath.row].achievementImage
         achievementLabelShow = achievement.data[indexPath.row].achievementName
         
