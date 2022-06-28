@@ -1343,6 +1343,7 @@ but the progress of your journey…</string>
                     <navigationItem key="navigationItem" id="aGp-wz-KKD"/>
                     <connections>
                         <outlet property="daysLabel" destination="O2m-3V-XPt" id="LPt-Sn-Ash"/>
+                        <outlet property="achievementImageView" destination="YOS-Zr-dXQ" id="ghf-dD-3Uc"/>
                         <outlet property="effortTextView" destination="jGl-YT-fyU" id="Mic-ed-gFC"/>
                         <outlet property="titleLabel" destination="N44-84-c1r" id="G3G-w4-JUE"/>
                     </connections>
