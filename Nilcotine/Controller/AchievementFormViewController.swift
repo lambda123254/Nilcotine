@@ -19,10 +19,20 @@ class AchievementFormViewController: UIViewController {
     var achievementName = ""
     var achievementImageString = ""
     var userIdString = ""
+
+    
+    var titleLabelString = ""
+    var daysLabelString = ""
+    var effortTextViewString = ""
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+
     var userName = ""
     var firstDataForDb: String?
     var sortedData: [CKRecord] = []
     
+
     @IBOutlet weak var effortTextView: UITextView!
     @IBOutlet weak var achievementImageView: UIImageView!
     
@@ -36,6 +46,12 @@ class AchievementFormViewController: UIViewController {
         print(achievementName)
         // Do any additional setup after loading the view.
         
+
+        effortTextView.isEditable = false
+        titleLabel.text = titleLabelString
+        daysLabel.text = daysLabelString
+        effortTextView.text = effortTextViewString
+
         Task {
             
             let data = try await ck.get(option: "all", format: "")
@@ -54,6 +70,7 @@ class AchievementFormViewController: UIViewController {
             } // For
             
         } // Task
+
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
