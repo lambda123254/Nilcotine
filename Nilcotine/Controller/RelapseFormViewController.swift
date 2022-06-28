@@ -97,7 +97,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             
             let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
             
-            YouRelapsedLabel.text = "You Relapsed After \(dayInterval.day!) Days"
+            YouRelapsedLabel.text = "You relapsed after \(dayInterval.day!) days"
             TellStoryLabel.text = "Tell your story how you can maintain \(dayInterval.day!) days streak"
             
             

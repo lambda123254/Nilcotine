@@ -557,14 +557,7 @@ but the progress of your journey…</string>
                                 <rect key="frame" x="138" y="181" width="114" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You relapsed after 12 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4M2-aq-mvX">
-                                <rect key="frame" x="95" y="360" width="200" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tell your story on how you can maintain  12 days streak!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVm-2R-fuS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVm-2R-fuS">
                                 <rect key="frame" x="28" y="443" width="330" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -591,6 +584,13 @@ but the progress of your journey…</string>
                                     <action selector="SubmitButtonPressed:" destination="sKj-g0-cTY" eventType="touchUpInside" id="zOq-bl-ybw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4M2-aq-mvX">
+                                <rect key="frame" x="72" y="343" width="242" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cJq-ow-7HV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1342,8 +1342,8 @@ but the progress of your journey…</string>
                     </view>
                     <navigationItem key="navigationItem" id="aGp-wz-KKD"/>
                     <connections>
-                        <outlet property="daysLabel" destination="O2m-3V-XPt" id="LPt-Sn-Ash"/>
                         <outlet property="achievementImageView" destination="YOS-Zr-dXQ" id="ghf-dD-3Uc"/>
+                        <outlet property="daysLabel" destination="O2m-3V-XPt" id="LPt-Sn-Ash"/>
                         <outlet property="effortTextView" destination="jGl-YT-fyU" id="Mic-ed-gFC"/>
                         <outlet property="titleLabel" destination="N44-84-c1r" id="G3G-w4-JUE"/>
                     </connections>
