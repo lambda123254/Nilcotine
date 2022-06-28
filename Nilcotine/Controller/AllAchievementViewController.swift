@@ -20,7 +20,8 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     var iconNameUseSorted: [String] = []
     var sortedRelapse: [Relapse] = []
     var relapse: [Relapse] = []
-    var achievementStoryArr: [String] = []
+    var achievementStoryArr: [[String]] = []
+    var achievementStoryArrSorted: [[String]] = []
 
 
     var isFetchingFinish = false
@@ -51,9 +52,10 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                     
                     let iconName = data[i].value(forKey: "iconName") as! String
                     let achievementEffort = data[i].value(forKey: "story") as! String
+                    let achievementName = data[i].value(forKey: "achievementName") as! String
                     
                     iconNameUse.append(iconName)
-                    achievementStoryArr.append(achievementEffort)
+                    achievementStoryArr.append([achievementEffort,achievementName])
 
                 } // if
             }// for
@@ -81,13 +83,19 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                 iconNameUse.append("nil")
             }
             
+            for i in 0 ..< achievement.data.count - achievementStoryArr.count {
+                achievementStoryArr.append(["nil", "nil"])
+            }
             let timeInterval = DateInterval(start: sortedRelapse.first!.startDate, end: Date())
             let duration = Int(timeInterval.duration)
             relapseDayIntervalTimer = duration / 86400
             
             iconNameUseSorted = iconNameUse.sorted()
+            achievementStoryArrSorted = achievementStoryArr.sorted(by: {$0[1] < $1[1]})
             isFetchingFinish = true
-        }
+        } // TASK END
+        
+        
         
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(afterAsync), userInfo: nil, repeats: true)
         
@@ -128,7 +136,15 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
 //        let achievementDaysLabel = stringDaysFromAchievement[..<index]
 //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
         nextView.daysLabelString = "You earn trophy for completing \(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
-        nextView.effortTextViewString = "\(achievementStoryArr[indexPath.row])"
+        
+        print(achievementStoryArrSorted[1][1])
+        for i in 0 ..< achievementStoryArrSorted.count {
+            if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
+                print(achievementStoryArrSorted[i][0])
+                nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
+            }
+
+        }
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     
