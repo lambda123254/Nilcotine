@@ -136,8 +136,6 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func SubmitButtonPressed(_ sender: UIButton) {
         
-        let startTime = df.string(from: Date())
-        let endTime = df.string(from: Date())
         var effort = ""
         
         if RelapseTextView.text == "" || RelapseTextView.text == "Share your story here..."{
@@ -149,13 +147,13 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
         // Update the data
 
-        ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(endTime)", key: "effort,endDate")
+        ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
         for i in 1 ... 2 {
             if i == 1 {
-                ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+                ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
             }
             else {
-                ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(endTime),relapse.png,\(effort), \(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+                ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
             }
         }
         
