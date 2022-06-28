@@ -13,25 +13,79 @@ protocol AllAchievementFormDelegateProtocol {
 }
 
 class AchievementFormViewController: UIViewController {
+    
     var delegate: AllAchievementFormDelegateProtocol? = nil
 
     var achievementName = ""
     var achievementImageString = ""
     var userIdString = ""
+    var userName = ""
+    var firstDataForDb: String?
+    var sortedData: [CKRecord] = []
+    
     @IBOutlet weak var effortTextView: UITextView!
+    @IBOutlet weak var achievementImageView: UIImageView!
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
+    var ck2 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
+    var ck3 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(achievementName)
         // Do any additional setup after loading the view.
+        
+        Task {
+            
+            let data = try await ck.get(option: "all", format: "")
+            let dataProfile = try await ck3.get(option: "all", format: "")
+            let userId = try await ck.getUserID()
+
+            
+            
+            for i in 0 ..< dataProfile.count {
+                let value = dataProfile[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                if value.recordID.recordName == userId.recordName {
+                    
+                    userName = dataProfile[i].value(forKey: "username") as! String
+                    
+                }
+            } // For
+            
+        } // Task
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        ck.insertMultiple(value: "\(userIdString),\(achievementName),\(achievementImageString),\(effortTextView.text!)", key: "accountNumber,achivementName,iconName,story")
+        
+        var effort = ""
+        
+        if effortTextView.text == "" || effortTextView.text == "Share your story here..."{
+            effort = "nil"
+        }
+        else {
+            effort = effortTextView.text
+        }
+        
+        for i in 1 ... 2 {
+            if i == 1 {
+                ck.insertMultiple(value: "\(userIdString),\(effortTextView.text!),\(achievementName),\(achievementImageString)", key: "accountNumber,story,achievementName,iconName")
+            } else {
+                ck2.insertMultiple(value: "\(userIdString),achievement,\(Date()),achievement.png,nil,\(Date()),\(effort),\(userName)", key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+            }
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
+    
+//    for i in 1 ... 2 {
+//        if i == 1 {
+//            ck.insertMultiple(value: "\(startTime),\(endTime),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+//        }
+//        else {
+//            ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(endTime),relapse.png,\(effort), \(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+//        }
+//    }
     
     /*
     // MARK: - Navigation
