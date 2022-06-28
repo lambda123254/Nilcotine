@@ -30,11 +30,14 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     let df = DateFormatter()
     var userName = ""
     var sortedData: [CKRecord] = []
-
+    var dayIntervalText: Date?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         df.timeZone = TimeZone.current
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+       // df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        df.dateFormat = "dd"
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.hidesBottomBarWhenPushed = true
         
@@ -61,6 +64,15 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                     let firstData = sortedData.first?.recordID.recordName
                     firstDataForDb = firstData
                     
+                    
+                    // Get Last Date
+                    
+                    let lastDate = sortedData.first?.value(forKey: "startDate") as! Date
+
+                    
+                    dayIntervalText = lastDate
+                    
+                   
                 }
             }
             
@@ -73,8 +85,38 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                 }
             } // For
             
+            
+            // Change Calender 
+            let calendar = Calendar.current
+
+            
+            let startDate = dayIntervalText!
+            let endDate = Date()
+            let date1 = calendar.startOfDay(for: startDate)
+            let date2 = calendar.startOfDay(for: endDate)
+            
+            let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
+            
+            YouRelapsedLabel.text = "You Relapsed After \(dayInterval.day!) Days"
+            TellStoryLabel.text = "Tell your story how you can maintain \(dayInterval.day!) days streak"
+            
+            
         } // Task
         
+       
+        
+
+        
+    }
+    
+    func intervalDays(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
+        
+        let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
+        return dayInterval.day!
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

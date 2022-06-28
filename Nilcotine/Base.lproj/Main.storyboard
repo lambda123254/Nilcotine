@@ -1342,6 +1342,7 @@ but the progress of your journey…</string>
                     </view>
                     <navigationItem key="navigationItem" id="aGp-wz-KKD"/>
                     <connections>
+                        <outlet property="achievementImageView" destination="YOS-Zr-dXQ" id="ghf-dD-3Uc"/>
                         <outlet property="effortTextView" destination="jGl-YT-fyU" id="Mic-ed-gFC"/>
                     </connections>
                 </viewController>
