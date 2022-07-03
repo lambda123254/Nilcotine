@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController {
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelAge: UILabel!
     @IBOutlet weak var labelTotalRelapse: UILabel!
@@ -129,6 +130,11 @@ class ProfileViewController: UIViewController {
                     var motivation = data![i].value(forKey: "motivation") as! String
                     var story = data![i].value(forKey: "story") as! String
                     let username = data![i].value(forKey: "username") as! String
+                    if let profileAsset = data![i].value(forKey: "profilePicture") as? CKAsset,
+                       let data = try? Data(contentsOf: profileAsset.fileURL!),
+                       let image = UIImage(data: data) {
+                        profileImageView.image = image
+                    }
                     
                     if motivation == "nil" {
                         motivation = "You haven't filled your motivation to quit yet"
@@ -160,7 +166,7 @@ class ProfileViewController: UIViewController {
                     labelLongestStreak.text = "\(maxDayInterval.max()!)"
                     textViewMotivation.text = motivation
                     textViewStory.text = story
-
+                    
                     
 //                    profile = Profile(achievement: "nil", age: age, motivation: motivation, story: story, username: username)
                     

@@ -195,6 +195,10 @@ public class CloudKitHandler {
             else if valArr[i].contains("_"){
                 sortedVal.append(CKRecord.ID(recordName: valArr[i]))
             }
+            else if valArr[i].contains("file://") {
+                let url = URL(string: valArr[i])
+                sortedVal.append(CKAsset(fileURL: url!))
+            }
             else {
                 sortedVal.append(valArr[i])
             }
@@ -202,11 +206,11 @@ public class CloudKitHandler {
         }
         db.fetch(withRecordID: recordID) { record, error in
             if error == nil {
-                
+
                 for i in 0 ..< valArr.count {
                     record?.setValue(sortedVal[i], forKey: keyArr[i])
                 }
-                
+
                 self.db.save(record!, completionHandler: { (newRecord, error) in
                     if error == nil {
                         print("Record Saved")
@@ -219,7 +223,7 @@ public class CloudKitHandler {
             else {
                 print(error!)
                 print("Could not fetch record")
-                
+
             }
         }
     }

@@ -8,10 +8,11 @@
 import UIKit
 import CloudKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     @IBOutlet weak var pickerAge: UIPickerView!
     
+    @IBOutlet weak var profilePicImageView: UIImageView!
     @IBOutlet weak var labelCountCharMotivation: UILabel!
     @IBOutlet weak var textViewMotivation: UITextView!
     
@@ -29,6 +30,9 @@ class EditProfileViewController: UIViewController {
     var recordId: String?
     var age = 0
     var usernameString = ""
+    
+    var imagePicker = UIImagePickerController()
+    var imageFileUrl: NSURL?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,6 +75,16 @@ class EditProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func addProfilePicButtonPressed(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            print("Button capture")
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
     @objc func saveButtonPressed() {
         if textViewMotivation.text == "" {
             textViewMotivation.text = "nil"
@@ -81,12 +95,21 @@ class EditProfileViewController: UIViewController {
         if usernameTextField.text == "" {
             usernameTextField.text = usernameString
         }
-        ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!)", key: "achievement,age,motivation,story,username")
-        
+        print(imageFileUrl!)
+        ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!),\(imageFileUrl!)", key: "achievement,age,motivation,story,username,profilePicture")
         self.navigationController?.popViewController(animated: true)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imageFileUrl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
+        
+        let imageData = NSData(contentsOf: info[UIImagePickerController.InfoKey.imageURL]! as! URL)
+        profilePicImageView.image = UIImage(data: imageData! as Data)
+    }
+    
 }
+
+
 extension EditProfileViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

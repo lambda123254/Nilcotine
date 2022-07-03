@@ -1059,6 +1059,7 @@ but the progress of your journey…</string>
                         <outlet property="labelLongestStreak" destination="gBI-BR-nZd" id="zfE-xZ-JmN"/>
                         <outlet property="labelTotalRelapse" destination="IZL-gz-fRC" id="3dm-IE-b8C"/>
                         <outlet property="labelUsername" destination="pQy-Yw-czJ" id="kyU-Bm-a1K"/>
+                        <outlet property="profileImageView" destination="mLW-vF-XHr" id="AVQ-Mg-1BD"/>
                         <outlet property="tableRelapse" destination="zBA-uR-Mf8" id="JbI-wJ-Gwi"/>
                         <outlet property="textViewMotivation" destination="kQv-2t-tYA" id="jW0-oK-OLj"/>
                         <outlet property="textViewStory" destination="4FR-PW-bPJ" id="qTj-E4-xtZ"/>
@@ -1163,6 +1164,22 @@ but the progress of your journey…</string>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIb-4D-REv">
+                                <rect key="frame" x="154" y="193" width="83" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Photo">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
+                                    <color key="baseBackgroundColor" red="0.12941176469999999" green="0.49803921569999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addProfilePicButtonPressed:" destination="SXG-zq-MUS" eventType="touchUpInside" id="RK0-If-N7a"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hje-0f-pgz">
+                                <rect key="frame" x="154" y="106" width="85" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8xK-xN-c9x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1191,6 +1208,7 @@ but the progress of your journey…</string>
                         <outlet property="labelCountCharMotivation" destination="T8n-DA-564" id="VfT-L8-AXe"/>
                         <outlet property="labelCountCharStory" destination="dX8-cQ-TzL" id="hqz-T4-HIi"/>
                         <outlet property="pickerAge" destination="zJM-zn-Kdp" id="m82-aS-1yX"/>
+                        <outlet property="profilePicImageView" destination="Hje-0f-pgz" id="EAl-bO-b79"/>
                         <outlet property="textViewMotivation" destination="MV3-Jh-M0n" id="hgt-Yx-7bf"/>
                         <outlet property="textViewStory" destination="gop-ex-U2q" id="NQN-nb-5zE"/>
                         <outlet property="usernameTextField" destination="PQ9-tg-YXi" id="i7a-Ub-ygM"/>
