@@ -65,6 +65,8 @@ class ProfileViewController: UIViewController {
     var maxDayInterval : [Int] = []
     
     var userId: CKRecord.ID?
+    
+    var imageUrl: URL?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,6 +135,7 @@ class ProfileViewController: UIViewController {
                     if let profileAsset = data![i].value(forKey: "profilePicture") as? CKAsset,
                        let data = try? Data(contentsOf: profileAsset.fileURL!),
                        let image = UIImage(data: data) {
+                        imageUrl = profileAsset.fileURL
                         profileImageView.image = image
                     }
                     
@@ -240,6 +243,7 @@ class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        
     }
 
     @objc func afterAsync() {
@@ -253,6 +257,7 @@ class ProfileViewController: UIViewController {
     
     @objc func editProfileButtonPressed() {
         let nextView = storyBoard.instantiateViewController(withIdentifier: "EditProfileView") as! EditProfileViewController
+        nextView.imageFileUrl = imageUrl as NSURL?
         self.navigationController?.pushViewController(nextView, animated: true)
 
     }

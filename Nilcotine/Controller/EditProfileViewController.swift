@@ -95,8 +95,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         if usernameTextField.text == "" {
             usernameTextField.text = usernameString
         }
-        print(imageFileUrl!)
-        ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!),\(imageFileUrl!)", key: "achievement,age,motivation,story,username,profilePicture")
+        
+        if imageFileUrl == nil {
+            ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!)", key: "achievement,age,motivation,story,username")
+        }
+        else {
+            ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!),\(imageFileUrl!)", key: "achievement,age,motivation,story,username,profilePicture")
+        }
+        
+        
         self.navigationController?.popViewController(animated: true)
     }
     
