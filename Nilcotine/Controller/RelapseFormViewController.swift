@@ -171,6 +171,19 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             }))
             
             self.present(alert, animated: true, completion: nil)
+            
+        } else if RelapseTextView.text == nil || RelapseTextView.text == "Share your story here..." || RelapseTextView
+            .text == "" {
+            
+            let alert2 = UIAlertController(title: "Alert", message: "Relapse story must be filled !", preferredStyle: .alert)
+            
+            alert2.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: {(_) in
+                // dismiss
+                
+            }))
+           
+            self.present(alert2, animated: true, completion: nil)
+            
         }
         else {
             self.delegate?.refreshTimer()

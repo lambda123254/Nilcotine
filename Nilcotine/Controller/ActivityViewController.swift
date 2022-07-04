@@ -127,10 +127,12 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
             
             let dayInterval = calendar.dateComponents([.day], from: date1, to: date2)
             
-            cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
+            //cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
+            cell.labelDesc.text = "\(sortedActivity[indexPath.row].relapseStory)"
         }
         else if sortedActivity[indexPath.row].activityType == "achievement" {
-            cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) earn a throphy!"
+            //cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) earn a throphy!"
+            cell.labelDesc.text = "\(sortedActivity[indexPath.row].trophyStory)"
         }
 
         return cell
