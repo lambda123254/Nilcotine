@@ -95,10 +95,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     @objc func saveButtonPressed() {
-        if textViewMotivation.text == "" {
+        if labelCountCharMotivation.text == "0" {
             textViewMotivation.text = "nil"
         }
-        if textViewStory.text == "" {
+        if labelCountCharStory.text == "0" {
             textViewStory.text = "nil"
         }
         if usernameTextField.text == "" {

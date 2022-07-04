@@ -148,17 +148,19 @@ class ProfileViewController: UIViewController {
                     
                     if motivation == "nil" {
                         motivation = "You haven't filled your motivation to quit yet"
+                        
                     }
                     else {
-                        textViewStory.textColor = .black
+                        textViewMotivation.textColor = .black
                     }
                     
                     if story == "nil" {
                         story = "You haven't filled your story yet"
                         
+                        
                     }
                     else {
-                        textViewMotivation.textColor = .black
+                        textViewStory.textColor = .black
                     }
                     
                     for i in 0 ..< sortedRelapse.count {
