@@ -135,23 +135,33 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         let cell = collectionView.cellForItem(at: indexPath) as! AchievementCollectionViewCell
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextView = storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
-        nextView.titleLabelString = "Yes, you did it!"
-//        let stringDaysFromAchievement = "\(achievement.data[indexPath.row].achievementName)"
-//        let index = stringDaysFromAchievement.firstIndex(of: " ") ?? stringDaysFromAchievement.endIndex
-//        let achievementDaysLabel = stringDaysFromAchievement[..<index]
-//        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
-        nextView.daysLabelString = "You earn trophy for completing \(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
         
-        print(achievementStoryArrSorted[1][1])
-        for i in 0 ..< achievementStoryArrSorted.count {
-            if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
-                print(achievementStoryArrSorted[i][0])
-                nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
-            }
+        if cell.AchievementImage.image != UIImage(named: "Achievement Locked.png") && cell.claimButton.isHidden  {
+            let nextView = storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
+            nextView.titleLabelString = "You earned a trophy!"
+    //        let stringDaysFromAchievement = "\(achievement.data[indexPath.row].achievementName)"
+    //        let index = stringDaysFromAchievement.firstIndex(of: " ") ?? stringDaysFromAchievement.endIndex
+    //        let achievementDaysLabel = stringDaysFromAchievement[..<index]
+    //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
+            nextView.daysLabelString = "\(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+            
+            print(achievementStoryArrSorted[1][1])
+            for i in 0 ..< achievementStoryArrSorted.count {
+                if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
+                    print(achievementStoryArrSorted[i][0])
+                    nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
+                }
 
+            }
+            self.navigationController?.pushViewController(nextView, animated: true)
+            
+            nextView.submitAchievementBool = true
+            nextView.isEditableEffort = false
+            nextView.isSharePrompt = true
         }
-        self.navigationController?.pushViewController(nextView, animated: true)
+
+        
+        
     }
     
     
@@ -226,6 +236,10 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
                                         nextView.achievementName = cell.AchievementLabel.text!
+                                        
+                                        nextView.titleLabelString = "Yes, you did it!"
+                                        nextView.daysLabelString = "You earn trophy for completing \(self.achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+                                        nextView.isEditableEffort = true
                                         self.navigationController?.pushViewController(nextView, animated: true)
                                     }
                                     

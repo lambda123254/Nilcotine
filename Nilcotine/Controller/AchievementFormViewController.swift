@@ -24,6 +24,9 @@ class AchievementFormViewController: UIViewController {
     var titleLabelString = ""
     var daysLabelString = ""
     var effortTextViewString = ""
+    var submitAchievementBool = false
+    var isEditableEffort = false
+    var isSharePrompt = false
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
@@ -33,8 +36,12 @@ class AchievementFormViewController: UIViewController {
     var sortedData: [CKRecord] = []
     
 
+    @IBOutlet weak var sharePromptLabel: UILabel!
+    
     @IBOutlet weak var effortTextView: UITextView!
     @IBOutlet weak var achievementImageView: UIImageView!
+    
+    @IBOutlet weak var submitAchievementButton: UIButton!
     
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Achievements")
     var ck2 = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Activities")
@@ -47,11 +54,21 @@ class AchievementFormViewController: UIViewController {
         // Do any additional setup after loading the view.
         
 
-        effortTextView.isEditable = false
         titleLabel.text = titleLabelString
         daysLabel.text = daysLabelString
         effortTextView.text = effortTextViewString
-
+        submitAchievementButton.isHidden = submitAchievementBool
+        effortTextView.isEditable = isEditableEffort
+        sharePromptLabel.isHidden = isSharePrompt
+        
+        effortTextView.layer.borderColor = UIColor.lightGray.cgColor
+        effortTextView.layer.borderWidth = 1
+        effortTextView.layer.cornerRadius = 10
+        
+        if effortTextView.text == "nil" {
+            effortTextView.text = "This user didn't fill any story"
+        }
+        
         Task {
             
             let data = try await ck.get(option: "all", format: "")
@@ -77,7 +94,7 @@ class AchievementFormViewController: UIViewController {
         
         var effort = ""
         
-        if effortTextView.text == "" || effortTextView.text == "Share your story here..."{
+        if effortTextView.text == "" || effortTextView.text == "Share your story here..." {
             effort = "nil"
         }
         else {
@@ -86,7 +103,7 @@ class AchievementFormViewController: UIViewController {
         
         for i in 1 ... 2 {
             if i == 1 {
-                ck.insertMultiple(value: "\(userIdString),\(effortTextView.text!),\(achievementName),\(achievementImageString)", key: "accountNumber,story,achievementName,iconName")
+                ck.insertMultiple(value: "\(userIdString),\(effort),\(achievementName),\(achievementImageString)", key: "accountNumber,story,achievementName,iconName")
             } else {
                 ck2.insertMultiple(value: "\(userIdString),achievement,\(Date()),achievement.png,nil,\(Date()),\(effort),\(userName)", key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
             }
