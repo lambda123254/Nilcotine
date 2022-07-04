@@ -36,6 +36,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let image = UIImageView(frame: CGRect(x: 158.67, y: 111.67, width: 75, height: 75))
+                profilePicImageView.layer.borderWidth = 1.0
+                profilePicImageView.layer.masksToBounds = true
+                profilePicImageView.layer.borderColor = UIColor.white.cgColor
+                profilePicImageView.layer.cornerRadius = image.bounds.width / 2
+                profilePicImageView.clipsToBounds = true
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
 
         

@@ -70,6 +70,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let image = UIImageView(frame: CGRect(x: 158.67, y: 111.67, width: 75, height: 75))
+                profileImageView.layer.borderWidth = 1.0
+                profileImageView.layer.masksToBounds = true
+                profileImageView.layer.borderColor = UIColor.white.cgColor
+                profileImageView.layer.cornerRadius = image.bounds.width / 2
+                profileImageView.clipsToBounds = true
         
         if visited {self.navigationItem.rightBarButtonItem = nil}
         tableRelapse.dataSource = self
