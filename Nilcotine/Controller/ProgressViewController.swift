@@ -125,7 +125,6 @@ class ProgressViewController: UIViewController, RelapseFormDelegateProtocol {
         count = 0
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
         
-        countRecordId += 1
         RelapseNumber.text = "\(countRecordId)"
 
     }
