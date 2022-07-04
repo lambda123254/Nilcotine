@@ -1317,13 +1317,6 @@ but the progress of your journey…</string>
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yes, you did it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N44-84-c1r">
-                                <rect key="frame" x="122" y="137" width="143" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Achievement" translatesAutoresizingMaskIntoConstraints="NO" id="YOS-Zr-dXQ">
                                 <rect key="frame" x="138" y="181" width="114" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1362,6 +1355,13 @@ but the progress of your journey…</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yes, you did it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N44-84-c1r">
+                                <rect key="frame" x="47" y="137" width="297" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HRe-sL-dlb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1371,6 +1371,8 @@ but the progress of your journey…</string>
                         <outlet property="achievementImageView" destination="YOS-Zr-dXQ" id="ghf-dD-3Uc"/>
                         <outlet property="daysLabel" destination="O2m-3V-XPt" id="LPt-Sn-Ash"/>
                         <outlet property="effortTextView" destination="jGl-YT-fyU" id="Mic-ed-gFC"/>
+                        <outlet property="sharePromptLabel" destination="YfJ-P8-AeR" id="7Re-Ab-lbl"/>
+                        <outlet property="submitAchievementButton" destination="XdO-HF-URv" id="Kbb-tf-uTz"/>
                         <outlet property="titleLabel" destination="N44-84-c1r" id="G3G-w4-JUE"/>
                     </connections>
                 </viewController>
