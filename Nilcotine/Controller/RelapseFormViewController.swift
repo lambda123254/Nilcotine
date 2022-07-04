@@ -35,6 +35,10 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         df.timeZone = TimeZone.current
        // df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         df.dateFormat = "dd"
@@ -52,8 +56,6 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             let dataProfile = try await ck3.get(option: "all", format: "")
             let userId = try await ck.getUserID()
             userIdForDb = userId
-            
-            
             
             for i in 0 ..< data.count {
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -107,6 +109,20 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         
 
         
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     func intervalDays(startDate: Date, endDate: Date) -> Int {
