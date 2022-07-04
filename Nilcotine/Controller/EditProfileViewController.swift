@@ -39,11 +39,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //Circular Profile Picture
 //        let image = UIImage(named: "User_PP.png")
         let image = UIImageView(frame: CGRect(x: 158.67, y: 111.67, width: 75, height: 75))
-        profilePicImageView.layer.borderWidth = 1.0
-        profilePicImageView.layer.masksToBounds = true
-        profilePicImageView.layer.borderColor = UIColor.white.cgColor
-        profilePicImageView.layer.cornerRadius = image.bounds.width / 2
-        profilePicImageView.clipsToBounds = true
+                profilePicImageView.layer.borderWidth = 1.0
+                profilePicImageView.layer.masksToBounds = true
+                profilePicImageView.layer.borderColor = UIColor.white.cgColor
+                profilePicImageView.layer.cornerRadius = image.bounds.width / 2
+                profilePicImageView.clipsToBounds = true
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
 
@@ -96,6 +96,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     @objc func saveButtonPressed() {
         if labelCountCharMotivation.text == "0" {
+            textViewMotivation.text = "nil"
+        }
+        if labelCountCharStory.text == "0" {
+            textViewStory.text = "nil"
+        }
+        
+        if textViewMotivation.text == "" {
             textViewMotivation.text = "nil"
         }
         if labelCountCharStory.text == "0" {

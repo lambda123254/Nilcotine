@@ -86,7 +86,13 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
             for i in 0 ..< achievement.data.count - achievementStoryArr.count {
                 achievementStoryArr.append(["nil", "nil"])
             }
-            let timeInterval = DateInterval(start: sortedRelapse.first!.startDate, end: Date())
+            var timeInterval = DateInterval()
+            if sortedRelapse.count == 0 {
+                timeInterval = DateInterval(start: Date(), end: Date())
+            }
+            else {
+                timeInterval = DateInterval(start: sortedRelapse.first!.startDate, end: Date())
+            }
             let duration = Int(timeInterval.duration)
             relapseDayIntervalTimer = duration / 86400
             
@@ -178,58 +184,69 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                 }
                 else if iconNameUseSorted[indexPath.row] != achievementBadgeShow && !visited{
-                    for i in 0 ..< relapseDayIntervalArr.count {
-                        if relapseDayIntervalTimer > relapseDayIntervalArr[i] {
-                            if relapseDayIntervalTimer > achievement.data[indexPath.row].isClaimableDays {
-                                cell.claimButton.isHidden = false
-                                cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
-                                cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
-                                cell.AchievementLabel.text = "\(achievementLabelShow!)"
-                                cell.ClaimButtonTapped = {
-                                    let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
-                                    nextView.userIdString = cell.userIdLabel.text!
-                                    nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
-                                    nextView.achievementName = cell.AchievementLabel.text!
-                                    self.navigationController?.pushViewController(nextView, animated: true)
-                                }
-                                
-                                for j in 0 ..< iconNameUseSorted.count {
-                                    if iconNameUseSorted[j] == achievementBadgeShow {
-                                        cell.claimButton.isHidden = true
+                    if relapseDayIntervalArr.count == 0 {
+                        cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
+                        cell.AchievementLabel.text = "\(achievementLabelShow!)"
+                    }
+                    else {
+                        for i in 0 ..< relapseDayIntervalArr.count {
+                            if relapseDayIntervalTimer > relapseDayIntervalArr[i] {
+                                if relapseDayIntervalTimer > achievement.data[indexPath.row].isClaimableDays {
+                                    cell.claimButton.isHidden = false
+                                    cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
+                                    cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
+                                    cell.AchievementLabel.text = "\(achievementLabelShow!)"
+                                    cell.ClaimButtonTapped = {
+                                        let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
+                                        nextView.userIdString = cell.userIdLabel.text!
+                                        nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
+                                        nextView.achievementName = cell.AchievementLabel.text!
+                                        self.navigationController?.pushViewController(nextView, animated: true)
                                     }
+                                    
+                                    for j in 0 ..< iconNameUseSorted.count {
+                                        if iconNameUseSorted[j] == achievementBadgeShow {
+                                            cell.claimButton.isHidden = true
+                                        }
+                                    }
+                                }
+                                else {
+                                    cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
+                                    cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                 }
                             }
                             else {
-                                cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
-                                cell.AchievementLabel.text = "\(achievementLabelShow!)"
-                            }
-                        }
-                        else {
-                            if relapseDayIntervalArr[i] >= achievement.data[indexPath.row].isClaimableDays {
-                                cell.claimButton.isHidden = false
-                                cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
-                                cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
-                                cell.AchievementLabel.text = "\(achievementLabelShow!)"
-                                cell.ClaimButtonTapped = {
-                                    let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
-                                    nextView.userIdString = cell.userIdLabel.text!
-                                    nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
-                                    nextView.achievementName = cell.AchievementLabel.text!
-                                    self.navigationController?.pushViewController(nextView, animated: true)
-                                }
-                                
-                                for j in 0 ..< iconNameUseSorted.count {
-                                    if iconNameUseSorted[j] == achievementBadgeShow {
-                                        cell.claimButton.isHidden = true
+                                if relapseDayIntervalArr[i] >= achievement.data[indexPath.row].isClaimableDays {
+                                    cell.claimButton.isHidden = false
+                                    cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
+                                    cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
+                                    cell.AchievementLabel.text = "\(achievementLabelShow!)"
+                                    cell.ClaimButtonTapped = {
+                                        let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
+                                        nextView.userIdString = cell.userIdLabel.text!
+                                        nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
+                                        nextView.achievementName = cell.AchievementLabel.text!
+                                        self.navigationController?.pushViewController(nextView, animated: true)
+                                    }
+                                    
+                                    for j in 0 ..< iconNameUseSorted.count {
+                                        if iconNameUseSorted[j] == achievementBadgeShow {
+                                            cell.claimButton.isHidden = true
+                                        }
                                     }
                                 }
-                            }
-                            else {
-                                cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
-                                cell.AchievementLabel.text = "\(achievementLabelShow!)"
+                                else {
+                                    cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
+                                    cell.AchievementLabel.text = "\(achievementLabelShow!)"
+                                }
                             }
                         }
                     }
+                    
+                }
+                else {
+                    cell.AchievementImage.image = UIImage(named: "Achievement Locked.png")
+                    cell.AchievementLabel.text = "\(achievementLabelShow!)"
                 }
 
             }
@@ -238,7 +255,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                 cell.AchievementLabel.text = "\(achievementLabelShow!)"
                 for i in 0 ..< iconNameUseSorted.count {
                     if iconNameUseSorted[i] == achievementBadgeShow! {
-                        print("aaa")
                         cell.AchievementImage.image = UIImage(named: "\(achievement.data[0].achievementImage)")
                         cell.AchievementLabel.text = "\(achievementLabelShow!)"
                     }
