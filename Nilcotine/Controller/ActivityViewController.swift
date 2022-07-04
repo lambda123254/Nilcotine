@@ -129,10 +129,19 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
             
             //cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) relapsed after \(dayInterval.day!) days of trying!"
             cell.labelDesc.text = "\(sortedActivity[indexPath.row].relapseStory)"
+            cell.labelDesc.textColor = .black
         }
         else if sortedActivity[indexPath.row].activityType == "achievement" {
             //cell.labelDesc.text = "\(sortedActivity[indexPath.row].username) earn a throphy!"
-            cell.labelDesc.text = "\(sortedActivity[indexPath.row].trophyStory)"
+            
+            if sortedActivity[indexPath.row].trophyStory == "nil" {
+                cell.labelDesc.text = "This user did not submit any story.."
+                cell.labelDesc.textColor = .lightGray
+            }// if
+            else {
+                cell.labelDesc.text = "\(sortedActivity[indexPath.row].trophyStory)"
+                cell.labelDesc.textColor = .black
+            }
         }
 
         return cell
