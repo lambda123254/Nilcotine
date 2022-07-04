@@ -151,13 +151,6 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     
 
     @IBAction func SubmitButtonPressed(_ sender: UIButton) {
-        
-        
-        
-        
-        
-        // if data = nil
-        
         //Check if story contains "_"
         if RelapseTextView.text.contains("_") {
             let alert = UIAlertController(title: "Alert", message: "Remove '_' character in your story", preferredStyle: .alert)
@@ -195,6 +188,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
             // Update the data
 
+            print(firstDataForDb!)
             ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
             for i in 1 ... 2 {
                 if i == 1 {

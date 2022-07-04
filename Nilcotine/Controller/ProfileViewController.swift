@@ -386,7 +386,7 @@ extension ProfileViewController: UICollectionViewDataSource {
                                 }
                             }
                             else {
-                                if relapseDayIntervalArr[i] >= achievement.data[indexPath.row].isClaimableDays {
+                                if relapseDayIntervalArr.max()! >= achievement.data[indexPath.row].isClaimableDays {
                                     cell.claimButton.isHidden = false
                                     cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
@@ -467,7 +467,6 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableRelapse.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileTableViewCell
         
         cell.selectionStyle = .none
-        
         cell.labelRelapseTime.text = sortedRelapse[indexPath.row].intervalTime
         cell.labelRelapseDate.text = df.string(from: sortedRelapse[indexPath.row].endDate)
 
