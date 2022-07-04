@@ -165,8 +165,21 @@ class ProfileViewController: UIViewController {
                     
                     labelUsername.text = username
                     labelAge.text = String(age)
-                    labelTotalRelapse.text = "\(sortedRelapse.count - 1)"
-                    labelLongestStreak.text = "\(maxDayInterval.max()!)"
+                    
+                    if sortedRelapse.count == 0 {
+                        labelTotalRelapse.text = "0"
+                    } else {
+                        labelTotalRelapse.text = "\(sortedRelapse.count - 1)"
+                    }
+
+                    
+                    if maxDayInterval.max() == nil {
+                        labelLongestStreak.text = "0"
+                    }
+                    else {
+                        labelLongestStreak.text = "\(maxDayInterval.max()!)"
+                    }
+
                     textViewMotivation.text = motivation
                     textViewStory.text = story
                     
