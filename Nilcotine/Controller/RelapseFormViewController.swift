@@ -136,26 +136,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func SubmitButtonPressed(_ sender: UIButton) {
         
-        var effort = ""
         
-        if RelapseTextView.text == "" || RelapseTextView.text == "Share your story here..."{
-            effort = "nil"
-        }
-        else {
-            effort = RelapseTextView.text
-        }
-
-        // Update the data
-
-        ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
-        for i in 1 ... 2 {
-            if i == 1 {
-                ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
-            }
-            else {
-                ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
-            }
-        }
         
         
         
@@ -186,6 +167,26 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             
         }
         else {
+            var effort = ""
+            
+            if RelapseTextView.text == "" || RelapseTextView.text == "Share your story here..."{
+                effort = "nil"
+            }
+            else {
+                effort = RelapseTextView.text
+            }
+
+            // Update the data
+
+            ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
+            for i in 1 ... 2 {
+                if i == 1 {
+                    ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+                }
+                else {
+                    ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+                }
+            }
             self.delegate?.refreshTimer()
             self.navigationController?.popViewController(animated: true)
             
