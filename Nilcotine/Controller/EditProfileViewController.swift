@@ -182,7 +182,6 @@ extension EditProfileViewController: UITextViewDelegate {
                 textViewMotivation.text = String(textViewMotivation.text.dropLast())
             }
             labelCountCharMotivation.text = String(textViewMotivation.text.count)
-
         }
         else if textView === textViewStory {
             if textViewStory.text.count > 250 {
