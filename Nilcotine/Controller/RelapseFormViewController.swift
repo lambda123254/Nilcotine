@@ -40,8 +40,8 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         df.timeZone = TimeZone.current
-       // df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        df.dateFormat = "dd"
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.hidesBottomBarWhenPushed = true
         
@@ -67,24 +67,20 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
                     
                     firstRecordArray.append(["\(startDate)", "\(recordID)"])
                     
-                    sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
+                    firstDataForDb = firstRecordArray.sorted(by: {$0[0] > $1[0]})[0][1]
                     
-                    print(firstRecordArray)
-                    
-                    
-                    firstDataForDb = firstRecordArray.sort()
-                    
+     
                     
                     // Get Last Date
-                    
-                    let lastDate = sortedData.first?.value(forKey: "startDate") as! Date
 
                     
-                    dayIntervalText = lastDate
+                    dayIntervalText = df.date(from: firstRecordArray.sorted(by: {$0[0] > $1[0]})[0][0])
                     
                    
                 }
             }
+            
+            print(firstDataForDb)
             
             for i in 0 ..< dataProfile.count {
                 let value = dataProfile[i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -197,15 +193,15 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             // Update the data
 
             print(firstDataForDb!)
-//            ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
-//            for i in 1 ... 2 {
-//                if i == 1 {
-//                    ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
-//                }
-//                else {
-//                    ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
-//                }
-//            }
+            ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
+            for i in 1 ... 2 {
+                if i == 1 {
+                    ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+                }
+                else {
+                    ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(dayIntervalText!),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+                }
+            }
             
             self.delegate?.refreshTimer()
             self.navigationController?.popViewController(animated: true)
