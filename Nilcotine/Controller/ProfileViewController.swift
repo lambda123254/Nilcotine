@@ -59,6 +59,9 @@ class ProfileViewController: UIViewController {
     var intervalArr: [String] = []
     var intervalSortedArr: [String] = []
     
+    var achievementStoryArr: [[String]] = []
+    var achievementStoryArrSorted: [[String]] = []
+    
     var dateInterval : DateInterval?
     var interval : Double?
     var dayInterval : Int?
@@ -106,9 +109,11 @@ class ProfileViewController: UIViewController {
                 if value.recordID.recordName == userId!.recordName {
                     
                     let iconName = dataAchievement[i].value(forKey: "iconName") as! String
-                    
+                    let achievementEffort = dataAchievement[i].value(forKey: "story") as! String
+                    let achievementName = dataAchievement[i].value(forKey: "achievementName") as! String
                     
                     iconNameUse.append(iconName)
+                    achievementStoryArr.append([achievementEffort, achievementName])
 
                 } // if
             }// for
@@ -116,18 +121,23 @@ class ProfileViewController: UIViewController {
             if iconNameUse.count > 3 {
                 for i in 0 ..< 3 {
                     iconNameUse.append(iconNameUse[i])
+//                    achievementStoryArr.append([achievementStoryArr[i][0], achievementStoryArr[])
                 }
                 iconNameUseSorted = iconNameUse.sorted()
             }
             else if iconNameUse.count < 3 {
                 for i in 0 ..< 3 - iconNameUse.count {
                     iconNameUse.append("nil")
+                    achievementStoryArr.append(["nil", "nil"])
                 }
                 iconNameUseSorted = iconNameUse.sorted()
             }
             else if iconNameUse.count == 3 {
                 iconNameUseSorted = iconNameUse.sorted()
             }
+            
+            achievementStoryArrSorted = achievementStoryArr.sorted(by: {$0[1] < $1[1]})
+            
                         
             for i in 0 ..< data!.count {
                 let value = data![i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -326,7 +336,38 @@ extension ProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        print("Collection View tapped")
+        let cell = collectionView.cellForItem(at: indexPath) as! ProfileCollectionViewCell
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if cell.AchievementImage.image != UIImage(named: "Achievement Locked.png") && cell.claimButton.isHidden  {
+            let nextView = storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
+            nextView.titleLabelString = "You earned a trophy!"
+    //        let stringDaysFromAchievement = "\(achievement.data[indexPath.row].achievementName)"
+    //        let index = stringDaysFromAchievement.firstIndex(of: " ") ?? stringDaysFromAchievement.endIndex
+    //        let achievementDaysLabel = stringDaysFromAchievement[..<index]
+    //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
+            nextView.daysLabelString = "\(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+            
+            print(achievementStoryArr)
+            print(achievementStoryArrSorted)
+//            print(achievementStoryArrSorted[1][1])
+            for i in 0 ..< achievementStoryArrSorted.count {
+                if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
+                    print(achievementStoryArrSorted[i][0])
+                    nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
+                }
+
+            }
+            self.navigationController?.pushViewController(nextView, animated: true)
+            
+            nextView.submitAchievementBool = true
+            nextView.isEditableEffort = false
+            nextView.isSharePrompt = true
+        }
+
+        
+        
     }
 }
 
@@ -367,10 +408,16 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
+                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
                                         nextView.achievementName = cell.AchievementLabel.text!
+                                        
+                                        nextView.titleLabelString = "Yes, you did it!"
+                                        nextView.daysLabelString = "You earn trophy for completing \(self.achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+                                        nextView.isEditableEffort = true
+                                        
                                         self.navigationController?.pushViewController(nextView, animated: true)
                                     }
                                     
@@ -392,10 +439,16 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
+                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
                                         nextView.achievementName = cell.AchievementLabel.text!
+                                        
+                                        nextView.titleLabelString = "Yes, you did it!"
+                                        nextView.daysLabelString = "You earn trophy for completing \(self.achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+                                        nextView.isEditableEffort = true
+                                        
                                         self.navigationController?.pushViewController(nextView, animated: true)
                                     }
                                     

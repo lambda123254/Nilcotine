@@ -24,6 +24,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func claimButtonPressed(_ sender: Any) {
+        ClaimButtonTapped?()
     }
     
     static func nib() -> UINib {
