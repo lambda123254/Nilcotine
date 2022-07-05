@@ -26,18 +26,19 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableActivity.reloadData()
         Task {
             let dataRecord = try? await ck.get(option: "all", format: "")
+            let dataRecordSorted = dataRecord?.sorted(by: {$0.value(forKey: "startDate" ) as! Date > $1.value(forKey: "startDate") as! Date })
             
-            for i in 0 ..< dataRecord!.count {
-                let activityType = dataRecord![i].value(forKey: "activityType") as! String
-                let username = dataRecord![i].value(forKey: "username") as! String
-                let imageName = dataRecord![i].value(forKey: "imageName") as! String
+            for i in 0 ..< dataRecord!.count - activity.count {
+                let activityType = dataRecordSorted![i].value(forKey: "activityType") as! String
+                let username = dataRecordSorted![i].value(forKey: "username") as! String
+                let imageName = dataRecordSorted![i].value(forKey: "imageName") as! String
                 let age = 12
-                let relapseStory = dataRecord![i].value(forKey: "relapseStory") as! String
-                let trophyStory = dataRecord![i].value(forKey: "trophyStory") as! String
-                let userId = dataRecord![i].value(forKey: "accountNumber") as! CKRecord.Reference
+                let relapseStory = dataRecordSorted![i].value(forKey: "relapseStory") as! String
+                let trophyStory = dataRecordSorted![i].value(forKey: "trophyStory") as! String
+                let userId = dataRecordSorted![i].value(forKey: "accountNumber") as! CKRecord.Reference
                 userIdArr.append(userId.recordID.recordName)
                 
-                if dataRecord?[i].value(forKey: "startDate") == nil {
+                if dataRecordSorted?[i].value(forKey: "startDate") == nil {
                     let isoDate = "2016-04-14T10:44:00+0000"
 
                     let dateFormatter = DateFormatter()
@@ -47,11 +48,14 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
                     activity.append(Activity( userId: userId.recordID.recordName, activityType: activityType, username: username, imageName: imageName, age: age, startDate: date, endDate: date, relapseStory: relapseStory, trophyStory: trophyStory))
                 }
                 else {
-                    let startDate = dataRecord?[i].value(forKey: "startDate") as! Date
-                    let endDate = dataRecord?[i].value(forKey: "endDate") as! Date
+
+                    let startDate = dataRecordSorted?[i].value(forKey: "startDate") as! Date
+                    let endDate = dataRecordSorted?[i].value(forKey: "endDate") as! Date
                     activity.append(Activity( userId: userId.recordID.recordName,activityType: activityType, username: username, imageName: imageName, age: age, startDate: startDate, endDate: endDate, relapseStory: relapseStory, trophyStory: trophyStory))
                 }
 
+                print(activity.count)
+                print(dataRecord!.count)
                 sortedActivity = activity.sorted(by: {$0.endDate > $1.endDate})
 
             }
