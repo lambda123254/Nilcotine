@@ -146,7 +146,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
             
             for i in 0 ..< achievementStoryArrSorted.count {
                 if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
-                    print(achievementStoryArrSorted[i][0])
                     nextView.effortTextViewString = "\(achievementStoryArrSorted[i][0])"
                 }
 
@@ -185,7 +184,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         
         if isFetchingFinish {
             cell.userIdLabel.text = userId?.recordName
-            print(relapseDayIntervalArr)
             if !visited {
                 if iconNameUseSorted[indexPath.row] == achievementBadgeShow {
                     cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")

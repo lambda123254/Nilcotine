@@ -349,13 +349,10 @@ extension ProfileViewController: UICollectionViewDelegate {
     //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
             nextView.daysLabelString = "\(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
             
-            print(achievementStoryArr)
-            print(achievementStoryArrSorted)
-//            print(achievementStoryArrSorted[1][1])
             for i in 0 ..< achievementStoryArrSorted.count {
                 if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
                     print(achievementStoryArrSorted[i][0])
-                    nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
+                    nextView.effortTextViewString = "\(achievementStoryArrSorted[i][0])"
                 }
 
             }
@@ -408,7 +405,6 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
-                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
@@ -439,7 +435,6 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
-                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
