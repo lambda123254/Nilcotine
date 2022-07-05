@@ -8,7 +8,7 @@
 import UIKit
 import CloudKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, EditProfileProtocol {
     
     var relapse: [Relapse] = []
     var sortedRelapse: [Relapse] = []
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var textViewStory: UITextView!
     
     @IBOutlet weak var tableRelapse: UITableView!
-    
+
     var userIdForDb: CKRecord.ID?
     
     let df = DateFormatter()
@@ -271,6 +271,33 @@ class ProfileViewController: UIViewController {
         
     }
     
+    func refreshData(username: String, age: String, motivation: String, story: String, pp: UIImage) {
+        
+        if motivation != "nil" {
+            textViewMotivation.text = motivation
+            textViewMotivation.textColor = .black
+
+        }
+        
+        if story != "nil" {
+            textViewStory.text = story
+            textViewStory.textColor = .black
+
+        }
+        labelUsername.text = username
+        labelAge.text = age
+        profileImageView.image = pp
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let secondVC: EditProfileViewController = segue.destination as! EditProfileViewController
+        secondVC.usernameString = labelUsername.text!
+        secondVC.motivationString = textViewMotivation.text!
+        secondVC.storyString = textViewStory.text!
+        secondVC.profilePicture = profileImageView.image
+        secondVC.delegate = self
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -288,10 +315,12 @@ class ProfileViewController: UIViewController {
     
     @objc func editProfileButtonPressed() {
         let nextView = storyBoard.instantiateViewController(withIdentifier: "EditProfileView") as! EditProfileViewController
-        nextView.imageFileUrl = imageUrl as NSURL?
-        self.navigationController?.pushViewController(nextView, animated: true)
+//        nextView.imageFileUrl = imageUrl as NSURL?
+        self.performSegue(withIdentifier: "toEditProfile", sender: self)
+//        self.navigationController?.pushViewController(nextView, animated: true)
 
     }
+
     
     func daysToHoursToMinutes(seconds: Int) -> (Int, Int, Int)
     {

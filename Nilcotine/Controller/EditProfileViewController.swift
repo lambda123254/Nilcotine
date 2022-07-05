@@ -8,7 +8,12 @@
 import UIKit
 import CloudKit
 
+protocol EditProfileProtocol {
+    func refreshData(username: String, age: String, motivation: String, story: String, pp: UIImage)
+}
+
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    var delegate: EditProfileProtocol? = nil
 
     @IBOutlet weak var pickerAge: UIPickerView!
     
@@ -30,12 +35,18 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var recordId: String?
     var age = 0
     var usernameString = ""
+    var motivationString = ""
+    var storyString = ""
     
     var imagePicker = UIImagePickerController()
     var imageFileUrl: NSURL?
+    var profilePicture: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        usernameTextField.text = usernameString
+        textViewStory.text = storyString
+        textViewMotivation.text = motivationString
+        profilePicImageView.image = profilePicture
         //Circular Profile Picture
 //        let image = UIImage(named: "User_PP.png")
         let image = UIImageView(frame: CGRect(x: 158.67, y: 111.67, width: 75, height: 75))
@@ -84,6 +95,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    
     @IBAction func addProfilePicButtonPressed(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             print("Button capture")
@@ -119,6 +131,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             ck.update(id: "\(recordId!)", value: "nil,\(age),\(textViewMotivation.text!),\(textViewStory.text!),\(usernameTextField.text!),\(imageFileUrl!)", key: "achievement,age,motivation,story,username,profilePicture")
         }
         
+        if profilePicture != nil {
+            self.delegate?.refreshData(username: usernameTextField.text!, age: "\(age)", motivation: textViewMotivation.text!, story: textViewStory.text!, pp: profilePicture!)
+        }
+        else {
+            self.delegate?.refreshData(username: usernameTextField.text!, age: "\(age)", motivation: textViewMotivation.text!, story: textViewStory.text!, pp: UIImage())
+        }
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -127,7 +145,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         imageFileUrl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
         
         let imageData = NSData(contentsOf: info[UIImagePickerController.InfoKey.imageURL]! as! URL)
-        profilePicImageView.image = UIImage(data: imageData! as Data)
+        profilePicture = UIImage(data: imageData! as Data)
+        profilePicImageView.image = profilePicture
+        dismiss(animated: true)
     }
     
 }
