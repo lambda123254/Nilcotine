@@ -145,6 +145,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
             nextView.daysLabelString = "\(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
             
+            print(achievementStoryArrSorted)
             print(achievementStoryArrSorted[1][1])
             for i in 0 ..< achievementStoryArrSorted.count {
                 if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
