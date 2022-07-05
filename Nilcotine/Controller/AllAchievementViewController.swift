@@ -121,7 +121,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         if isFetchingFinish {
             AchievementCollection.reloadData()
             timer.invalidate()
-            
         }
         
     }
@@ -145,12 +144,10 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
     //        nextView.daysLabelString = "You earn trophy for completing \(achievementDaysLabel) days of no smoking"
             nextView.daysLabelString = "\(achievement.data[indexPath.row].isClaimableDays) days of no smoking"
             
-            print(achievementStoryArrSorted)
-            print(achievementStoryArrSorted[1][1])
             for i in 0 ..< achievementStoryArrSorted.count {
                 if achievementStoryArrSorted[i][1] == achievement.data[indexPath.row].achievementName {
                     print(achievementStoryArrSorted[i][0])
-                    nextView.effortTextViewString = "\(achievementStoryArrSorted[indexPath.row][0])"
+                    nextView.effortTextViewString = "\(achievementStoryArrSorted[i][0])"
                 }
 
             }
@@ -188,7 +185,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         
         if isFetchingFinish {
             cell.userIdLabel.text = userId?.recordName
-
+            print(relapseDayIntervalArr)
             if !visited {
                 if iconNameUseSorted[indexPath.row] == achievementBadgeShow {
                     cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
@@ -227,7 +224,7 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
                                 }
                             }
                             else {
-                                if relapseDayIntervalArr[i] >= achievement.data[indexPath.row].isClaimableDays {
+                                if relapseDayIntervalArr.max()! >= achievement.data[indexPath.row].isClaimableDays {
                                     cell.claimButton.isHidden = false
                                     cell.AchievementImage.image = UIImage(named: "\(achievementBadgeShow!)")
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!

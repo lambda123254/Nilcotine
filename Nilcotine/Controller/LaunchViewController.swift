@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+class LaunchViewController: UIViewController {
 
     var ck = CloudKitHandler(dbString: "iCloud.Nilcotine", recordString: "Profiles")
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
