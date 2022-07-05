@@ -31,7 +31,7 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
     var userName = ""
     var sortedData: [CKRecord] = []
     var dayIntervalText: Date?
-    
+    var firstRecordArray: [[String]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,15 +56,23 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             let dataProfile = try await ck3.get(option: "all", format: "")
             let userId = try await ck.getUserID()
             userIdForDb = userId
-            
+           
             for i in 0 ..< data.count {
                 let value = data[i].value(forKey: "accountNumber") as! CKRecord.Reference
+                
                 if value.recordID.recordName == userId.recordName {
+                    
+                    let startDate = data[i].value(forKey: "startDate") as! Date
+                    let recordID = data[i].recordID.recordName
+                    
+                    firstRecordArray.append(["\(startDate)", "\(recordID)"])
                     
                     sortedData = data.sorted(by: {$0.value(forKey: "startDate") as! Date > $1.value(forKey: "startDate") as! Date})
                     
-                    let firstData = sortedData.first?.recordID.recordName
-                    firstDataForDb = firstData
+                    print(firstRecordArray)
+                    
+                    
+                    firstDataForDb = firstRecordArray.sort()
                     
                     
                     // Get Last Date
@@ -189,15 +197,15 @@ class RelapseFormViewController: UIViewController, UITextViewDelegate {
             // Update the data
 
             print(firstDataForDb!)
-            ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
-            for i in 1 ... 2 {
-                if i == 1 {
-                    ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
-                }
-                else {
-                    ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
-                }
-            }
+//            ck.update(id: "\(firstDataForDb!)", value: "\(effort),\(Date())", key: "effort,endDate")
+//            for i in 1 ... 2 {
+//                if i == 1 {
+//                    ck.insertMultiple(value: "\(Date()),\(Date()),nil,\(userIdForDb!.recordName)" , key: "startDate,endDate,effort,accountNumber")
+//                }
+//                else {
+//                    ck2.insertMultiple(value: "\(userIdForDb!.recordName),relapse,\(Date()),relapse.png,\(effort),\(sortedData.first?.value(forKey: "startDate") as! Date),nil,\(userName)" , key: "accountNumber,activityType,endDate,imageName,relapseStory,startDate,trophyStory,username")
+//                }
+//            }
             
             self.delegate?.refreshTimer()
             self.navigationController?.popViewController(animated: true)
