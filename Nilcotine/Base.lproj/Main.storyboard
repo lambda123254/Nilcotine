@@ -1287,10 +1287,10 @@ but the progress of your journey…</string>
             </objects>
             <point key="canvasLocation" x="-438.46153846153845" y="799.76303317535542"/>
         </scene>
-        <!--Splash View Controller-->
+        <!--Launch View Controller-->
         <scene sceneID="MKu-VG-MgU">
             <objects>
-                <viewController id="Pbg-qN-3NB" customClass="SplashViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Pbg-qN-3NB" customClass="LaunchViewController" customModule="Nilcotine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ugs-dF-2ZC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

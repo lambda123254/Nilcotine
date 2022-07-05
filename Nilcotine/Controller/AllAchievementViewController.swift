@@ -121,7 +121,6 @@ class AllAchievementViewController: UIViewController, UICollectionViewDelegate, 
         if isFetchingFinish {
             AchievementCollection.reloadData()
             timer.invalidate()
-            
         }
         
     }
