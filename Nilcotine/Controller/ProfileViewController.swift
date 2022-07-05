@@ -121,18 +121,23 @@ class ProfileViewController: UIViewController {
             if iconNameUse.count > 3 {
                 for i in 0 ..< 3 {
                     iconNameUse.append(iconNameUse[i])
+//                    achievementStoryArr.append([achievementStoryArr[i][0], achievementStoryArr[])
                 }
                 iconNameUseSorted = iconNameUse.sorted()
             }
             else if iconNameUse.count < 3 {
                 for i in 0 ..< 3 - iconNameUse.count {
                     iconNameUse.append("nil")
+                    achievementStoryArr.append(["nil", "nil"])
                 }
                 iconNameUseSorted = iconNameUse.sorted()
             }
             else if iconNameUse.count == 3 {
                 iconNameUseSorted = iconNameUse.sorted()
             }
+            
+            achievementStoryArrSorted = achievementStoryArr.sorted(by: {$0[1] < $1[1]})
+            
                         
             for i in 0 ..< data!.count {
                 let value = data![i].value(forKey: "accountNumber") as! CKRecord.Reference
@@ -403,10 +408,16 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
+                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
                                         nextView.achievementName = cell.AchievementLabel.text!
+                                        
+                                        nextView.titleLabelString = "Yes, you did it!"
+                                        nextView.daysLabelString = "You earn trophy for completing \(self.achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+                                        nextView.isEditableEffort = true
+                                        
                                         self.navigationController?.pushViewController(nextView, animated: true)
                                     }
                                     
@@ -428,10 +439,16 @@ extension ProfileViewController: UICollectionViewDataSource {
                                     cell.AchievementImage.restorationIdentifier = achievementBadgeShow!
                                     cell.AchievementLabel.text = "\(achievementLabelShow!)"
                                     cell.ClaimButtonTapped = {
+                                        print("tapped")
                                         let nextView = self.storyBoard.instantiateViewController(withIdentifier: "AchievementFormView") as! AchievementFormViewController
                                         nextView.userIdString = cell.userIdLabel.text!
                                         nextView.achievementImageString = cell.AchievementImage.restorationIdentifier!
                                         nextView.achievementName = cell.AchievementLabel.text!
+                                        
+                                        nextView.titleLabelString = "Yes, you did it!"
+                                        nextView.daysLabelString = "You earn trophy for completing \(self.achievement.data[indexPath.row].isClaimableDays) days of no smoking"
+                                        nextView.isEditableEffort = true
+                                        
                                         self.navigationController?.pushViewController(nextView, animated: true)
                                     }
                                     
