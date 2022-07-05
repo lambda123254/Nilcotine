@@ -18,12 +18,60 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
     var sortedActivity: [Activity] = []
     let df = DateFormatter()
     
+
+    
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
+        // Do your job, when done:
+        print("refresh")
+        self.tableActivity.reloadData()
+        Task {
+            let dataRecord = try? await ck.get(option: "all", format: "")
+            
+            for i in 0 ..< dataRecord!.count {
+                let activityType = dataRecord![i].value(forKey: "activityType") as! String
+                let username = dataRecord![i].value(forKey: "username") as! String
+                let imageName = dataRecord![i].value(forKey: "imageName") as! String
+                let age = 12
+                let relapseStory = dataRecord![i].value(forKey: "relapseStory") as! String
+                let trophyStory = dataRecord![i].value(forKey: "trophyStory") as! String
+                let userId = dataRecord![i].value(forKey: "accountNumber") as! CKRecord.Reference
+                userIdArr.append(userId.recordID.recordName)
+                
+                if dataRecord?[i].value(forKey: "startDate") == nil {
+                    let isoDate = "2016-04-14T10:44:00+0000"
+
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    let date = dateFormatter.date(from:isoDate)!
+                    activity.append(Activity( userId: userId.recordID.recordName, activityType: activityType, username: username, imageName: imageName, age: age, startDate: date, endDate: date, relapseStory: relapseStory, trophyStory: trophyStory))
+                }
+                else {
+                    let startDate = dataRecord?[i].value(forKey: "startDate") as! Date
+                    let endDate = dataRecord?[i].value(forKey: "endDate") as! Date
+                    activity.append(Activity( userId: userId.recordID.recordName,activityType: activityType, username: username, imageName: imageName, age: age, startDate: startDate, endDate: endDate, relapseStory: relapseStory, trophyStory: trophyStory))
+                }
+
+                sortedActivity = activity.sorted(by: {$0.endDate > $1.endDate})
+
+            }
+            
+            self.tableActivity.reloadData()
+        }
+        print("refreshdone")
+        refreshControl.endRefreshing()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableActivity.dataSource = self
         tableActivity.delegate = self
         
-    
+//        tableActivity.refreshControl = refreshControl
+        
+//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+//        tableView.addSubview(refreshControl) // not required when using UITableViewControll
         
         df.timeZone = TimeZone.current
         df.dateFormat = "MMM dd"
@@ -62,6 +110,14 @@ class ActivityViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             self.tableActivity.reloadData()
+            
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+            if #available(iOS 10.0, *) {
+                tableActivity.refreshControl = refreshControl
+            } else {
+                tableActivity.backgroundView = refreshControl
+            }
         }
         
     }
