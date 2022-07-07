@@ -29,11 +29,11 @@ public class CloudKitHandler {
     }
     
     public func getUserID() async throws -> CKRecord.ID {
-        var idName: CKRecord.ID?
+        var idName = CKRecord.ID()
             if let id = try? await container.userRecordID() {
                 idName = id
             }
-        return idName!
+        return idName
         
     }
     
